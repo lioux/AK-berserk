@@ -1454,8 +1454,8 @@ static int serial_omap_probe(struct platform_device *pdev)
 		return -ENODEV;
 	}
 
-	if (!request_mem_region(mem->start, (mem->end - mem->start) + 1,
-				     pdev->dev.driver->name)) {
+	if (!request_mem_region(mem->start, resource_size(mem),
+				pdev->dev.driver->name)) {
 		dev_err(&pdev->dev, "memory region already claimed\n");
 		return -EBUSY;
 	}
@@ -1562,9 +1562,7 @@ do_iounmap:
 do_free:
 	kfree(up);
 do_release_region:
-	release_mem_region(mem->start, (mem->end - mem->start) + 1);
-	dev_err(&pdev->dev, "[UART%d]: failure [%s]: %d\n",
-				pdev->id, __func__, ret);
+	release_mem_region(mem->start, resource_size(mem));
 	return ret;
 }
 

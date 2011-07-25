@@ -703,8 +703,19 @@ struct rtl8169_private {
 	u32 saved_wolopts;
 	u32 opts1_mask;
 
-	const struct firmware *fw;
-#define RTL_FIRMWARE_UNKNOWN	ERR_PTR(-EAGAIN);
+	struct rtl_fw {
+		const struct firmware *fw;
+
+#define RTL_VER_SIZE		32
+
+		char version[RTL_VER_SIZE];
+
+		struct rtl_fw_phy_action {
+			__le32 *code;
+			size_t size;
+		} phy_action;
+	} *rtl_fw;
+#define RTL_FIRMWARE_UNKNOWN	ERR_PTR(-EAGAIN)
 };
 
 MODULE_AUTHOR("Realtek and the Linux r8169 crew <netdev@vger.kernel.org>");
