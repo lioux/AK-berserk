@@ -664,7 +664,6 @@ static int iio_device_register_sysfs(struct iio_dev *dev_info)
 	else
 		ret = sysfs_create_group(&dev_info->dev.kobj,
 					 &iio_base_dummy_group);
-	
 	if (ret) {
 		dev_err(dev_info->dev.parent,
 			"Failed to register sysfs hooks\n");
