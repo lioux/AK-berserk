@@ -1401,7 +1401,7 @@ rcu_torture_shutdown(void *arg)
  * Execute random CPU-hotplug operations at the interval specified
  * by the onoff_interval.
  */
-static int
+static int __cpuinit
 rcu_torture_onoff(void *arg)
 {
 	int cpu;
@@ -1449,7 +1449,7 @@ rcu_torture_onoff(void *arg)
 	return 0;
 }
 
-static int
+static int __cpuinit
 rcu_torture_onoff_init(void)
 {
 	if (onoff_interval <= 0)
