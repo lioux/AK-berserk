@@ -504,6 +504,10 @@ static struct regulator_init_data tuna_vaux1 = {
 					| REGULATOR_CHANGE_VOLTAGE
 #endif
 					| REGULATOR_CHANGE_STATUS,
+		.state_mem = {
+			.disabled	= true,
+		},
+		.initial_state		= PM_SUSPEND_MEM,
 		.always_on		= true,
 	},
 };
@@ -541,6 +545,10 @@ static struct regulator_init_data tuna_vaux3 = {
 		.valid_ops_mask	 = REGULATOR_CHANGE_VOLTAGE
 					| REGULATOR_CHANGE_MODE
 					| REGULATOR_CHANGE_STATUS,
+		.state_mem = {
+			.disabled	= true,
+		},
+		.initial_state		= PM_SUSPEND_MEM,
 	},
 	.num_consumer_supplies = ARRAY_SIZE(tuna_vaux3_supplies),
 	.consumer_supplies = tuna_vaux3_supplies,
@@ -556,6 +564,10 @@ static struct regulator_init_data tuna_vmmc = {
 		.valid_ops_mask	 = REGULATOR_CHANGE_VOLTAGE
 					| REGULATOR_CHANGE_MODE
 					| REGULATOR_CHANGE_STATUS,
+		.state_mem = {
+			.disabled	= true,
+		},
+		.initial_state		= PM_SUSPEND_MEM,
 	},
 	.num_consumer_supplies = 2,
 	.consumer_supplies = tuna_vmmc_supply,
@@ -596,6 +608,10 @@ static struct regulator_init_data tuna_vusim = {
 					| REGULATOR_CHANGE_VOLTAGE
 #endif
 					| REGULATOR_CHANGE_STATUS,
+		.state_mem = {
+			.disabled	= true,
+		},
+		.initial_state		= PM_SUSPEND_MEM,
 	},
 	.num_consumer_supplies = ARRAY_SIZE(tuna_vusim_supplies),
 	.consumer_supplies = tuna_vusim_supplies,
@@ -613,6 +629,10 @@ static struct regulator_init_data tuna_vana = {
 #endif
 					| REGULATOR_CHANGE_STATUS,
 		.always_on	= true,
+		.state_mem = {
+			.disabled	= true,
+		},
+		.initial_state		= PM_SUSPEND_MEM,
 	},
 };
 
@@ -632,6 +652,10 @@ static struct regulator_init_data tuna_vcxio = {
 					| REGULATOR_CHANGE_VOLTAGE
 #endif
 					| REGULATOR_CHANGE_STATUS,
+		.state_mem = {
+			.disabled	= true,
+		},
+		.initial_state		= PM_SUSPEND_MEM,
 	},
 	.num_consumer_supplies	= ARRAY_SIZE(tuna_vcxio_supply),
 	.consumer_supplies	= tuna_vcxio_supply,
@@ -655,6 +679,10 @@ static struct regulator_init_data tuna_vdac = {
 					| REGULATOR_CHANGE_VOLTAGE
 #endif
 					| REGULATOR_CHANGE_STATUS,
+		.state_mem = {
+			.disabled	= true,
+		},
+		.initial_state		= PM_SUSPEND_MEM,
 	},
 	.num_consumer_supplies	= ARRAY_SIZE(tuna_vdac_supply),
 	.consumer_supplies	= tuna_vdac_supply,
@@ -746,6 +774,10 @@ static struct regulator_init_data tuna_v2v1 = {
 					| REGULATOR_CHANGE_VOLTAGE
 #endif
 					| REGULATOR_CHANGE_STATUS,
+		.state_mem = {
+			.disabled	= true,
+		},
+		.initial_state		= PM_SUSPEND_MEM,
 		.always_on		= true,
 	},
 };
