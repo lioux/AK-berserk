@@ -472,8 +472,11 @@ static struct freq_attr omap_UV_mV_table = {
 };
 #endif
 
+#if defined(CONFIG_OMAP_SCALING_FREQS) || defined(CONFIG_OMAP_SCREENOFF_MAXFREQ) || defined(CONFIG_CUSTOM_VOLTAGE)
 static struct freq_attr *omap_cpufreq_attr[] = {
+#ifdef CONFIG_OMAP_SCALING_FREQS
 	&cpufreq_freq_attr_scaling_available_freqs,
+#endif
 #ifdef CONFIG_OMAP_SCREENOFF_MAXFREQ
 	&omap_cpufreq_attr_screen_off_freq,
 #endif
@@ -482,6 +485,7 @@ static struct freq_attr *omap_cpufreq_attr[] = {
 #endif
 	NULL,
 };
+#endif
 
 static struct cpufreq_driver omap_driver = {
 	.flags		= CPUFREQ_STICKY,
@@ -491,7 +495,9 @@ static struct cpufreq_driver omap_driver = {
 	.init		= omap_cpu_init,
 	.exit		= omap_cpu_exit,
 	.name		= "omap2plus",
+#if defined(CONFIG_OMAP_SCALING_FREQS) || defined(CONFIG_OMAP_SCREENOFF_MAXFREQ) || defined(CONFIG_CUSTOM_VOLTAGE)
 	.attr		= omap_cpufreq_attr,
+#endif
 };
 
 static int omap_cpufreq_suspend_noirq(struct device *dev)
