@@ -113,11 +113,7 @@ static void __spin_lock_debug(raw_spinlock_t *lock)
 		/* lockup suspected: */
 		if (print_once) {
 			print_once = 0;
-			printk(KERN_EMERG "BUG: spinlock lockup on CPU#%d, "
-					"%s/%d, %p\n",
-				raw_smp_processor_id(), current->comm,
-				task_pid_nr(current), lock);
-			dump_stack();
+			spin_dump(lock, "lockup suspected");
 #ifdef CONFIG_SMP
 			trigger_all_cpu_backtrace();
 #endif
