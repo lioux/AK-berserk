@@ -1661,6 +1661,7 @@ entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
 		check_preempt_tick(cfs_rq, curr);
 }
 
+
 /**************************************************
  * CFS bandwidth control machinery
  */
