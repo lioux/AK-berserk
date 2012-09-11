@@ -374,6 +374,13 @@ config OMAP_C4_MPUOSWR
 	  Select this option to enable powering down the MPU logic
 	  in the C4 state reducing the power consumption.
 
+config CONSERVATIVE_GOV_WHILE_SCREEN_OFF
+	bool "Switch to Conservative governor while screen off"
+	default n
+	help
+	  Switch to Conservative CPU governor while screen off to save
+	  power
+
 config OMAP_FIQ_DEBUGGER
 	bool "Enable the serial FIQ debugger on OMAP"
 	default y
