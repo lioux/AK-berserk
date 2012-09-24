@@ -160,6 +160,9 @@ config CPU_FREQ_DEFAULT_GOV_SAKURACTIVE
 	  support the hotplug governor. If unsure have a look at
 	  the help section of the driver. Fallback governor will be the
 	  performance governor.
+config CPU_FREQ_DEFAULT_GOV_PEGASUSQ
+        bool "pegasusq"
+        select CPU_FREQ_GOV_PEGASUSQ
 
 endchoice
 
@@ -254,6 +257,9 @@ config CPU_FREQ_GOV_ONDEMAND_2_PHASE
         depends on CPU_FREQ_GOV_ONDEMAND || CPU_FREQ_GOV_INTELLIDEMAND
         help
           '2-phase' - This driver adds a new algo to save power
+
+config CPU_FREQ_GOV_PEGASUSQ
+        tristate "'pegasusq' cpufreq policy governor"
 
 config CPU_FREQ_GOV_CONSERVATIVE
 	tristate "'conservative' cpufreq governor"
