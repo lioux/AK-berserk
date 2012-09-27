@@ -80,6 +80,10 @@ static unsigned int screen_off_max_freq;
 static bool omap_cpufreq_ready;
 static bool omap_cpufreq_suspended;
 
+#ifdef CONFIG_CPU_FREQ_GOV_INTELLIDEMAND
+extern bool lmf_screen_state;
+#endif
+
 static unsigned int omap_getspeed(unsigned int cpu)
 {
 	unsigned long rate;
