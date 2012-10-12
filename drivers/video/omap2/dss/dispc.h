@@ -297,6 +297,8 @@ static inline u16 DISPC_OVL_BASE(enum omap_plane plane)
 		return 0x014C;
 	case OMAP_DSS_VIDEO3:
 		return 0x0300;
+	case OMAP_DSS_WB:
+		return 0x0500;
 	default:
 		BUG();
 	}
@@ -311,6 +313,7 @@ static inline u16 DISPC_BA0_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x0000;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0008;
 	default:
 		BUG();
@@ -325,6 +328,7 @@ static inline u16 DISPC_BA1_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x0004;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x000C;
 	default:
 		BUG();
@@ -342,6 +346,8 @@ static inline u16 DISPC_BA0_UV_OFFSET(enum omap_plane plane)
 		return 0x04BC;
 	case OMAP_DSS_VIDEO3:
 		return 0x0310;
+	case OMAP_DSS_WB:
+		return 0x0118;
 	default:
 		BUG();
 	}
@@ -358,6 +364,8 @@ static inline u16 DISPC_BA1_UV_OFFSET(enum omap_plane plane)
 		return 0x04C0;
 	case OMAP_DSS_VIDEO3:
 		return 0x0314;
+	case OMAP_DSS_WB:
+		return 0x011C;
 	default:
 		BUG();
 	}
@@ -372,6 +380,7 @@ static inline u16 DISPC_POS_OFFSET(enum omap_plane plane)
 		return 0x0008;
 	case OMAP_DSS_VIDEO3:
 		return 0x009C;
+	case OMAP_DSS_WB:
 	default:
 		BUG();
 	}
@@ -385,6 +394,7 @@ static inline u16 DISPC_SIZE_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x000C;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x00A8;
 	default:
 		BUG();
@@ -400,6 +410,7 @@ static inline u16 DISPC_ATTR_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x0010;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0070;
 	default:
 		BUG();
@@ -417,6 +428,8 @@ static inline u16 DISPC_ATTR2_OFFSET(enum omap_plane plane)
 		return 0x04DC;
 	case OMAP_DSS_VIDEO3:
 		return 0x032C;
+	case OMAP_DSS_WB:
+		return 0x0310;
 	default:
 		BUG();
 	}
@@ -431,6 +444,7 @@ static inline u16 DISPC_FIFO_THRESH_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x0014;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x008C;
 	default:
 		BUG();
@@ -446,6 +460,7 @@ static inline u16 DISPC_FIFO_SIZE_STATUS_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x0018;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0088;
 	default:
 		BUG();
@@ -461,6 +476,7 @@ static inline u16 DISPC_ROW_INC_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x001C;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x00A4;
 	default:
 		BUG();
@@ -476,6 +492,7 @@ static inline u16 DISPC_PIX_INC_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x0020;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0098;
 	default:
 		BUG();
@@ -490,6 +507,7 @@ static inline u16 DISPC_WINDOW_SKIP_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO1:
 	case OMAP_DSS_VIDEO2:
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		BUG();
 	default:
 		BUG();
@@ -504,6 +522,7 @@ static inline u16 DISPC_TABLE_BA_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO1:
 	case OMAP_DSS_VIDEO2:
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		BUG();
 	default:
 		BUG();
@@ -519,6 +538,7 @@ static inline u16 DISPC_FIR_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x0024;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0090;
 	default:
 		BUG();
@@ -536,6 +556,8 @@ static inline u16 DISPC_FIR2_OFFSET(enum omap_plane plane)
 		return 0x055C;
 	case OMAP_DSS_VIDEO3:
 		return 0x0424;
+	case OMAP_DSS_WB:
+		return 0x0290;
 	default:
 		BUG();
 	}
@@ -550,6 +572,7 @@ static inline u16 DISPC_PIC_SIZE_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x0028;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0094;
 	default:
 		BUG();
@@ -566,6 +589,7 @@ static inline u16 DISPC_ACCU0_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x002C;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0000;
 	default:
 		BUG();
@@ -583,6 +607,8 @@ static inline u16 DISPC_ACCU2_0_OFFSET(enum omap_plane plane)
 		return 0x0560;
 	case OMAP_DSS_VIDEO3:
 		return 0x0428;
+	case OMAP_DSS_WB:
+		return 0x0294;
 	default:
 		BUG();
 	}
@@ -597,6 +623,7 @@ static inline u16 DISPC_ACCU1_OFFSET(enum omap_plane plane)
 	case OMAP_DSS_VIDEO2:
 		return 0x0030;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0004;
 	default:
 		BUG();
@@ -614,6 +641,8 @@ static inline u16 DISPC_ACCU2_1_OFFSET(enum omap_plane plane)
 		return 0x0564;
 	case OMAP_DSS_VIDEO3:
 		return 0x042C;
+	case OMAP_DSS_WB:
+		return 0x0298;
 	default:
 		BUG();
 	}
@@ -629,6 +658,7 @@ static inline u16 DISPC_FIR_COEF_H_OFFSET(enum omap_plane plane, u16 i)
 	case OMAP_DSS_VIDEO2:
 		return 0x0034 + i * 0x8;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0010 + i * 0x8;
 	default:
 		BUG();
@@ -647,6 +677,8 @@ static inline u16 DISPC_FIR_COEF_H2_OFFSET(enum omap_plane plane, u16 i)
 		return 0x0568 + i * 0x8;
 	case OMAP_DSS_VIDEO3:
 		return 0x0430 + i * 0x8;
+	case OMAP_DSS_WB:
+		return 0x02A0 + i * 0x8;
 	default:
 		BUG();
 	}
@@ -662,6 +694,7 @@ static inline u16 DISPC_FIR_COEF_HV_OFFSET(enum omap_plane plane, u16 i)
 	case OMAP_DSS_VIDEO2:
 		return 0x0038 + i * 0x8;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0014 + i * 0x8;
 	default:
 		BUG();
@@ -680,6 +713,8 @@ static inline u16 DISPC_FIR_COEF_HV2_OFFSET(enum omap_plane plane, u16 i)
 		return 0x056C + i * 0x8;
 	case OMAP_DSS_VIDEO3:
 		return 0x0434 + i * 0x8;
+	case OMAP_DSS_WB:
+		return 0x02A4 + i * 0x8;
 	default:
 		BUG();
 	}
@@ -694,6 +729,7 @@ static inline u16 DISPC_CONV_COEF_OFFSET(enum omap_plane plane, u16 i)
 	case OMAP_DSS_VIDEO1:
 	case OMAP_DSS_VIDEO2:
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0074 + i * 0x4;
 	default:
 		BUG();
@@ -711,6 +747,7 @@ static inline u16 DISPC_FIR_COEF_V_OFFSET(enum omap_plane plane, u16 i)
 	case OMAP_DSS_VIDEO2:
 		return 0x00B4 + i * 0x4;
 	case OMAP_DSS_VIDEO3:
+	case OMAP_DSS_WB:
 		return 0x0050 + i * 0x4;
 	default:
 		BUG();
@@ -729,6 +766,8 @@ static inline u16 DISPC_FIR_COEF_V2_OFFSET(enum omap_plane plane, u16 i)
 		return 0x05A8 + i * 0x4;
 	case OMAP_DSS_VIDEO3:
 		return 0x0470 + i * 0x4;
+	case OMAP_DSS_WB:
+		return 0x02E0 + i * 0x4;
 	default:
 		BUG();
 	}
@@ -745,6 +784,7 @@ static inline u16 DISPC_PRELOAD_OFFSET(enum omap_plane plane)
 		return 0x00E8;
 	case OMAP_DSS_VIDEO3:
 		return 0x00A0;
+	case OMAP_DSS_WB:
 	default:
 		BUG();
 	}
