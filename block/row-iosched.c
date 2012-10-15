@@ -495,8 +495,8 @@ static int row_dispatch_requests(struct request_queue *q, int force)
 			}
 		}
 
-		if (!force && row_queues_def[currq].idling_enabled &&
-		    rd->row_queues[currq].idle_data.begin_idling) {
+		if (!force && queue_idling_enabled[currq] &&
+		    rd->row_queues[currq].rqueue.idle_data.begin_idling) {
 			if (!queue_delayed_work(rd->read_idle.idle_workqueue,
 						&rd->read_idle.idle_work,
 						rd->read_idle.idle_time)) {
