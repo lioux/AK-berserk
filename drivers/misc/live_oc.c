@@ -111,6 +111,14 @@ static DECLARE_DELAYED_WORK(coreupdate_work, liveoc_update_core);
 extern struct device_opp * find_device_opp(struct device * dev);
 extern void cpufreq_stats_reset(void);
 
+void liveoc_register_powerkey(struct input_dev * input_device)
+{
+    powerkey_device = input_device;
+
+    return;
+}
+EXPORT_SYMBOL(liveoc_register_powerkey);
+
 void liveoc_register_maxthermal(unsigned int * max_thermal)
 {
     maximum_thermal = max_thermal;
