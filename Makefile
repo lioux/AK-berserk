@@ -1,8 +1,8 @@
 VERSION = 3
 PATCHLEVEL = 0
-SUBLEVEL = 50
+SUBLEVEL = 51
 EXTRAVERSION = +
-NAME = eva03
+NAME = Berserk
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
