@@ -61,7 +61,7 @@ else
  # LOCAL KERNEL VERSION
  # PRINT THIS AFTER MAKEFILE VERSION
  #
- ak_ver="ak.304.berserk"
+ ak_ver="ak.305.berserk"
  export LOCALVERSION="~"`echo $ak_ver`
 
  debug=0
