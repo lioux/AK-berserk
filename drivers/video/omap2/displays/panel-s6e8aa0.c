@@ -71,7 +71,7 @@ enum {
 #define DEVICE_NAME "s6e8aa0_i2c"
 
 /* contrast tweak from morfic - Trinity Kernel */
-static int contrast = -3;
+static int contrast = -24;
 module_param(contrast, int, 0755);
 EXPORT_SYMBOL(contrast);
 
@@ -81,7 +81,7 @@ static int s6e8aa0_update(struct omap_dss_device *dssdev,
 static struct omap_video_timings s6e8aa0_timings = {
 	.x_res = 720,
 	.y_res = 1280,
-	.pixel_clock = 79494,
+	.pixel_clock = 80842,
 	.hfp = 158,
 	.hsw = 2,
 	.hbp = 160,
