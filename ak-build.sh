@@ -22,7 +22,8 @@ if [ "${param}" == "debug" ]; then
  rm -rfv .config.old
  echo ""
 
- make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm tuna_ak_debug_defconfig
+ #make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm tuna_ak_debug_defconfig
+ make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm tuna_ak_debug_defconfig
 
  #
  # LOCAL KERNEL VERSION
@@ -51,11 +52,8 @@ else
  rm -rfv .config.old
  echo ""
 
- #make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm cyanogenmod_ak_defconfig
- #make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.07-20120725/bin/arm-linux-gnueabihf- ARCH=arm cyanogenmod_tuna_defconfig
- #make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.08-20120827/bin/arm-linux-gnueabihf- ARCH=arm cyanogenmod_ak_defconfig
- #make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.09-20120921/bin/arm-linux-gnueabihf- ARCH=arm cyanogenmod_ak_defconfig
- make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf- ARCH=arm tuna_ak_defconfig
+ #make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm tuna_ak_defconfig
+ make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf- ARCH=arm tuna_ak_defconfig
 
  #
  # LOCAL KERNEL VERSION
@@ -73,11 +71,8 @@ fi
 # AND THEN CROSS COMPILE KERNEL MODULES
 #
 
-#make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm -j4 modules
-#make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.07-20120725/bin/arm-linux-gnueabihf- ARCH=arm -j4 modules
-#make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.08-20120827/bin/arm-linux-gnueabihf- ARCH=arm -j4 modules
-#make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.09-20120921/bin/arm-linux-gnueabihf- ARCH=arm -j4 modules
-make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf- ARCH=arm -j4 modules
+#make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm -j4 modules
+make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf- ARCH=arm -j4 modules
 
 #
 # FIND .KO MODULE CREATE WITH CROSS COMPILE
@@ -85,13 +80,10 @@ make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/
 #
 
 echo ""
-rm -rfv /root/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*
-find /root/android/AK-Kernel/AK-berserk/ -name '*.ko' -exec cp -v {} /root/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules \;
-#/root/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi-strip --strip-debug /root/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*.ko
-#/root/android/AK-Kernel/AK-linaro/4.7.2-2012.07-20120725/bin/arm-linux-gnueabihf-strip --strip-debug /root/android/AK-Kernel/AK-ramdisk/ramdisk-cm10/sbin/files/modules/*.ko
-#/root/android/AK-Kernel/AK-linaro/4.7.2-2012.08-20120827/bin/arm-linux-gnueabihf-strip --strip-debug /root/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*.ko
-#/root/android/AK-Kernel/AK-linaro/4.7.2-2012.09-20120921/bin/arm-linux-gnueabihf-strip --strip-debug /root/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*.ko
-/root/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf-strip --strip-debug /root/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*.ko
+rm -rfv ${HOME}/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*
+find ${HOME}/android/AK-Kernel/AK-berserk/ -name '*.ko' -exec cp -v {} ${HOME}/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules \;
+#${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi-strip --strip-debug ${HOME}/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*.ko
+${HOME}/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf-strip --strip-debug ${HOME}/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*.ko
 echo ""
 
 #
@@ -99,11 +91,8 @@ echo ""
 # REMEMBER TO SET CONFIG_INITRAMFS_SOURCE DIR
 #
 
-#make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm -j4 zImage
-#make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.07-20120725/bin/arm-linux-gnueabihf- ARCH=arm -j4 zImage
-#make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.08-20120827/bin/arm-linux-gnueabihf- ARCH=arm -j4 zImage
-#make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.09-20120921/bin/arm-linux-gnueabihf- ARCH=arm -j4 zImage
-make CROSS_COMPILE=/root/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf- ARCH=arm -j4 zImage
+#make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm -j4 zImage
+make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf- ARCH=arm -j4 zImage
 
 #
 # COPY ZIMAGE OF KERNEL
@@ -142,4 +131,4 @@ echo ..
 echo ... Compile Complite ! ... `echo $ak_ver`.zip
 echo ..
 echo .
-e\cho ""
+echo ""
