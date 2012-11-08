@@ -4,6 +4,8 @@ clear
 
 param=$1
 
+DATE_START=$(date +"%s")
+
 if [ "${param}" == "debug" ]; then
 
  echo ""; echo "# AK BUILD DEBUG ------------------------------------------------------------------------------------------------"; echo ""
@@ -131,4 +133,8 @@ echo ..
 echo ... Compile Complite ! ... `echo $ak_ver`.zip
 echo ..
 echo .
+echo ""
+DATE_END=$(date +"%s")
+DIFF=$(($DATE_END - $DATE_START))
+echo "Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
 echo ""
