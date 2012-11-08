@@ -369,7 +369,7 @@ KBUILD_CFLAGS   := -Wall -Wno-address -Wundef -Wstrict-prototypes -Wno-trigraphs
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks \
-		   -mfpu=neon -mfloat-abi=softfp \
+		   -pipe -marm -mfpu=neon -mfloat-abi=softfp \
 		   -mcpu=cortex-a9 -march=armv7-a -mtune=cortex-a9 \
 		   -mno-unaligned-access
 KBUILD_AFLAGS_KERNEL :=
