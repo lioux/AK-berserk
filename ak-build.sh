@@ -94,6 +94,9 @@ cd cwm
 zip -r `echo $ak_ver`.zip *
 rm -rf $CWM_MOVE/`echo $ak_ver`.zip
 cp -vr `echo $ak_ver`.zip $CWM_MOVE/AK-Kernel/
+if [ ! -d ../zip ]; then
+ mkdir ../zip
+fi
 mv `echo $ak_ver`.zip ../zip/
 rm -rf `echo $ak_ver`.zip boot.img
 cd ..
