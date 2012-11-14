@@ -77,13 +77,13 @@ make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bi
 # FOR MERGE WITH RAMDISK
 #
 cp -vr arch/arm/boot/zImage ../AK-ramdisk/
-cd ../AK-ramdisk/ramdisk-cm10/
+cd ../AK-ramdisk/ramdisk-4.2/
 chmod 750 init* charger
 chmod 644 default.prop
 chmod 640 fstab.tuna
 chmod 644 ueventd*
 cd ..
-./repack-bootimg.pl zImage ramdisk-cm10/ boot.img
+./repack-bootimg.pl zImage ramdisk-4.2/ boot.img
 cp -vr boot.img cwm/
 
 #
