@@ -317,6 +317,7 @@ static int cpufreq_change_gov(char *target_gov)
 	unsigned int cpu = 0;
 	for_each_online_cpu(cpu)
 		return cpufreq_set_gov(target_gov, cpu);
+	return 0;
 }
 
 static int cpufreq_restore_default_gov(void)
