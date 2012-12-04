@@ -464,8 +464,7 @@ static void dbs_freq_increase(struct cpufreq_policy *p, unsigned int freq)
 	else if (p->cur == p->max)
 		return;
 
-	__cpufreq_driver_target(p, freq, dbs_tuners_ins.powersave_bias ?
-			CPUFREQ_RELATION_L : CPUFREQ_RELATION_H);
+	__cpufreq_driver_target(p, freq, CPUFREQ_RELATION_L);
 }
 
 static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
