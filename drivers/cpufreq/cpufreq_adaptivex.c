@@ -598,7 +598,10 @@ static void dbs_freq_increase(struct cpufreq_policy *p, unsigned int freq)
 
 	if (suspended && freq > dbs_tuners_ins.suspend_freq) {
 		freq = dbs_tuners_ins.suspend_freq;
-	__cpufreq_driver_target(p, freq, CPUFREQ_RELATION_L);
+		__cpufreq_driver_target(p, freq, CPUFREQ_RELATION_H);
+	} else
+		__cpufreq_driver_target(p, freq, dbs_tuners_ins.powersave_bias ?
+			CPUFREQ_RELATION_L : CPUFREQ_RELATION_H);
 }
 
 static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
