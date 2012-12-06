@@ -543,12 +543,12 @@ static void *row_init_queue(struct request_queue *q)
 		return NULL;
 
 	for (i = 0; i < ROWQ_MAX_PRIO; i++) {
-		INIT_LIST_HEAD(&rdata->row_queues[i].fifo);
-		rdata->row_queues[i].disp_quantum = row_queues_def[i].quantum;
-		rdata->row_queues[i].rdata = rdata;
-		rdata->row_queues[i].prio = i;
-		rdata->row_queues[i].idle_data.begin_idling = false;
-		rdata->row_queues[i].idle_data.last_insert_time =
+		INIT_LIST_HEAD(&rdata->row_queues[i].rqueue.fifo);
+		rdata->row_queues[i].disp_quantum = queue_quantum[i];
+		rdata->row_queues[i].rqueue.rdata = rdata;
+		rdata->row_queues[i].rqueue.prio = i;
+		rdata->row_queues[i].rqueue.idle_data.begin_idling = false;
+		rdata->row_queues[i].rqueue.idle_data.last_insert_time =
 			ktime_set(0, 0);
 	}
 
@@ -692,7 +692,7 @@ SHOW_FUNCTION(row_lp_read_quantum_show,
 	rowd->row_queues[ROWQ_PRIO_LOW_READ].disp_quantum, 0);
 SHOW_FUNCTION(row_lp_swrite_quantum_show,
 	rowd->row_queues[ROWQ_PRIO_LOW_SWRITE].disp_quantum, 0);
-SHOW_FUNCTION(row_read_idle_show, rowd->read_idle.idle_time, 0);
+SHOW_FUNCTION(row_read_idle_show, rowd->read_idle.idle_time, 1);
 SHOW_FUNCTION(row_read_idle_freq_show, rowd->read_idle.freq, 0);
 #undef SHOW_FUNCTION
 
@@ -733,7 +733,7 @@ STORE_FUNCTION(row_lp_swrite_quantum_store,
 			&rowd->row_queues[ROWQ_PRIO_LOW_SWRITE].disp_quantum,
 			1, INT_MAX, 1);
 STORE_FUNCTION(row_read_idle_store, &rowd->read_idle.idle_time, 1, INT_MAX, 1);
-STORE_FUNCTION(row_read_idle_freq_store, &rowd->read_idle.freq, 1, INT_MAX, 1);
+STORE_FUNCTION(row_read_idle_freq_store, &rowd->read_idle.freq, 1, INT_MAX, 0);
 
 #undef STORE_FUNCTION
 
