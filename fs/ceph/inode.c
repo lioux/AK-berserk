@@ -383,7 +383,6 @@ static void ceph_i_callback(struct rcu_head *head)
 	struct inode *inode = container_of(head, struct inode, i_rcu);
 	struct ceph_inode_info *ci = ceph_inode(inode);
 
-	INIT_LIST_HEAD(&inode->i_dentry);
 	kmem_cache_free(ceph_inode_cachep, ci);
 }
 
@@ -617,7 +616,7 @@ static int fill_inode(struct inode *inode,
 	}
 
 	if ((issued & CEPH_CAP_LINK_EXCL) == 0)
-		inode->i_nlink = le32_to_cpu(info->nlink);
+		set_nlink(inode, le32_to_cpu(info->nlink));
 
 	/* be careful with mtime, atime, size */
 	ceph_decode_timespec(&atime, &info->atime);

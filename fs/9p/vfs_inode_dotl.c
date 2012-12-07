@@ -48,7 +48,7 @@
 #include "acl.h"
 
 static int
-v9fs_vfs_mknod_dotl(struct inode *dir, struct dentry *dentry, int omode,
+v9fs_vfs_mknod_dotl(struct inode *dir, struct dentry *dentry, umode_t omode,
 		    dev_t rdev);
 
 /**
@@ -395,7 +395,7 @@ err_clunk_old_fid:
  */
 
 static int v9fs_vfs_mkdir_dotl(struct inode *dir,
-			       struct dentry *dentry, int omode)
+			       struct dentry *dentry, umode_t omode)
 {
 	int err;
 	struct v9fs_session_info *v9ses;
@@ -606,7 +606,7 @@ v9fs_stat2inode_dotl(struct p9_stat_dotl *stat, struct inode *inode)
 		inode->i_ctime.tv_nsec = stat->st_ctime_nsec;
 		inode->i_uid = stat->st_uid;
 		inode->i_gid = stat->st_gid;
-		inode->i_nlink = stat->st_nlink;
+		set_nlink(inode, stat->st_nlink);
 
 		mode = stat->st_mode & S_IALLUGO;
 		mode |= inode->i_mode & ~S_IALLUGO;
@@ -632,7 +632,7 @@ v9fs_stat2inode_dotl(struct p9_stat_dotl *stat, struct inode *inode)
 		if (stat->st_result_mask & P9_STATS_GID)
 			inode->i_gid = stat->st_gid;
 		if (stat->st_result_mask & P9_STATS_NLINK)
-			inode->i_nlink = stat->st_nlink;
+			set_nlink(inode, stat->st_nlink);
 		if (stat->st_result_mask & P9_STATS_MODE) {
 			inode->i_mode = stat->st_mode;
 			if ((S_ISBLK(inode->i_mode)) ||
@@ -799,7 +799,7 @@ v9fs_vfs_link_dotl(struct dentry *old_dentry, struct inode *dir,
  *
  */
 static int
-v9fs_vfs_mknod_dotl(struct inode *dir, struct dentry *dentry, int omode,
+v9fs_vfs_mknod_dotl(struct inode *dir, struct dentry *dentry, umode_t omode,
 		dev_t rdev)
 {
 	int err;
@@ -814,7 +814,7 @@ v9fs_vfs_mknod_dotl(struct inode *dir, struct dentry *dentry, int omode,
 	struct posix_acl *dacl = NULL, *pacl = NULL;
 
 	P9_DPRINTK(P9_DEBUG_VFS,
-		" %lu,%s mode: %x MAJOR: %u MINOR: %u\n", dir->i_ino,
+		" %lu,%s mode: %hx MAJOR: %u MINOR: %u\n", dir->i_ino,
 		dentry->d_name.name, omode, MAJOR(rdev), MINOR(rdev));
 
 	if (!new_valid_dev(rdev))

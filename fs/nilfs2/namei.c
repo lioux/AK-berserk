@@ -117,7 +117,7 @@ static int nilfs_create(struct inode *dir, struct dentry *dentry, int mode,
 }
 
 static int
-nilfs_mknod(struct inode *dir, struct dentry *dentry, int mode, dev_t rdev)
+nilfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, dev_t rdev)
 {
 	struct inode *inode;
 	struct nilfs_transaction_info ti;
@@ -218,7 +218,7 @@ static int nilfs_link(struct dentry *old_dentry, struct inode *dir,
 	return err;
 }
 
-static int nilfs_mkdir(struct inode *dir, struct dentry *dentry, int mode)
+static int nilfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 {
 	struct inode *inode;
 	struct nilfs_transaction_info ti;
@@ -294,7 +294,7 @@ static int nilfs_do_unlink(struct inode *dir, struct dentry *dentry)
 		nilfs_warning(inode->i_sb, __func__,
 			      "deleting nonexistent file (%lu), %d\n",
 			      inode->i_ino, inode->i_nlink);
-		inode->i_nlink = 1;
+		set_nlink(inode, 1);
 	}
 	err = nilfs_delete_entry(de, page);
 	if (err)
