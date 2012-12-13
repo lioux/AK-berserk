@@ -44,7 +44,7 @@ else
   #
   # LOCAL KERNEL VERSION
   #
-  ak_ver="ak.447.42.berserk.pgm"; export LOCALVERSION="~"`echo $ak_ver`
+  ak_ver="ak.467.42.berserk.pgm"; export LOCALVERSION="~"`echo $ak_ver`
 
   debug=0
 
