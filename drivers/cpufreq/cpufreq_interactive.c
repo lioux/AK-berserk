@@ -21,13 +21,14 @@
 #include <linux/cpufreq.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
-#include <linux/rwsem.h>
+#include <linux/mutex.h>
 #include <linux/sched.h>
 #include <linux/tick.h>
 #include <linux/time.h>
 #include <linux/timer.h>
 #include <linux/workqueue.h>
 #include <linux/kthread.h>
+#include <linux/mutex.h>
 #include <linux/slab.h>
 #include <asm/cputime.h>
 
@@ -52,7 +53,6 @@ struct cpufreq_interactive_cpuinfo {
 	unsigned int floor_freq;
 	u64 floor_validate_time;
 	u64 hispeed_validate_time;
-	struct rw_semaphore mutex;
 	int governor_enabled;
 };
 
@@ -253,8 +253,8 @@ static void cpufreq_interactive_timer(unsigned long data)
 	unsigned int index;
 	unsigned long flags;
 
-	if (!down_read_trylock(&pcpu->mutex))
-		return;
+	smp_rmb();
+
 	if (!pcpu->governor_enabled)
 		goto exit;
 
@@ -354,7 +354,6 @@ rearm:
 	}
 
 exit:
-	up_read(&pcpu->mutex);
 	return;
 }
 
@@ -364,12 +363,8 @@ static void cpufreq_interactive_idle_start(void)
 		&per_cpu(cpuinfo, smp_processor_id());
 	int pending;
 
-	if (!down_read_trylock(&pcpu->mutex))
+	if (!pcpu->governor_enabled)
 		return;
-	if (!pcpu->governor_enabled) {
-		up_read(&pcpu->mutex);
-		return;
-	}
 
 	pending = timer_pending(&pcpu->cpu_timer);
 
@@ -399,7 +394,6 @@ static void cpufreq_interactive_idle_start(void)
 		}
 	}
 
-	up_read(&pcpu->mutex);
 }
 
 static void cpufreq_interactive_idle_end(void)
@@ -407,12 +401,8 @@ static void cpufreq_interactive_idle_end(void)
 	struct cpufreq_interactive_cpuinfo *pcpu =
 		&per_cpu(cpuinfo, smp_processor_id());
 
-	if (!down_read_trylock(&pcpu->mutex))
+	if (!pcpu->governor_enabled)
 		return;
-	if (!pcpu->governor_enabled) {
-		up_read(&pcpu->mutex);
-		return;
-	}
 
 	/* Arm the timer for 1-2 ticks later if not already. */
 	if (!timer_pending(&pcpu->cpu_timer)) {
@@ -423,8 +413,6 @@ static void cpufreq_interactive_idle_end(void)
 		del_timer(&pcpu->cpu_timer);
 		cpufreq_interactive_timer(smp_processor_id());
 	}
-
-	up_read(&pcpu->mutex);
 }
 
 static int cpufreq_interactive_speedchange_task(void *data)
@@ -459,12 +447,10 @@ static int cpufreq_interactive_speedchange_task(void *data)
 			unsigned int max_freq = 0;
 
 			pcpu = &per_cpu(cpuinfo, cpu);
-			if (!down_read_trylock(&pcpu->mutex))
+			smp_rmb();
+
+			if (!pcpu->governor_enabled)
 				continue;
-			if (!pcpu->governor_enabled) {
-				up_read(&pcpu->mutex);
-				continue;
-			}
 
 			for_each_cpu(j, pcpu->policy->cpus) {
 				struct cpufreq_interactive_cpuinfo *pjcpu =
@@ -495,8 +481,6 @@ static int cpufreq_interactive_speedchange_task(void *data)
 			trace_cpufreq_interactive_setspeed(cpu,
 						     pcpu->target_freq,
 						     pcpu->policy->cur);
-
-			up_read(&pcpu->mutex);
 		}
 	}
 
@@ -862,10 +846,9 @@ static int cpufreq_governor_interactive(struct cpufreq_policy *policy,
 	case CPUFREQ_GOV_STOP:
 		for_each_cpu(j, policy->cpus) {
 			pcpu = &per_cpu(cpuinfo, j);
-			down_write(&pcpu->mutex);
 			pcpu->governor_enabled = 0;
+			smp_wmb();
 			del_timer_sync(&pcpu->cpu_timer);
-			up_write(&pcpu->mutex);
 		}
 
 		if (atomic_dec_return(&active_count) > 0)
@@ -930,7 +913,6 @@ static int __init cpufreq_interactive_init(void)
 			init_timer_deferrable(&pcpu->cpu_timer);
 		pcpu->cpu_timer.function = cpufreq_interactive_timer;
 		pcpu->cpu_timer.data = i;
-		init_rwsem(&pcpu->mutex);
 	}
 
 	spin_lock_init(&target_loads_lock);
