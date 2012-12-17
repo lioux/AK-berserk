@@ -80,15 +80,17 @@ CONFIG_OMAP4_DUTY_CYCLE=y
 #
 # Boot logo and Framebuffer
 #
-CONFIG_CMDLINE="console=tty0,115200 fbcon=rotate:1 fbcon=font:VGA8x8 mem=1G vmalloc=768M zcache omap_wdt.timer_margin=60 no_console_suspend"
+CONFIG_CMDLINE="console=tty0,115200 bcon=rotate:1 fbcon=font:VGA8x8 mem=1G vmalloc=768M zcache omap_wdt.timer_margin=60 no_console_suspend"
 CONFIG_CMDLINE_FORCE=y
 CONFIG_VT=y
 CONFIG_DUMMY_CONSOLE=y
 CONFIG_LOGO=y
-CONFIG_LOGO_LINUX_MONO=y
+# CONFIG_LOGO_LINUX_MONO is not set
+# CONFIG_LOGO_LINUX_VGA16 is not set
+CONFIG_LOGO_LINUX_CLUT224=y
 CONFIG_FRAMEBUFFER_CONSOLE=y
 CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY=y
-CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+# CONFIG_FRAMEBUFFER_CONSOLE_ROTATION is not set
 CONFIG_FONTS=y
 CONFIG_FONT_8x8=y
 CONFIG_FONT_8x16=y
