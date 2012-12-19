@@ -493,7 +493,7 @@ static int fb_show_logo_line(struct fb_info *info, int rotate,
 		fb_set_logo(info, logo, logo_new, fb_logo.depth);
 	}
 
-	image.dx = 0;
+	image.dx = 220;
 	image.dy = y;
 	image.width = logo->width;
 	image.height = logo->height;
