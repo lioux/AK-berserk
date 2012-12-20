@@ -63,22 +63,26 @@ struct row_queue_params {
 	bool is_urgent;
 };
 
-/*
- * This array holds the default values of the different configurables
- * for each ROW queue. Each row of the array holds the following values:
- * {idling_enabled, quantum, is_urgent}
- * Each row corresponds to a queue with the same index (according to
- * enum row_queue_prio)
- */
-static const struct row_queue_params row_queues_def[] = {
-/* idling_enabled, quantum, is_urgent */
-	{true, 100, true},	/* ROWQ_PRIO_HIGH_READ */
-	{true, 100, true},	/* ROWQ_PRIO_REG_READ */
-	{false, 2, false},	/* ROWQ_PRIO_HIGH_SWRITE */
-	{false, 1, false},	/* ROWQ_PRIO_REG_SWRITE */
-	{false, 1, false},	/* ROWQ_PRIO_REG_WRITE */
-	{false, 1, false},	/* ROWQ_PRIO_LOW_READ */
-	{false, 1, false}	/* ROWQ_PRIO_LOW_SWRITE */
+/* Flags indicating whether the queue can notify on urgent requests */
+static const bool urgent_queues[] = {
+	true,	/* ROWQ_PRIO_HIGH_READ */
+	true,	/* ROWQ_PRIO_REG_READ */
+	false,	/* ROWQ_PRIO_HIGH_SWRITE */
+	false,	/* ROWQ_PRIO_REG_SWRITE */
+	false,	/* ROWQ_PRIO_REG_WRITE */
+	false,	/* ROWQ_PRIO_LOW_READ */
+	false,	/* ROWQ_PRIO_LOW_SWRITE */
+};
+
+/* Default values for row queues quantums in each dispatch cycle */
+static const int queue_quantum[] = {
+	100,	/* ROWQ_PRIO_HIGH_READ */
+	100,	/* ROWQ_PRIO_REG_READ */
+	2,	/* ROWQ_PRIO_HIGH_SWRITE */
+	1,	/* ROWQ_PRIO_REG_SWRITE */
+	1,	/* ROWQ_PRIO_REG_WRITE */
+	1,	/* ROWQ_PRIO_LOW_READ */
+	1	/* ROWQ_PRIO_LOW_SWRITE */
 };
 
 /* Default values for idling on read queues */
@@ -298,14 +302,13 @@ static void row_add_request(struct request_queue *q,
 
 		rqueue->idle_data.last_insert_time = ktime_get();
 	}
-	if (row_queues_def[rqueue->prio].is_urgent &&
+	if (urgent_queues[rqueue->prio] &&
 	    row_rowq_unserved(rd, rqueue->prio)) {
 		row_log_rowq(rd, rqueue->prio,
-			"added urgent request (total on queue=%d)",
-			rqueue->nr_req);
+			     "added urgent req curr_queue = %d",
+			     rd->curr_queue);
 	} else
-		row_log_rowq(rd, rqueue->prio,
-			"added request (total on queue=%d)", rqueue->nr_req);
+		row_log_rowq(rd, rqueue->prio, "added request");
 }
 
 /**
@@ -356,6 +359,28 @@ static bool row_urgent_pending(struct request_queue *q)
 	for (i = 0; i < ROWQ_MAX_PRIO; i++)
 		if (row_queues_def[i].is_urgent && row_rowq_unserved(rd, i) &&
 		    !list_empty(&rd->row_queues[i].fifo)) {
+			row_log_rowq(rd, i,
+				     "Urgent request pending (curr=%i)",
+				     rd->curr_queue);
+			return true;
+		}
+
+	return false;
+}
+
+/**
+ * row_urgent_pending() - Return TRUE if there is an urgent
+ *			  request on scheduler
+ * @q:	requests queue
+ */
+static bool row_urgent_pending(struct request_queue *q)
+{
+	struct row_data *rd = q->elevator->elevator_data;
+	int i;
+
+	for (i = 0; i < ROWQ_MAX_PRIO; i++)
+		if (urgent_queues[i] && row_rowq_unserved(rd, i) &&
+		    !list_empty(&rd->row_queues[i].rqueue.fifo)) {
 			row_log_rowq(rd, i,
 				     "Urgent request pending (curr=%i)",
 				     rd->curr_queue);
