@@ -350,8 +350,8 @@ CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 CFLAGS_MODULE   = -O2 -mtune=cortex-a9 -march=armv7-a -mfpu=neon -ftree-vectorize
 AFLAGS_MODULE   =
 LDFLAGS_MODULE  =
-CFLAGS_KERNEL   = -O2 -mtune=cortex-a9 -march=armv7-a -mfpu=neon -ftree-vectorize
-AFLAGS_KERNEL	=
+CFLAGS_KERNEL   = -O2 -mtune=cortex-a9 -march=armv7-a -mfpu=neon -ftree-vectorize -pipe
+AFLAGS_KERNEL	= -O2 -mtune=cortex-a9 -march=armv7-a -mfpu=neon -ftree-vectorize
 CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
 
 
