@@ -39,7 +39,7 @@ else
    echo ""
   #make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm tuna_ak_defconfig
   #make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf- ARCH=arm tuna_ak_defconfig
-  make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.3-2012.12-20121218/bin/arm-linux-gnueabihf- ARCH=arm tuna_ak_defconfig
+  make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.3-2012.12.20121218/bin/arm-linux-gnueabihf- ARCH=arm tuna_ak_defconfig
 
   #
   # LOCAL KERNEL VERSION
@@ -55,7 +55,7 @@ fi
 #
 #make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm -j4 modules
 #make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf- ARCH=arm -j4 modules
-make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.3-2012.12-20121218/bin/arm-linux-gnueabihf- ARCH=arm -j4 modules
+make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.3-2012.12.20121218/bin/arm-linux-gnueabihf- ARCH=arm -j4 modules
 
 #
 # FIND .KO MODULE CREATE WITH CROSS COMPILE
@@ -66,7 +66,7 @@ rm -rfv ${HOME}/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*
 find ${HOME}/android/AK-Kernel/AK-berserk/ -name '*.ko' -exec cp -v {} ${HOME}/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules \;
 #${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi-strip --strip-debug ${HOME}/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*.ko
 #${HOME}/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf-strip --strip-debug ${HOME}/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*.ko
-${HOME}/android/AK-Kernel/AK-linaro/4.7.3-2012.12-20121218/bin/arm-linux-gnueabihf-strip --strip-debug ${HOME}/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*.ko
+${HOME}/android/AK-Kernel/AK-linaro/4.7.3-2012.12.20121218/bin/arm-linux-gnueabihf-strip --strip-debug ${HOME}/android/AK-Kernel/AK-ramdisk/cwm/system/lib/modules/*.ko
 echo ""
 
 #
@@ -74,7 +74,7 @@ echo ""
 #
 #make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm -j4 zImage
 #make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.2-2012.10-20121023/bin/arm-linux-gnueabihf- ARCH=arm -j4 zImage
-make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.3-2012.12-20121218/bin/arm-linux-gnueabihf- ARCH=arm -j4 zImage
+make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.3-2012.12.20121218/bin/arm-linux-gnueabihf- ARCH=arm -j4 zImage
 
 #
 # COPY ZIMAGE OF KERNEL
