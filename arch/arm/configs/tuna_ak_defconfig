@@ -87,7 +87,7 @@ CONFIG_HARDLOCKUP_DETECTOR_OTHER_CPU=y
 #
 # Boot logo and Framebuffer
 #
-CONFIG_CMDLINE="console=tty0,115200 fbcon=rotate:0 mem=1G vmalloc=768M zcache omap_wdt.timer_margin=60 no_console_suspend"
+CONFIG_CMDLINE="console=ttyS0,115200 androidboot.console=ttyS0 fbcon=rotate:0 mem=1G vmalloc=768M zcache omap_wdt.timer_margin=60 no_console_suspend"
 CONFIG_BOOT_PRINTK_DELAY=y
 CONFIG_CMDLINE_FORCE=y
 CONFIG_CMDLINE_EXTEND=y
