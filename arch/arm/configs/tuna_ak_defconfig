@@ -87,7 +87,8 @@ CONFIG_HARDLOCKUP_DETECTOR_OTHER_CPU=y
 #
 # Boot logo and Framebuffer
 #
-CONFIG_CMDLINE="console=tty0,115200 fbcon=rotate:0 fbcon=font:VGA8x8 mem=1G vmalloc=768M zcache omap_wdt.timer_margin=60 no_console_suspend"
+CONFIG_CMDLINE="console=tty0,115200 fbcon=rotate:0 mem=1G vmalloc=768M zcache omap_wdt.timer_margin=60 no_console_suspend"
+CONFIG_BOOT_PRINTK_DELAY=y
 CONFIG_CMDLINE_FORCE=y
 CONFIG_CMDLINE_EXTEND=y
 CONFIG_VT=y
@@ -99,10 +100,10 @@ CONFIG_LOGO_LINUX_CLUT224=y
 CONFIG_FRAMEBUFFER_CONSOLE=y
 CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY=y
 # CONFIG_FRAMEBUFFER_CONSOLE_ROTATION is not set
-CONFIG_FONTS=y
+# CONFIG_FONTS is not set
 # CONFIG_FONT_4x6 is not set
 # CONFIG_FONT_6x11 is not set
-CONFIG_FONT_8x8=y
+# CONFIG_FONT_8x8 is not set
 # CONFIG_FONT_8x16 is not set
 
 #
@@ -2679,7 +2680,6 @@ CONFIG_SCHED_DEBUG=y
 # CONFIG_DEBUG_NOTIFIERS is not set
 # CONFIG_DEBUG_CREDENTIALS is not set
 # CONFIG_FRAME_POINTER is not set
-# CONFIG_BOOT_PRINTK_DELAY is not set
 # CONFIG_RCU_TORTURE_TEST is not set
 CONFIG_RCU_CPU_STALL_TIMEOUT=60
 # CONFIG_RCU_CPU_STALL_VERBOSE is not set
