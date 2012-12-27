@@ -1,0 +1,49 @@
+	return &dd->sort_list[rq_data_dir(rq)];
+	if (dd->next_rq[data_dir] == rq)
+		dd->next_rq[data_dir] = deadline_latter_request(rq);
+	rq_set_fifo_time(rq, jiffies + dd->fifo_expire[data_dir]);
+	list_add_tail(&rq->queuelist, &dd->fifo_list[data_dir]);
+	if (dd->front_merges) {
+		__rq = elv_rb_find(&dd->sort_list[bio_data_dir(bio)], sector);
+	dd->next_rq[READ] = NULL;
+	dd->next_rq[WRITE] = NULL;
+	dd->next_rq[data_dir] = deadline_latter_request(rq);
+	dd->last_sector = rq_end_sector(rq);
+ * 1 otherwise. Requires !list_empty(&dd->fifo_list[data_dir])
+	struct request *rq = rq_entry_fifo(dd->fifo_list[ddir].next);
+	const int reads = !list_empty(&dd->fifo_list[READ]);
+	const int writes = !list_empty(&dd->fifo_list[WRITE]);
+	if (dd->next_rq[WRITE])
+		rq = dd->next_rq[WRITE];
+		rq = dd->next_rq[READ];
+	if (rq && dd->batching < dd->fifo_batch)
+		BUG_ON(RB_EMPTY_ROOT(&dd->sort_list[READ]));
+		if (writes && (dd->starved++ >= dd->writes_starved))
+		BUG_ON(RB_EMPTY_ROOT(&dd->sort_list[WRITE]));
+		dd->starved = 0;
+	if (deadline_check_fifo(dd, data_dir) || !dd->next_rq[data_dir]) {
+		rq = rq_entry_fifo(dd->fifo_list[data_dir].next);
+		rq = dd->next_rq[data_dir];
+	dd->batching = 0;
+	dd->batching++;
+	BUG_ON(!list_empty(&dd->fifo_list[READ]));
+	BUG_ON(!list_empty(&dd->fifo_list[WRITE]));
+	INIT_LIST_HEAD(&dd->fifo_list[READ]);
+	INIT_LIST_HEAD(&dd->fifo_list[WRITE]);
+	dd->sort_list[READ] = RB_ROOT;
+	dd->sort_list[WRITE] = RB_ROOT;
+	dd->fifo_expire[READ] = read_expire;
+	dd->fifo_expire[WRITE] = write_expire;
+	dd->writes_starved = writes_starved;
+	dd->front_merges = 0;
+	dd->fifo_batch = fifo_batch;
+SHOW_FUNCTION(deadline_read_expire_show, dd->fifo_expire[READ], 1);
+SHOW_FUNCTION(deadline_write_expire_show, dd->fifo_expire[WRITE], 1);
+SHOW_FUNCTION(deadline_writes_starved_show, dd->writes_starved, 0);
+SHOW_FUNCTION(deadline_front_merges_show, dd->front_merges, 0);
+SHOW_FUNCTION(deadline_fifo_batch_show, dd->fifo_batch, 0);
+STORE_FUNCTION(deadline_read_expire_store, &dd->fifo_expire[READ], 0, INT_MAX, 1);
+STORE_FUNCTION(deadline_write_expire_store, &dd->fifo_expire[WRITE], 0, INT_MAX, 1);
+STORE_FUNCTION(deadline_writes_starved_store, &dd->writes_starved, INT_MIN, INT_MAX, 0);
+STORE_FUNCTION(deadline_front_merges_store, &dd->front_merges, 0, 1, 0);
+STORE_FUNCTION(deadline_fifo_batch_store, &dd->fifo_batch, 0, INT_MAX, 0);
