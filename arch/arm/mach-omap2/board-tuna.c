@@ -1380,7 +1380,7 @@ static void __init tuna_init(void)
 
 
 #ifdef CONFIG_CPU_FREQ_GOV_ONDEMAND_2_PHASE
-	set_two_phase_freq(920000);
+	set_two_phase_freq(1075200);
 #endif
 
 	tuna_wlan_init();
