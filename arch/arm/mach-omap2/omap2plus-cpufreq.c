@@ -356,7 +356,6 @@ static void omap_cpu_early_suspend(struct early_suspend *h)
 #ifdef CONFIG_CPU_FREQ_GOV_INTELLIDEMAND
 	lmf_screen_state = false;
 #endif
-
 #ifdef CONFIG_CONSERVATIVE_GOV_WHILE_SCREEN_OFF
 	cpufreq_store_default_gov();
 	if (cpufreq_change_gov(cpufreq_conservative_gov))
@@ -379,11 +378,12 @@ static void omap_cpu_late_resume(struct early_suspend *h)
 	unsigned int cur;
 
 	mutex_lock(&omap_cpufreq_lock);
+#ifdef CONFIG_CPU_FREQ_GOV_INTELLIDEMAND
+	lmf_screen_state = true;
+#endif
 #ifdef CONFIG_CONSERVATIVE_GOV_WHILE_SCREEN_OFF
 	if (cpufreq_restore_default_gov())
 		pr_err("Early_suspend: Unable to restore governor\n");
-#ifdef CONFIG_CPU_FREQ_GOV_INTELLIDEMAND
-	lmf_screen_state = true;
 #endif
 	if (max_capped) {
 		max_capped = 0;
