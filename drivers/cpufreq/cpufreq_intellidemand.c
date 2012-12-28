@@ -26,7 +26,7 @@
 #include <linux/input.h>
 #include <linux/workqueue.h>
 #include <linux/slab.h>
-#ifdef CONFIG_EARLYSUSPEND
+#ifdef CONFIG_HAS_EARLYSUSPEND
 #include <linux/earlysuspend.h>
 #endif
 #include <linux/rq_stats.h>
@@ -39,23 +39,23 @@
  */
 
 #define DEF_FREQUENCY_DOWN_DIFFERENTIAL		(10)
-#define DEF_FREQUENCY_UP_THRESHOLD		(80)
+#define DEF_FREQUENCY_UP_THRESHOLD		(85)
 #define DEF_SAMPLING_DOWN_FACTOR		(1)
 #define BOOSTED_SAMPLING_DOWN_FACTOR		(10)
-#define MAX_SAMPLING_DOWN_FACTOR		(100000)
+#define MAX_SAMPLING_DOWN_FACTOR		(95000)
 #define MICRO_FREQUENCY_DOWN_DIFFERENTIAL	(3)
-#define MICRO_FREQUENCY_UP_THRESHOLD		(75)
-#define MICRO_FREQUENCY_MIN_SAMPLE_RATE		(15000)
+#define MICRO_FREQUENCY_UP_THRESHOLD		(85)
+#define MICRO_FREQUENCY_MIN_SAMPLE_RATE		(20000)
 #define MIN_FREQUENCY_UP_THRESHOLD		(11)
 #define MAX_FREQUENCY_UP_THRESHOLD		(100)
 #define MIN_FREQUENCY_DOWN_DIFFERENTIAL		(1)
-#define DEFAULT_FREQ_BOOST_TIME			(1500000)
+#define DEFAULT_FREQ_BOOST_TIME			(1420000)
 #define DEF_SAMPLING_RATE			(50000)
 #define BOOSTED_SAMPLING_RATE			(15000)
-#define DBS_INPUT_EVENT_MIN_FREQ		(1200000)
+#define DBS_INPUT_EVENT_MIN_FREQ		(1305600)
 
 #ifdef CONFIG_CPUFREQ_ID_PERFLOCK
-#define DBS_PERFLOCK_MIN_FREQ			(525000)
+#define DBS_PERFLOCK_MIN_FREQ			(345600)
 #endif
 
 u64 freq_boosted_time;
@@ -72,7 +72,7 @@ u64 freq_boosted_time;
 #define MIN_SAMPLING_RATE_RATIO			(2)
 
 static unsigned int min_sampling_rate;
-#ifdef CONFIG_EARLYSUSPEND
+#ifdef CONFIG_HAS_EARLYSUSPEND
 static unsigned long stored_sampling_rate;
 #endif
 
@@ -1103,8 +1103,8 @@ enum {
 #define INACTIVE_DURATION_MSEC	(1*60*1000) // 1 mins
 #define MAX_ACTIVE_FREQ_LIMIT	30 // %
 #define MAX_INACTIVE_FREQ_LIMIT	20 // %
-#define ACTIVE_MAX_FREQ		CONFIG_INTELLI_MAX_ACTIVE_FREQ		// 1.512GHZ
-#define INACTIVE_MAX_FREQ	CONFIG_INTELLI_MAX_INACTIVE_FREQ	// 1.134GHZ
+#define ACTIVE_MAX_FREQ		CONFIG_INTELLI_MAX_ACTIVE_FREQ		// 1.420GHZ
+#define INACTIVE_MAX_FREQ	CONFIG_INTELLI_MAX_INACTIVE_FREQ	// 1.305GHZ
 
 #define NUM_ACTIVE_LOAD_ARRAY	(ACTIVE_DURATION_MSEC/SAMPLE_DURATION_MSEC)
 #define NUM_INACTIVE_LOAD_ARRAY	(INACTIVE_DURATION_MSEC/SAMPLE_DURATION_MSEC)
@@ -1191,7 +1191,7 @@ static unsigned int nr_run_thresholds[] = {
 	7,  UINT_MAX /* avg run threads * 2 (e.g., 9 = 2.25 threads) */
 	};
 
-static unsigned int nr_run_hysteresis = 8;  /* 0.5 thread */
+static unsigned int nr_run_hysteresis = 4;  /* 0.5 thread */
 static unsigned int nr_run_last;
 
 static unsigned int calculate_thread_stats (void)
@@ -1793,7 +1793,7 @@ static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 	return 0;
 }
 
-#ifdef CONFIG_EARLYSUSPEND
+#ifdef CONFIG_HAS_EARLYSUSPEND
 static void cpufreq_intellidemand_early_suspend(struct early_suspend *h)
 {
 	mutex_lock(&dbs_mutex);
@@ -1856,7 +1856,7 @@ static int __init cpufreq_gov_dbs_init(void)
 		INIT_WORK(&per_cpu(dbs_refresh_work, i), dbs_refresh_callback);
 	}
 
-#ifdef CONFIG_EARLYSUSPEND
+#ifdef CONFIG_HAS_EARLYSUSPEND
 	register_early_suspend(&cpufreq_intellidemand_early_suspend_info);
 #endif
 	return cpufreq_register_governor(&cpufreq_gov_intellidemand);
@@ -1865,7 +1865,7 @@ static int __init cpufreq_gov_dbs_init(void)
 static void __exit cpufreq_gov_dbs_exit(void)
 {
 	cpufreq_unregister_governor(&cpufreq_gov_intellidemand);
-#ifdef CONFIG_EARLYSUSPEND
+#ifdef CONFIG_HAS_EARLYSUSPEND
 	unregister_early_suspend(&cpufreq_intellidemand_early_suspend_info);
 #endif
 	destroy_workqueue(input_wq);
