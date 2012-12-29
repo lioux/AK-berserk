@@ -1386,7 +1386,7 @@ static void __init tuna_init(void)
 	set_two_phase_freq(1075200);
 #endif
 #ifdef CONFIG_CPU_FREQ_GOV_INTELLIDEMAND
-	id_set_two_phase_freq(1075200);
+	id_set_two_phase_freq(691200);
 #endif
 	tuna_wlan_init();
 	tuna_audio_init();
