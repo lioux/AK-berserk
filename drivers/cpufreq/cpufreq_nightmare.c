@@ -1598,7 +1598,7 @@ static void cpufreq_nightmare_early_suspend(struct early_suspend *h)
 #endif
 	previous_freq_step = dbs_tuners_ins.freq_step;
 	previous_sampling_rate = dbs_tuners_ins.sampling_rate;
-	dbs_tuners_ins.freq_step = 10;
+	dbs_tuners_ins.freq_step = 20;
 	dbs_tuners_ins.sampling_rate = 200000;
 #if EARLYSUSPEND_HOTPLUGLOCK
 	atomic_set(&g_hotplug_lock,
@@ -1666,8 +1666,8 @@ static int cpufreq_governor_nightmare(struct cpufreq_policy *policy,
 			}
 		}
 		this_dbs_info->cpu = cpu;
-		/*this_dbs_info->rate_mult = 1;*/
-		this_dbs_info->avg_rate_mult = 10;
+		/*this_dbs_info->rate_mult = 10;*/
+		this_dbs_info->avg_rate_mult = 1;
 		/*
 		 * Start the timerschedule work, when this governor
 		 * is used for first time
