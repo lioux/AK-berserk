@@ -39,7 +39,7 @@
  */
 
 #define DEF_FREQUENCY_DOWN_DIFFERENTIAL		(10)
-#define DEF_FREQUENCY_UP_THRESHOLD		(75)
+#define DEF_FREQUENCY_UP_THRESHOLD		(80)
 #define DEF_SAMPLING_DOWN_FACTOR		(1)
 #define BOOSTED_SAMPLING_DOWN_FACTOR		(10)
 #define MAX_SAMPLING_DOWN_FACTOR		(100000)
@@ -49,10 +49,10 @@
 #define MIN_FREQUENCY_UP_THRESHOLD		(11)
 #define MAX_FREQUENCY_UP_THRESHOLD		(100)
 #define MIN_FREQUENCY_DOWN_DIFFERENTIAL		(1)
-#define DEFAULT_FREQ_BOOST_TIME			(2500000)
+#define DEFAULT_FREQ_BOOST_TIME			(1500000)
 #define DEF_SAMPLING_RATE			(50000)
 #define BOOSTED_SAMPLING_RATE			(15000)
-#define DBS_INPUT_EVENT_MIN_FREQ		(1075200)
+#define DBS_INPUT_EVENT_MIN_FREQ		(1305600)
 
 #ifdef CONFIG_CPUFREQ_ID_PERFLOCK
 #define DBS_PERFLOCK_MIN_FREQ			(518400)
@@ -1191,7 +1191,7 @@ static unsigned int nr_run_thresholds[] = {
 	7,  UINT_MAX /* avg run threads * 2 (e.g., 9 = 2.25 threads) */
 	};
 
-static unsigned int nr_run_hysteresis = 4;  /* 0.5 thread */
+static unsigned int nr_run_hysteresis = 8;  /* 0.5 thread */
 static unsigned int nr_run_last;
 
 static unsigned int calculate_thread_stats (void)
