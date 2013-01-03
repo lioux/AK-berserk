@@ -313,7 +313,7 @@ config CPU_FREQ_GOV_INTELLIDEMAND
 config INTELLI_MAX_ACTIVE_FREQ
 	int "Max Active Freq for Intellidemand"
 	depends on CPU_FREQ_GOV_INTELLIDEMAND
-	default	1420000
+	default	1420800
 	help
 		Set default max active frequency for intellidemand
 
