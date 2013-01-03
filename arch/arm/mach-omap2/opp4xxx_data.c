@@ -334,10 +334,10 @@ static struct omap_opp_def __initdata omap446x_opp_def_list[] = {
 	/* MPU OPP4 - OPP-Nitro */
 	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1305600000, OMAP4460_VDD_MPU_OPPNITRO_UV),
 #ifdef CONFIG_OMAP_OCFREQ_1400
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1420000000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1400),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1420800000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1400),
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_1600
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1600000000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1600),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1536000000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1600),
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_1800
 	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1800000000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1800),
@@ -438,10 +438,10 @@ int __init omap4_opp_init(void)
 		if (omap4_has_mpu_1_2ghz())
 			omap4_mpu_opp_enable(1305600000);
 #ifdef CONFIG_OMAP_OCFREQ_1400
-		omap4_mpu_opp_enable(1420000000);
+		omap4_mpu_opp_enable(1420800000);
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_1600
-		omap4_mpu_opp_enable(1600000000);
+		omap4_mpu_opp_enable(1536000000);
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_1800
 		omap4_mpu_opp_enable(1800000000);
