@@ -158,7 +158,7 @@ static unsigned int get_nr_run_avg(void)
 
 #define DEF_MAX_CPU_LOCK			(0)
 #define DEF_MIN_CPU_LOCK			(0)
-#define DEF_CPU_UP_FREQ				(691200)
+#define DEF_CPU_UP_FREQ				(518400)
 #define DEF_CPU_DOWN_FREQ			(345600)
 #define DEF_UP_NR_CPUS				(1)
 #define DEF_CPU_UP_RATE				(10)
@@ -173,11 +173,12 @@ static unsigned int get_nr_run_avg(void)
 #define HOTPLUG_UP_INDEX			(1)
 
 /* CPU freq will be increased if measured load > inc_cpu_load;*/
-#define DEF_INC_CPU_LOAD (80)
+#define DEF_INC_CPU_LOAD 				(80)
 #define INC_CPU_LOAD_AT_MIN_FREQ		(40)
 #define UP_AVG_LOAD						(65u)
+
 /* CPU freq will be decreased if measured load < dec_cpu_load;*/
-#define DEF_DEC_CPU_LOAD (60)
+#define DEF_DEC_CPU_LOAD 				(60)
 #define DOWN_AVG_LOAD					(30u)
 #define DEF_FREQ_UP_BRAKE				(5u)
 #define DEF_HOTPLUG_COMPARE_LEVEL		(0u)
@@ -1059,7 +1060,6 @@ static void cpu_up_work(struct work_struct *work)
 		nr_up = max(nr_up, min_cpu_lock - online);
 
 	if (online == 1) {
-		printk(KERN_ERR "CPU_UP 3\n");
 		cpu_up(num_possible_cpus() - 1);
 		nr_up -= 1;
 	}
@@ -1069,7 +1069,6 @@ static void cpu_up_work(struct work_struct *work)
 			break;
 		if (cpu == 0)
 			continue;
-		printk(KERN_ERR "CPU_UP %d\n", cpu);
 		cpu_up(cpu);
 	}
 }
@@ -1087,7 +1086,6 @@ static void cpu_down_work(struct work_struct *work)
 	for_each_online_cpu(cpu) {
 		if (cpu == 0)
 			continue;
-		printk(KERN_ERR "CPU_DOWN %d\n", cpu);
 		cpu_down(cpu);
 		if (--nr_down == 0)
 			break;
@@ -1648,16 +1646,12 @@ static int cpufreq_governor_nightmare(struct cpufreq_policy *policy,
 
 	case CPUFREQ_GOV_LIMITS:
 		mutex_lock(&this_dbs_info->timer_mutex);
-
 		if (policy->max < this_dbs_info->cur_policy->cur)
 			__cpufreq_driver_target(this_dbs_info->cur_policy,
-						policy->max,
-						CPUFREQ_RELATION_H);
+						policy->max, CPUFREQ_RELATION_H);
 		else if (policy->min > this_dbs_info->cur_policy->cur)
 			__cpufreq_driver_target(this_dbs_info->cur_policy,
-						policy->min,
-						CPUFREQ_RELATION_L);
-
+						policy->min, CPUFREQ_RELATION_L);
 		mutex_unlock(&this_dbs_info->timer_mutex);
 		break;
 	}
