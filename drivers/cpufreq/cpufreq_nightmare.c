@@ -443,8 +443,7 @@ static inline cputime64_t get_cpu_idle_time_jiffy(unsigned int cpu,
 
         cur_wall_time = jiffies64_to_cputime64(get_jiffies_64());
 
-        busy_time  = cputime64_add(busy_time, kstat_cpu(cpu).cpustat.user);
-        busy_time += cputime64_add(busy_time, kstat_cpu(cpu).cpustat.system);
+        busy_time  = cputime64_add(kstat_cpu(cpu).cpustat.user, kstat_cpu(cpu).cpustat.system);
         busy_time += cputime64_add(busy_time, kstat_cpu(cpu).cpustat.irq);
         busy_time += cputime64_add(busy_time, kstat_cpu(cpu).cpustat.softirq);
         busy_time += cputime64_add(busy_time, kstat_cpu(cpu).cpustat.steal);
@@ -632,7 +631,7 @@ static ssize_t store_sampling_down_factor(struct kobject *a,
 					  struct attribute *b,
 					  const char *buf, size_t count)
 {
-	unsigned int input, j;
+	unsigned int input;
 	int ret;
 	ret = sscanf(buf, "%u", &input);
 
@@ -914,7 +913,7 @@ static ssize_t store_sampling_up_factor(struct kobject *a,
 					  struct attribute *b,
 					  const char *buf, size_t count)
 {
-	unsigned int input, j;
+	unsigned int input;
 	int ret;
 	ret = sscanf(buf, "%u", &input);
 
