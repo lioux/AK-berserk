@@ -380,7 +380,7 @@ static bool row_urgent_pending(struct request_queue *q)
 
 	for (i = 0; i < ROWQ_MAX_PRIO; i++)
 		if (urgent_queues[i] && row_rowq_unserved(rd, i) &&
-		    !list_empty(&rd->row_queues[i].rqueue.fifo)) {
+		    !list_empty(&rd->row_queues[i].fifo)) {
 			row_log_rowq(rd, i,
 				     "Urgent request pending (curr=%i)",
 				     rd->curr_queue);
@@ -521,7 +521,7 @@ static int row_dispatch_requests(struct request_queue *q, int force)
 		}
 
 		if (!force && queue_idling_enabled[currq] &&
-		    rd->row_queues[currq].rqueue.idle_data.begin_idling) {
+		    rd->row_queues[currq].idle_data.begin_idling) {
 			if (!queue_delayed_work(rd->read_idle.idle_workqueue,
 						&rd->read_idle.idle_work,
 						rd->read_idle.idle_time)) {
@@ -568,12 +568,12 @@ static void *row_init_queue(struct request_queue *q)
 		return NULL;
 
 	for (i = 0; i < ROWQ_MAX_PRIO; i++) {
-		INIT_LIST_HEAD(&rdata->row_queues[i].rqueue.fifo);
+		INIT_LIST_HEAD(&rdata->row_queues[i].fifo);
 		rdata->row_queues[i].disp_quantum = queue_quantum[i];
-		rdata->row_queues[i].rqueue.rdata = rdata;
-		rdata->row_queues[i].rqueue.prio = i;
-		rdata->row_queues[i].rqueue.idle_data.begin_idling = false;
-		rdata->row_queues[i].rqueue.idle_data.last_insert_time =
+		rdata->row_queues[i].rdata = rdata;
+		rdata->row_queues[i].prio = i;
+		rdata->row_queues[i].idle_data.begin_idling = false;
+		rdata->row_queues[i].idle_data.last_insert_time =
 			ktime_set(0, 0);
 	}
 
