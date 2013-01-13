@@ -158,8 +158,6 @@ static unsigned int get_nr_run_avg(void)
 
 #define DEF_MAX_CPU_LOCK			(0)
 #define DEF_MIN_CPU_LOCK			(0)
-#define DEF_CPU_UP_FREQ				(518400)
-#define DEF_CPU_DOWN_FREQ			(345600)
 #define DEF_UP_NR_CPUS				(1)
 #define DEF_CPU_UP_RATE				(10)
 #define DEF_CPU_DOWN_RATE			(20)
@@ -167,32 +165,31 @@ static unsigned int get_nr_run_avg(void)
 
 #define DEF_START_DELAY				(0)
 
-#define FREQ_FOR_RESPONSIVENESS			(691200)
+#define FREQ_FOR_RESPONSIVENESS			(400000)
 
 #define HOTPLUG_DOWN_INDEX			(0)
 #define HOTPLUG_UP_INDEX			(1)
 
 /* CPU freq will be increased if measured load > inc_cpu_load;*/
-#define DEF_INC_CPU_LOAD 				(80)
+#define DEF_INC_CPU_LOAD (80)
 #define INC_CPU_LOAD_AT_MIN_FREQ		(40)
 #define UP_AVG_LOAD						(65u)
-
 /* CPU freq will be decreased if measured load < dec_cpu_load;*/
-#define DEF_DEC_CPU_LOAD 				(60)
+#define DEF_DEC_CPU_LOAD (60)
 #define DOWN_AVG_LOAD					(30u)
 #define DEF_FREQ_UP_BRAKE				(5u)
 #define DEF_HOTPLUG_COMPARE_LEVEL		(0u)
 
 #ifdef CONFIG_MACH_MIDAS
 static int hotplug_rq[4][2] = {
-	{0, 200}, {200, 200}, {200, 300}, {300, 0}
+	{0, 100}, {100, 200}, {200, 300}, {300, 0}
 };
 
 static int hotplug_freq[4][2] = {
-	{0, DEF_CPU_UP_FREQ},
-	{DEF_CPU_DOWN_FREQ, DEF_CPU_UP_FREQ},
-	{DEF_CPU_DOWN_FREQ, DEF_CPU_UP_FREQ},
-	{DEF_CPU_DOWN_FREQ, 0}
+	{0, 691200},
+	{345600, 691200},
+	{345600, 691200},
+	{345600, 0}
 };
 #else
 static int hotplug_rq[4][2] = {
@@ -200,10 +197,10 @@ static int hotplug_rq[4][2] = {
 };
 
 static int hotplug_freq[4][2] = {
-	{0, DEF_CPU_UP_FREQ},
-	{DEF_CPU_DOWN_FREQ, DEF_CPU_UP_FREQ},
-	{DEF_CPU_DOWN_FREQ, DEF_CPU_UP_FREQ},
-	{DEF_CPU_DOWN_FREQ, 0}
+	{0, 691200},
+	{345600, 691200},
+	{345600, 691200},
+	{345600, 0}
 };
 #endif
 
@@ -267,8 +264,6 @@ static struct dbs_tuners {
 	unsigned int freq_step;
 	unsigned int cpu_up_rate;
 	unsigned int cpu_down_rate;
-	unsigned int cpu_up_freq;
-	unsigned int cpu_down_freq;
 	unsigned int up_nr_cpus;
 	unsigned int max_cpu_lock;
 	unsigned int min_cpu_lock;
@@ -295,8 +290,6 @@ static struct dbs_tuners {
 	.freq_step = DEF_FREQ_STEP,
 	.cpu_up_rate = DEF_CPU_UP_RATE,
 	.cpu_down_rate = DEF_CPU_DOWN_RATE,
-	.cpu_up_freq = DEF_CPU_UP_FREQ,
-	.cpu_down_freq = DEF_CPU_DOWN_FREQ,
 	.up_nr_cpus = DEF_UP_NR_CPUS,
 	.max_cpu_lock = DEF_MAX_CPU_LOCK,
 	.min_cpu_lock = DEF_MIN_CPU_LOCK,
@@ -435,25 +428,24 @@ struct cpu_usage_history {
 struct cpu_usage_history *hotplug_histories;
 
 static inline cputime64_t get_cpu_idle_time_jiffy(unsigned int cpu,
-                                                  cputime64_t *wall)
+						  cputime64_t *wall)
 {
-        cputime64_t idle_time;
-        cputime64_t cur_wall_time;
-        cputime64_t busy_time;
+	cputime64_t idle_time, cur_wall_time, busy_time = 0;
 
-        cur_wall_time = jiffies64_to_cputime64(get_jiffies_64());
+	cur_wall_time = jiffies64_to_cputime64(get_jiffies_64());
 
-        busy_time  = cputime64_add(kstat_cpu(cpu).cpustat.user, kstat_cpu(cpu).cpustat.system);
-        busy_time += cputime64_add(busy_time, kstat_cpu(cpu).cpustat.irq);
-        busy_time += cputime64_add(busy_time, kstat_cpu(cpu).cpustat.softirq);
-        busy_time += cputime64_add(busy_time, kstat_cpu(cpu).cpustat.steal);
-        busy_time += cputime64_add(busy_time, kstat_cpu(cpu).cpustat.nice);
+	busy_time = cputime64_add(busy_time, kstat_cpu(cpu).cpustat.user);
+	busy_time = cputime64_add(busy_time, kstat_cpu(cpu).cpustat.system);
+	busy_time = cputime64_add(busy_time, kstat_cpu(cpu).cpustat.irq);
+	busy_time = cputime64_add(busy_time, kstat_cpu(cpu).cpustat.softirq);
+	busy_time = cputime64_add(busy_time, kstat_cpu(cpu).cpustat.steal);
+	busy_time = cputime64_add(busy_time, kstat_cpu(cpu).cpustat.nice);
 
-        idle_time = cputime64_sub(cur_wall_time, busy_time);
-        if (wall)
-                *wall = (cputime64_t)jiffies_to_usecs(cur_wall_time);
+	idle_time = cur_wall_time - busy_time;
+	if (wall)
+		*wall = jiffies_to_usecs(cur_wall_time);
 
-        return (cputime64_t)jiffies_to_usecs(idle_time);
+	return jiffies_to_usecs(idle_time);
 }
 
 static inline cputime64_t get_cpu_idle_time(unsigned int cpu, cputime64_t *wall)
@@ -504,8 +496,6 @@ show_one(freq_step_dec, freq_step_dec);
 show_one(freq_step, freq_step);
 show_one(cpu_up_rate, cpu_up_rate);
 show_one(cpu_down_rate, cpu_down_rate);
-show_one(cpu_up_freq, cpu_up_freq);
-show_one(cpu_down_freq, cpu_down_freq);
 show_one(up_nr_cpus, up_nr_cpus);
 show_one(max_cpu_lock, max_cpu_lock);
 show_one(min_cpu_lock, min_cpu_lock);
@@ -722,30 +712,6 @@ static ssize_t store_cpu_down_rate(struct kobject *a, struct attribute *b,
 	return count;
 }
 
-static ssize_t store_cpu_up_freq(struct kobject *a, struct attribute *b,
-				 const char *buf, size_t count)
-{
-	unsigned int input;
-	int ret;
-	ret = sscanf(buf, "%u", &input);
-	if (ret != 1)
-		return -EINVAL;
-	dbs_tuners_ins.cpu_up_freq = min(input, dbs_tuners_ins.max_freq);
-	return count;
-}
-
-static ssize_t store_cpu_down_freq(struct kobject *a, struct attribute *b,
-				   const char *buf, size_t count)
-{
-	unsigned int input;
-	int ret;
-	ret = sscanf(buf, "%u", &input);
-	if (ret != 1)
-		return -EINVAL;
-	dbs_tuners_ins.cpu_down_freq = max(input, dbs_tuners_ins.min_freq);
-	return count;
-}
-
 static ssize_t store_up_nr_cpus(struct kobject *a, struct attribute *b,
 				const char *buf, size_t count)
 {
@@ -920,7 +886,7 @@ static ssize_t store_sampling_up_factor(struct kobject *a,
 	if (ret != 1 || input > MAX_SAMPLING_UP_FACTOR || input < 1)
 		return -EINVAL;
 	dbs_tuners_ins.sampling_up_factor = input;
-	
+
 	return count;
 }
 
@@ -972,8 +938,6 @@ define_one_global_rw(freq_step_dec);
 define_one_global_rw(freq_step);
 define_one_global_rw(cpu_up_rate);
 define_one_global_rw(cpu_down_rate);
-define_one_global_rw(cpu_up_freq);
-define_one_global_rw(cpu_down_freq);
 define_one_global_rw(up_nr_cpus);
 define_one_global_rw(max_cpu_lock);
 define_one_global_rw(min_cpu_lock);
@@ -999,8 +963,6 @@ static struct attribute *dbs_attributes[] = {
 	&freq_step.attr,
 	&cpu_up_rate.attr,
 	&cpu_down_rate.attr,
-	&cpu_up_freq.attr,
-	&cpu_down_freq.attr,
 	&up_nr_cpus.attr,
 	/* priority: hotplug_lock > max_cpu_lock > min_cpu_lock
 	   Exception: hotplug_lock on early_suspend uses min_cpu_lock */
@@ -1164,7 +1126,7 @@ static int check_up(void)
 		if (dbs_tuners_ins.dvfs_debug)
 				debug_hotplug_check(1, min_rq_avg, min_freq, usage);
 	}
-	
+
 	if (min_freq >= up_freq && min_rq_avg > up_rq) {
 		if (online >= 1) {
 			if (min_avg_load < up_avg_load)
@@ -1283,7 +1245,7 @@ static void dbs_check_cpu(struct cpufreq_nightmare_cpuinfo *this_dbs_info)
 		//int freq_avg;		
 
 		j_dbs_info = &per_cpu(od_cpu_dbs_info, j);
-		
+
 		prev_wall_time = j_dbs_info->prev_cpu_wall;
 		prev_idle_time = j_dbs_info->prev_cpu_idle;
 		prev_iowait_time = j_dbs_info->prev_cpu_iowait;
@@ -1305,11 +1267,10 @@ static void dbs_check_cpu(struct cpufreq_nightmare_cpuinfo *this_dbs_info)
 
 		if (dbs_tuners_ins.ignore_nice) {
 			cputime64_t cur_nice;
-                        unsigned long cur_nice_jiffies;
+			unsigned long cur_nice_jiffies;
 
-                        cur_nice = cputime64_sub(kstat_cpu(j).cpustat.nice,
-                                                 j_dbs_info->prev_cpu_nice);
-
+			cur_nice = cputime64_sub(kstat_cpu(j).cpustat.nice,
+						 j_dbs_info->prev_cpu_nice);
 			/*
 			 * Assumption: nice time between sampling periods will
 			 * be less than 2^32 jiffies for 32 bit sys
@@ -1320,7 +1281,7 @@ static void dbs_check_cpu(struct cpufreq_nightmare_cpuinfo *this_dbs_info)
 			j_dbs_info->prev_cpu_nice = kstat_cpu(j).cpustat.nice;
 			idle_time += jiffies_to_usecs(cur_nice_jiffies);
 		}
-		
+
 		if (dbs_tuners_ins.io_is_busy && idle_time >= iowait_time)
 			idle_time -= iowait_time;
 
@@ -1367,16 +1328,16 @@ static void dbs_check_cpu(struct cpufreq_nightmare_cpuinfo *this_dbs_info)
 				inc_cpu_load = dbs_tuners_ins.inc_cpu_load_at_min_freq;
 			else
 				inc_cpu_load = dbs_tuners_ins.inc_cpu_load;
-	
+
 			// Check for frequency increase or for frequency decrease			
 			if (load >= inc_cpu_load) {
 				unsigned int inc_load = (load * j_dbs_info->cur_policy->min) / 100;
 				unsigned int inc_step = (dbs_tuners_ins.freq_step * j_dbs_info->cur_policy->min) / 100;
 				unsigned int inc;
 				unsigned int freq_up = 0;
-				
+
 				avg_rate_mult += dbs_tuners_ins.sampling_up_factor;
-				
+
 				// if we cannot increment the frequency anymore, break out early
 				if (j_dbs_info->cur_policy->cur == j_dbs_info->cur_policy->max) {					
 					continue;
@@ -1390,7 +1351,7 @@ static void dbs_check_cpu(struct cpufreq_nightmare_cpuinfo *this_dbs_info)
 				if (freq_up != j_dbs_info->cur_policy->cur) {
 					__cpufreq_driver_target(j_dbs_info->cur_policy, freq_up, CPUFREQ_RELATION_L);
 				}
-			
+
 			}	
 			else if (load <	 dec_cpu_load && load > -1) {
 				unsigned int dec_load = ((100 - load) * (j_dbs_info->cur_policy->min)) / 100;				
@@ -1404,7 +1365,7 @@ static void dbs_check_cpu(struct cpufreq_nightmare_cpuinfo *this_dbs_info)
 				if (j_dbs_info->cur_policy->cur == j_dbs_info->cur_policy->min) {
 					continue;
 				}				
-				
+
 				dec = dec_load + dec_step;
 
 				freq_down = max(j_dbs_info->cur_policy->min,j_dbs_info->cur_policy->cur - dec);
@@ -1471,33 +1432,6 @@ static inline void dbs_timer_exit(struct cpufreq_nightmare_cpuinfo *dbs_info)
 	cancel_work_sync(&dbs_info->down_work);
 }
 
-static int pm_notifier_call(struct notifier_block *this,
-			    unsigned long event, void *ptr)
-{
-	static unsigned int prev_hotplug_lock;
-	switch (event) {
-	case PM_SUSPEND_PREPARE:
-		prev_hotplug_lock = atomic_read(&g_hotplug_lock);
-		atomic_set(&g_hotplug_lock, 1);
-		apply_hotplug_lock();
-		pr_debug("%s enter suspend\n", __func__);
-		return NOTIFY_OK;
-	case PM_POST_RESTORE:
-	case PM_POST_SUSPEND:
-		atomic_set(&g_hotplug_lock, prev_hotplug_lock);
-		if (prev_hotplug_lock)
-			apply_hotplug_lock();
-		prev_hotplug_lock = 0;
-		pr_debug("%s exit suspend\n", __func__);
-		return NOTIFY_OK;
-	}
-	return NOTIFY_DONE;
-}
-
-static struct notifier_block pm_notifier = {
-	.notifier_call = pm_notifier_call,
-};
-
 static int reboot_notifier_call(struct notifier_block *this,
 				unsigned long code, void *_cmd)
 {
@@ -1521,7 +1455,7 @@ static void cpufreq_nightmare_early_suspend(struct early_suspend *h)
 #endif
 	previous_freq_step = dbs_tuners_ins.freq_step;
 	previous_sampling_rate = dbs_tuners_ins.sampling_rate;
-	dbs_tuners_ins.freq_step = 20;
+	dbs_tuners_ins.freq_step = 10;
 	dbs_tuners_ins.sampling_rate = 200000;
 #if EARLYSUSPEND_HOTPLUGLOCK
 	atomic_set(&g_hotplug_lock,
@@ -1550,7 +1484,6 @@ static int cpufreq_governor_nightmare(struct cpufreq_policy *policy,
 {
 	unsigned int cpu = policy->cpu;
 	struct cpufreq_nightmare_cpuinfo *this_dbs_info;
-	struct cpufreq_frequency_table *freq_table;
 	unsigned int j;
 	int rc;
 
@@ -1563,8 +1496,6 @@ static int cpufreq_governor_nightmare(struct cpufreq_policy *policy,
 
 		dbs_tuners_ins.max_freq = policy->max;
 		dbs_tuners_ins.min_freq = policy->min;
-		dbs_tuners_ins.cpu_down_freq = policy->min;
-
 		hotplug_histories->num_hist = 0;
 		start_rq_work();
 
@@ -1578,14 +1509,12 @@ static int cpufreq_governor_nightmare(struct cpufreq_policy *policy,
 
 			j_dbs_info->prev_cpu_idle = get_cpu_idle_time(j,
 				&j_dbs_info->prev_cpu_wall);
-			if (dbs_tuners_ins.ignore_nice) {
+			if (dbs_tuners_ins.ignore_nice)
 				j_dbs_info->prev_cpu_nice =
 					kstat_cpu(j).cpustat.nice;
-			}
 		}
 		this_dbs_info->cpu = cpu;
 		this_dbs_info->avg_rate_mult = 20;
-		
 		/*
 		 * Start the timerschedule work, when this governor
 		 * is used for first time
@@ -1645,12 +1574,16 @@ static int cpufreq_governor_nightmare(struct cpufreq_policy *policy,
 
 	case CPUFREQ_GOV_LIMITS:
 		mutex_lock(&this_dbs_info->timer_mutex);
+
 		if (policy->max < this_dbs_info->cur_policy->cur)
 			__cpufreq_driver_target(this_dbs_info->cur_policy,
-						policy->max, CPUFREQ_RELATION_H);
+						policy->max,
+						CPUFREQ_RELATION_H);
 		else if (policy->min > this_dbs_info->cur_policy->cur)
 			__cpufreq_driver_target(this_dbs_info->cur_policy,
-						policy->min, CPUFREQ_RELATION_L);
+						policy->min,
+						CPUFREQ_RELATION_L);
+
 		mutex_unlock(&this_dbs_info->timer_mutex);
 		break;
 	}
