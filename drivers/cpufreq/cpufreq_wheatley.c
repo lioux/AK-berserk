@@ -24,6 +24,9 @@
 #include <linux/ktime.h>
 #include <linux/sched.h>
 #include <linux/cpuidle.h>
+#ifdef CONFIG_HAS_EARLYSUSPEND
+#include <linux/earlysuspend.h>
+#endif
 
 /*
  * dbs is used in this file as a shortform for demandbased switching
@@ -63,6 +66,12 @@ static unsigned int min_sampling_rate, num_misses;
 static void do_dbs_timer(struct work_struct *work);
 static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 				unsigned int event);
+
+#ifdef CONFIG_HAS_EARLYSUSPEND
+static struct early_suspend cpufreq_gov_early_suspend;
+static unsigned int cpufreq_gov_lcd_status;
+static unsigned long stored_sampling_rate;
+#endif
 
 #ifndef CONFIG_CPU_FREQ_DEFAULT_GOV_WHEATLEY
 static
@@ -156,10 +165,12 @@ static inline cputime64_t get_cpu_idle_time_jiffy(unsigned int cpu,
 
 static inline cputime64_t get_cpu_idle_time(unsigned int cpu, cputime64_t *wall)
 {
-    u64 idle_time = get_cpu_idle_time_us(cpu, wall);
+    u64 idle_time = get_cpu_idle_time_us(cpu, NULL);
 
     if (idle_time == -1ULL)
 	return get_cpu_idle_time_jiffy(cpu, wall);
+    else
+	idle_time += get_cpu_iowait_time_us(cpu, wall);
 
     return idle_time;
 }
@@ -462,28 +473,18 @@ static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
     policy = this_dbs_info->cur_policy;
 
     /*
-     * Every sampling_rate, we calculate the relative load (percentage of 
-     * time spend outside of idle) and the usage and average residency of 
-     * the highest C-state during the last sampling interval.
+     * Every sampling_rate, we check, if current idle time is less
+     * than 20% (default), then we try to increase frequency
+     * Every sampling_rate, we look for a the lowest
+     * frequency which can sustain the load while keeping idle time over
+     * 30%. If such a frequency exist, we try to decrease to this frequency.
      *
-     * If the highest C-state has been used and the average residency is
-     * greater or equal the user-defined target_residency or the relative 
-     * load is above up_threshold percent, we increase the frequency to 
-     * maximum (or stay there if we already are at maximum).
-     *
-     * If the highest C-state has not been used or the average residency
-     * too low, we note that and if it happens more than allowed_misses
-     * times in a row, we look for a the lowest frequency which can sustain
-     * the current load with a relative load value below (up_threshold - 
-     * down_differential) percent. If such a frequency exists, we decrease
-     * to this frequency.
+     * Any frequency increase takes it to the maximum frequency.
+     * Frequency reduction happens at minimum steps of
+     * 5% (default) of current frequency
      */
 
-    /* 
-     * Get load (in terms of the current frequency)
-     * and usage and average residency of the highest C-state 
-     */
-
+    /* Get Absolute Load - in terms of freq */
     max_load_freq = 0;
     total_idletime = 0;
     total_usage = 0;
@@ -591,6 +592,25 @@ static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
 	return;
     }
 
+#ifdef CONFIG_HAS_EARLYSUSPEND
+	/* should we enable auxillary CPUs? */
+	/* only master CPU is alive and Screen is ON */
+	if (num_online_cpus() < 2 && cpufreq_gov_lcd_status == 1) {
+		mutex_unlock(&this_dbs_info->timer_mutex);
+		/* hot-plug enable 2nd CPU */
+		cpu_up(1);
+		mutex_lock(&this_dbs_info->timer_mutex);
+		printk("Wheatley - Screen ON Hot-plug!\n");
+	/* Both CPUs are up and Screen is OFF */
+	} else if (num_online_cpus() > 1 && cpufreq_gov_lcd_status == 0) {
+		mutex_unlock(&this_dbs_info->timer_mutex);
+		/* hot-unplug 2nd CPU */
+		cpu_down(1);
+		printk("Wheatley - Screen OFF Hot-unplug!\n");
+		mutex_lock(&this_dbs_info->timer_mutex);
+	}
+#endif
+
     /* Check for frequency decrease */
     /* if we cannot reduce the frequency anymore, break out early */
     if (policy->cur == policy->min)
@@ -599,8 +619,7 @@ static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
     /*
      * The optimal frequency is the frequency that is the lowest that
      * can support the current CPU usage without triggering the up
-     * policy. To be safe, we focus down_differential points under the 
-     * threshold.
+     * policy. To be safe, we focus 10 points under the threshold.
      */
     if (max_load_freq <
 	(dbs_tuners_ins.up_threshold - dbs_tuners_ins.down_differential) *
@@ -801,13 +820,31 @@ static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
     return 0;
 }
 
+#ifdef CONFIG_HAS_EARLYSUSPEND
+static void cpufreq_gov_suspend(struct early_suspend *h)
+{
+	mutex_lock(&dbs_mutex);
+	cpufreq_gov_lcd_status = 0;
+	stored_sampling_rate = min_sampling_rate;
+	min_sampling_rate = MICRO_FREQUENCY_MIN_SAMPLE_RATE * 2;
+	mutex_unlock(&dbs_mutex);
+}
+
+static void cpufreq_gov_resume(struct early_suspend *h)
+{
+	mutex_lock(&dbs_mutex);
+	cpufreq_gov_lcd_status = 1;
+	min_sampling_rate = stored_sampling_rate;
+	mutex_unlock(&dbs_mutex);
+}
+#endif
+
 static int __init cpufreq_gov_dbs_init(void)
 {
-    cputime64_t wall;
     u64 idle_time;
     int cpu = get_cpu();
 
-    idle_time = get_cpu_idle_time_us(cpu, &wall);
+    idle_time = get_cpu_idle_time_us(cpu, NULL);
     put_cpu();
     if (idle_time != -1ULL) {
 	/* Idle micro accounting is supported. Use finer thresholds */
@@ -825,6 +862,16 @@ static int __init cpufreq_gov_dbs_init(void)
 	min_sampling_rate =
 	    MIN_SAMPLING_RATE_RATIO * jiffies_to_usecs(10);
     }
+
+#ifdef CONFIG_HAS_EARLYSUSPEND
+	cpufreq_gov_lcd_status = 1;
+
+	cpufreq_gov_early_suspend.level = EARLY_SUSPEND_LEVEL_BLANK_SCREEN + 25;
+
+	cpufreq_gov_early_suspend.suspend = cpufreq_gov_suspend;
+	cpufreq_gov_early_suspend.resume = cpufreq_gov_resume;
+	register_early_suspend(&cpufreq_gov_early_suspend);
+#endif
 
     return cpufreq_register_governor(&cpufreq_gov_wheatley);
 }
