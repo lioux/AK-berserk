@@ -1,8 +1,8 @@
 VERSION = 3
 PATCHLEVEL = 0
-SUBLEVEL = 58
-EXTRAVERSION = +
-NAME = Berserk
+SUBLEVEL = 59
+EXTRAVERSION = ++
+NAME = Sneaky Weasel
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
