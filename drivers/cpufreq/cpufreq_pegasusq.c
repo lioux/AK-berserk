@@ -80,26 +80,26 @@
 #define HOTPLUG_UP_INDEX			(1)
 
 #ifdef CONFIG_CPU_FREQ_GOV_ONDEMAND_FLEXRATE
-#define FLEX_MAX_FREQ				(800000)
+#define FLEX_MAX_FREQ				(700000)
 #endif
 
 #ifdef CONFIG_CPU_FREQ_LCD_FREQ_DFS
 #define LCD_FREQ_KICK_IN_DOWN_DELAY		(20)
-#define LCD_FREQ_KICK_IN_FREQ			(500000)
+#define LCD_FREQ_KICK_IN_FREQ			(525000)
 
 extern int _lcdfreq_lock(int lock);
 #endif
 
 #ifdef CONFIG_MACH_MIDAS
 static int hotplug_rq[4][2] = {
-	{0, 175}, {175, 275}, {275, 375}, {375, 0}
+	{0, 100}, {100, 200}, {200, 300}, {300, 0}
 };
 
 static int hotplug_freq[4][2] = {
-	{0, 500000},
-	{200000, 500000},
-	{200000, 700000},
-	{400000, 0}
+	{0, 700000},
+	{350000, 700000},
+	{350000, 700000},
+	{350000, 0}
 };
 #else
 static int hotplug_rq[4][2] = {
@@ -107,10 +107,10 @@ static int hotplug_rq[4][2] = {
 };
 
 static int hotplug_freq[4][2] = {
-	{0, 500000},
-	{200000, 500000},
-	{200000, 500000},
-	{200000, 0}
+	{0, 700000},
+	{350000, 700000},
+	{350000, 700000},
+	{350000, 0}
 };
 #endif
 
