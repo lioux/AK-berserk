@@ -352,7 +352,7 @@ static struct omap_opp_def __initdata omap446x_opp_def_list[] = {
 	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1560000000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1800),
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_2000
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1720000000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC2000),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1640000000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC2000),
 #endif
 	/* MPU OPP4 - OPP-Nitro SpeedBin */
 	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1500000000, OMAP4460_VDD_MPU_OPPNITRO_UV),
@@ -455,7 +455,7 @@ int __init omap4_opp_init(void)
 			omap4_mpu_opp_enable(1560000000);
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_2000
-			omap4_mpu_opp_enable(1720000000);
+			omap4_mpu_opp_enable(1640000000);
 #endif
 	}
 
