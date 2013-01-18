@@ -263,10 +263,6 @@ static int omap_target(struct cpufreq_policy *policy,
 	unsigned int i;
 	int ret = 0;
 
-#ifdef CONFIG_LIVE_OC
-	mutex_lock(&omap_cpufreq_lock);
-#endif
-
 	if (!freq_table) {
 		dev_err(mpu_dev, "%s: cpu%d: no freq table!\n", __func__,
 				policy->cpu);
@@ -281,9 +277,7 @@ static int omap_target(struct cpufreq_policy *policy,
 		return ret;
 	}
 
-#ifndef CONFIG_LIVE_OC
 	mutex_lock(&omap_cpufreq_lock);
-#endif
 
 	current_target_freq = freq_table[i].frequency;
 
@@ -296,7 +290,6 @@ static int omap_target(struct cpufreq_policy *policy,
 	return ret;
 }
 
-#ifdef CONFIG_OMAP_SCREENOFF_MAXFREQ
 #ifdef CONFIG_CONSERVATIVE_GOV_WHILE_SCREEN_OFF
 #define MAX_GOV_NAME_LEN 16
 static char cpufreq_default_gov[CONFIG_NR_CPUS][MAX_GOV_NAME_LEN];
@@ -348,16 +341,15 @@ static int cpufreq_restore_default_gov(void)
 }
 #endif
 
+#ifdef CONFIG_OMAP_SCREENOFF_MAXFREQ
 static void omap_cpu_early_suspend(struct early_suspend *h)
 {
 	unsigned int cur;
 
 	mutex_lock(&omap_cpufreq_lock);
-
 #ifdef CONFIG_CPU_FREQ_GOV_INTELLIDEMAND
 	lmf_screen_state = false;
 #endif
-
 #ifdef CONFIG_CONSERVATIVE_GOV_WHILE_SCREEN_OFF
 	cpufreq_store_default_gov();
 	if (cpufreq_change_gov(cpufreq_conservative_gov))
@@ -380,11 +372,9 @@ static void omap_cpu_late_resume(struct early_suspend *h)
 	unsigned int cur;
 
 	mutex_lock(&omap_cpufreq_lock);
-
 #ifdef CONFIG_CPU_FREQ_GOV_INTELLIDEMAND
 	lmf_screen_state = true;
 #endif
-
 #ifdef CONFIG_CONSERVATIVE_GOV_WHILE_SCREEN_OFF
 	if (cpufreq_restore_default_gov())
 		pr_err("Early_suspend: Unable to restore governor\n");
@@ -576,7 +566,7 @@ static int __cpuinit omap_cpu_init(struct cpufreq_policy *policy)
 
 	policy->min = policy->cpuinfo.min_freq;
 #if defined(CONFIG_OMAP_OCFREQ_1400) || defined(CONFIG_OMAP_OCFREQ_1600) || defined(CONFIG_OMAP_OCFREQ_1800) || defined(CONFIG_OMAP_OCFREQ_2000)
-	policy->max = 1200000;
+	policy->max = 1305600;
 #else
 	policy->max = policy->cpuinfo.max_freq;
 #endif
@@ -584,8 +574,6 @@ static int __cpuinit omap_cpu_init(struct cpufreq_policy *policy)
 
 	for (i = 0; freq_table[i].frequency != CPUFREQ_TABLE_END; i++)
 		max_freq = max(freq_table[i].frequency, max_freq);
-	max_thermal = max_freq;
-	current_cooling_level = 0;
 
 	/*
 	 * On OMAP SMP configuartion, both processors share the voltage
@@ -787,6 +775,9 @@ static int __init omap_cpufreq_init(void)
 
 	ret = cpufreq_register_driver(&omap_driver);
 	omap_cpufreq_ready = !ret;
+
+	max_thermal = max_freq;
+	current_cooling_level = 0;
 
 	if (!ret) {
 		int t;
