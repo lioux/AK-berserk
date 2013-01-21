@@ -54,7 +54,6 @@
 static void do_dbs_timer(struct work_struct *work);
 static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 		unsigned int event);
-static int sakuractive_boost(struct cpufreq_policy *policy);
 
 #ifndef CONFIG_CPU_FREQ_DEFAULT_GOV_SAKURACTIVE
 static
@@ -742,28 +741,6 @@ static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 		mutex_unlock(&this_dbs_info->timer_mutex);
 		break;
 	}
-	return 0;
-}
-
-static int hotplug_boost(struct cpufreq_policy *policy)
-{
-	unsigned int cpu = policy->cpu;
-	struct cpu_dbs_info_s *this_dbs_info;
-
-	this_dbs_info = &per_cpu(hp_cpu_dbs_info, cpu);
-
-#if 0
-	/* Already at max? */
-	if (policy->cur == policy->max)
-		return;
-#endif
-
-	mutex_lock(&this_dbs_info->timer_mutex);
-	this_dbs_info->boost_applied = 1;
-	__cpufreq_driver_target(policy, policy->max,
-		CPUFREQ_RELATION_H);
-	mutex_unlock(&this_dbs_info->timer_mutex);
-
 	return 0;
 }
 
