@@ -621,7 +621,7 @@ static ssize_t store_sampling_down_factor(struct kobject *a,
 					  struct attribute *b,
 					  const char *buf, size_t count)
 {
-	unsigned int input, j;
+	unsigned int input;
 	int ret;
 	ret = sscanf(buf, "%u", &input);
 
@@ -879,7 +879,7 @@ static ssize_t store_sampling_up_factor(struct kobject *a,
 					  struct attribute *b,
 					  const char *buf, size_t count)
 {
-	unsigned int input, j;
+	unsigned int input;
 	int ret;
 	ret = sscanf(buf, "%u", &input);
 
@@ -1436,33 +1436,6 @@ static inline void dbs_timer_exit(struct cpufreq_nightmare_cpuinfo *dbs_info)
 	cancel_work_sync(&dbs_info->up_work);
 	cancel_work_sync(&dbs_info->down_work);
 }
-
-static int pm_notifier_call(struct notifier_block *this,
-			    unsigned long event, void *ptr)
-{
-	static unsigned int prev_hotplug_lock;
-	switch (event) {
-	case PM_SUSPEND_PREPARE:
-		prev_hotplug_lock = atomic_read(&g_hotplug_lock);
-		atomic_set(&g_hotplug_lock, 1);
-		apply_hotplug_lock();
-		pr_debug("%s enter suspend\n", __func__);
-		return NOTIFY_OK;
-	case PM_POST_RESTORE:
-	case PM_POST_SUSPEND:
-		atomic_set(&g_hotplug_lock, prev_hotplug_lock);
-		if (prev_hotplug_lock)
-			apply_hotplug_lock();
-		prev_hotplug_lock = 0;
-		pr_debug("%s exit suspend\n", __func__);
-		return NOTIFY_OK;
-	}
-	return NOTIFY_DONE;
-}
-
-static struct notifier_block pm_notifier = {
-	.notifier_call = pm_notifier_call,
-};
 
 static int reboot_notifier_call(struct notifier_block *this,
 				unsigned long code, void *_cmd)
