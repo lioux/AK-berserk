@@ -471,9 +471,10 @@ int __init omap4_opp_init(void)
 
 	if (!r) {
 			omap4_mpu_opp_enable(1200000000);
-#ifdef CONFIG_OMAP_OCFREQ_1400
 			omap4_mpu_opp_enable(1350000000);
+#ifdef CONFIG_OMAP_OCFREQ_1400
 			omap4_mpu_opp_enable(1420000000);
+			omap4_mpu_opp_enable(1480000000);
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_1600
 			omap4_mpu_opp_enable(1560000000);
