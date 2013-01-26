@@ -19,7 +19,8 @@ if [ "${PARAM}" == "debug" ]; then
   rm -rfv .config; rm -rfv .config.old
    echo ""
   #make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm tuna_ak_debug_defconfig
-  make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm tuna_ak_debug_defconfig
+  #make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.6.x-google/bin/arm-eabi- ARCH=arm tuna_ak_debug_defconfig
+  make CROSS_COMPILE=${HOME}/android/AK-Kernel/AK-linaro/4.7.3-2012.12.20121218/bin/arm-linux-gnueabihf- ARCH=arm tuna_ak_debug_defconfig
 
   #
   # LOCAL KERNEL VERSION
