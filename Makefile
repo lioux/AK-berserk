@@ -1,8 +1,8 @@
 VERSION = 3
 PATCHLEVEL = 0
-SUBLEVEL = 61
+SUBLEVEL = 62
 EXTRAVERSION = +
-NAME = Dummy Plug
+NAME = Dummy
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
