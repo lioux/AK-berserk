@@ -3114,6 +3114,8 @@ static int select_idle_sibling(struct task_struct *p, int target)
 	int cpu = smp_processor_id();
 	int prev_cpu = task_cpu(p);
 	struct sched_domain *sd;
+	struct sched_group *sg;
+	int i;
 
 	/*
 	 * If the task is going to be woken-up on this cpu and if it is
@@ -3130,18 +3132,94 @@ static int select_idle_sibling(struct task_struct *p, int target)
 		return prev_cpu;
 
 	/*
-	 * Otherwise, check assigned siblings to find an elegible idle cpu.
+	 * Otherwise, iterate the domains and find an elegible idle cpu.
 	 */
 	sd = rcu_dereference(per_cpu(sd_llc, target));
-
 	for_each_lower_domain(sd) {
-		if (!cpumask_test_cpu(sd->idle_buddy, tsk_cpus_allowed(p)))
-			continue;
-		if (idle_cpu(sd->idle_buddy))
-			return sd->idle_buddy;
+		sg = sd->groups;
+		do {
+			if (!cpumask_intersects(sched_group_cpus(sg),
+						tsk_cpus_allowed(p)))
+				goto next;
+
+			for_each_cpu(i, sched_group_cpus(sg)) {
+				if (!idle_cpu(i))
+					goto next;
+			}
+
+			target = cpumask_first_and(sched_group_cpus(sg),
+					tsk_cpus_allowed(p));
+			goto done;
+next:
+			sg = sg->next;
+		} while (sg != sd->groups);
+	}
+done:
+	return target;
+}
+
+static inline bool is_buddy_busy(int cpu)
+{
+	struct rq *rq = cpu_rq(cpu);
+	volatile u32 *psum = &rq->avg.runnable_avg_sum;
+	volatile u32 *pperiod = &rq->avg.runnable_avg_period;
+	u32 sum, new_sum, period, new_period;
+	int timeout = 10;
+
+	while (timeout) {
+		sum = *psum;
+		period = *pperiod;
+		new_sum = *psum;
+		new_period = *pperiod;
+
+		if ((sum == new_sum) && (period == new_period))
+			break;
+
+		timeout--;
 	}
 
-	return target;
+	/*
+	 * A busy buddy is a CPU with a high load or a small load with a lot of
+	 * running tasks.
+	 */
+	return ((new_sum << rq->nr_running) > new_period);
+}
+
+static inline bool is_light_task(struct task_struct *p)
+{
+	/* A light task runs less than 25% in average */
+	return ((p->se.avg.usage_avg_sum << 2) < p->se.avg.runnable_avg_period);
+}
+
+static int check_pack_buddy(int cpu, struct task_struct *p)
+{
+	int buddy = per_cpu(sd_pack_buddy, cpu);
+
+	/* No pack buddy for this CPU */
+	if (buddy == -1)
+		return false;
+
+	/*
+	 * If a task is waiting for running on the CPU which is its own buddy,
+	 * let the default behavior to look for a better CPU if available
+	 * The threshold has been set to 37.5%
+	 */
+	if ((buddy == cpu)
+	 && ((p->se.avg.usage_avg_sum << 3) < (p->se.avg.runnable_avg_sum * 5)))
+		return false;
+
+	/* buddy is not an allowed CPU */
+	if (!cpumask_test_cpu(buddy, tsk_cpus_allowed(p)))
+		return false;
+
+	/*
+	 * If the task is a small one and the buddy is not overloaded,
+	 * we use buddy cpu
+	 */
+	 if (!is_light_task(p) || is_buddy_busy(buddy))
+		return false;
+
+	return true;
 }
 
 /*
