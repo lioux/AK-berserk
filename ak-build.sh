@@ -44,7 +44,7 @@ else
   #
   # LOCAL KERNEL VERSION
   #
-  ak_ver="sk8.05.Special.ED"; export LOCALVERSION="~"`echo $ak_ver`
+  ak_ver="sk8.05.OldSchool.ED"; export LOCALVERSION="~"`echo $ak_ver`
 
   debug=0
 
