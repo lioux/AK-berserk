@@ -45,7 +45,7 @@ else
   #
   # LOCAL KERNEL VERSION
   #
-  ak_ver="ak.680.42.Dummy"; export LOCALVERSION="~"`echo $ak_ver`
+  ak_ver="ak.aospa.O3.Ed"; export LOCALVERSION="~"`echo $ak_ver`
 
   debug=0
 
