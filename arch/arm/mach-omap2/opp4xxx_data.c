@@ -184,9 +184,9 @@ static struct omap_opp_def __initdata omap443x_opp_def_list[] = {
 	OPP_INITIALIZER("aess", "abe_clk", "iva", true, 196608000, OMAP4430_VDD_IVA_OPP100_UV),
 };
 
-#define OMAP4460_VDD_MPU_OPP15_UV       	850000
-#define OMAP4460_VDD_MPU_OPP25_UV       	875000
-#define OMAP4460_VDD_MPU_OPP50_UV			975000
+#define OMAP4460_VDD_MPU_OPP15_UV       	810000
+#define OMAP4460_VDD_MPU_OPP25_UV       	835000
+#define OMAP4460_VDD_MPU_OPP50_UV			935000
 #define OMAP4460_VDD_MPU_OPP75_UV			1003000
 #define OMAP4460_VDD_MPU_OPP100_UV			1083000
 #define OMAP4460_VDD_MPU_OPP125_UV			1134000
@@ -199,14 +199,14 @@ static struct omap_opp_def __initdata omap443x_opp_def_list[] = {
  #define OMAP4460_VDD_MPU_OPPNITROPLUS_UV_OC1400	1410000
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_1600
- #define OMAP4460_VDD_MPU_OPPNITRO_UV_OC1600		1420000
- #define OMAP4460_VDD_MPU_OPPNITROPLUS_UV_OC1600	1430000
+ #define OMAP4460_VDD_MPU_OPPNITRO_UV_OC1600		1430000
+ #define OMAP4460_VDD_MPU_OPPNITROPLUS_UV_OC1600	1450000
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_1800
- #define OMAP4460_VDD_MPU_OPPNITRO_UV_OC1800		1440000
+ #define OMAP4460_VDD_MPU_OPPNITRO_UV_OC1800		1460000
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_2000
- #define OMAP4460_VDD_MPU_OPPNITRO_UV_OC2000		1450000
+ #define OMAP4460_VDD_MPU_OPPNITRO_UV_OC2000		1470000
 #endif
 
 #ifdef CONFIG_OMAP_SMARTREFLEX_CUSTOM_SENSOR
@@ -350,34 +350,34 @@ struct omap_vdd_dep_info omap446x_vddiva_dep_info[] = {
 static struct omap_opp_def __initdata omap446x_opp_def_list[] = {
 	/* MPU OPP1 - OPP25 */
 #ifdef CONFIG_UNLOCK_LOW_FREQS
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 180000000, OMAP4460_VDD_MPU_OPP15_UV),
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 230000000, OMAP4460_VDD_MPU_OPP25_UV),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 172800000, OMAP4460_VDD_MPU_OPP15_UV),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 259200000, OMAP4460_VDD_MPU_OPP25_UV),
 #endif
 	/* MPU OPP1 - OPP50 */
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 350000000, OMAP4460_VDD_MPU_OPP50_UV),
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 525000000, OMAP4460_VDD_MPU_OPP75_UV),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 345600000, OMAP4460_VDD_MPU_OPP50_UV),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 518400000, OMAP4460_VDD_MPU_OPP75_UV),
 	/* MPU OPP2 - OPP100 */
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 700000000, OMAP4460_VDD_MPU_OPP100_UV),
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 810000000, OMAP4460_VDD_MPU_OPP125_UV),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 691200000, OMAP4460_VDD_MPU_OPP100_UV),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 864000000, OMAP4460_VDD_MPU_OPP125_UV),
 	/* MPU OPP3 - OPP-Turbo */
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 920000000, OMAP4460_VDD_MPU_OPPTURBO_UV),
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 1060000000, OMAP4460_VDD_MPU_OPPTURBOPLUS_UV),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 950400000, OMAP4460_VDD_MPU_OPPTURBO_UV),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", true, 1036800000, OMAP4460_VDD_MPU_OPPTURBOPLUS_UV),
 	/* MPU OPP4 - OPP-Nitro */
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1200000000, OMAP4460_VDD_MPU_OPPNITRO_UV),
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1350000000, OMAP4460_VDD_MPU_OPPNITROPLUS_UV),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1209600000, OMAP4460_VDD_MPU_OPPNITRO_UV),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1382400000, OMAP4460_VDD_MPU_OPPNITROPLUS_UV),
 #ifdef CONFIG_OMAP_OCFREQ_1400
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1420000000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1400),
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1480000000, OMAP4460_VDD_MPU_OPPNITROPLUS_UV_OC1400),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1468800000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1400),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1555200000, OMAP4460_VDD_MPU_OPPNITROPLUS_UV_OC1400),
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_1600
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1560000000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1600),
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1640000000, OMAP4460_VDD_MPU_OPPNITROPLUS_UV_OC1600),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1641600000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1600),
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_1800
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1720000000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1800),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1728000000, OMAP4460_VDD_MPU_OPPNITROPLUS_UV_OC1600),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1814400000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC1800),
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_2000
-	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1800000000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC2000),
+	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1900800000, OMAP4460_VDD_MPU_OPPNITRO_UV_OC2000),
 #endif
 	/* MPU OPP4 - OPP-Nitro SpeedBin */
 	OPP_INITIALIZER("mpu", "virt_dpll_mpu_ck", "mpu", false, 1500000000, OMAP4460_VDD_MPU_OPPNITRO_UV),
@@ -469,21 +469,21 @@ int __init omap4_opp_init(void)
 			ARRAY_SIZE(omap446x_opp_def_list));
 
 	if (!r) {
-			omap4_mpu_opp_enable(1200000000);
-			omap4_mpu_opp_enable(1350000000);
+			omap4_mpu_opp_enable(1209600000);
+			omap4_mpu_opp_enable(1382400000);
 #ifdef CONFIG_OMAP_OCFREQ_1400
-			omap4_mpu_opp_enable(1420000000);
-			omap4_mpu_opp_enable(1480000000);
+			omap4_mpu_opp_enable(1468800000);
+			omap4_mpu_opp_enable(1555200000);
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_1600
-			omap4_mpu_opp_enable(1560000000);
-			omap4_mpu_opp_enable(1640000000);
+			omap4_mpu_opp_enable(1641600000);
+			omap4_mpu_opp_enable(1728000000);
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_1800
-			omap4_mpu_opp_enable(1720000000);
+			omap4_mpu_opp_enable(1814400000);
 #endif
 #ifdef CONFIG_OMAP_OCFREQ_2000
-			omap4_mpu_opp_enable(1800000000);
+			omap4_mpu_opp_enable(1900800000);
 #endif
 	}
 
