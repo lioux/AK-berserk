@@ -2021,13 +2021,6 @@ static void bfq_exit_icq(struct io_cq *icq)
 	}
 
 	if (bic->bfqq[BLK_RW_SYNC]) {
-		/*
-		 * If the bic is using a shared queue, put the reference
-		 * taken on the io_context when the bic started using a
-		 * shared bfq_queue.
-		 */
-		if (bfq_bfqq_coop(bic->bfqq[BLK_RW_SYNC]))
-			put_io_context(icq->ioc);
 		bfq_exit_bfqq(bfqd, bic->bfqq[BLK_RW_SYNC]);
 		bic->bfqq[BLK_RW_SYNC] = NULL;
 	}
@@ -2597,9 +2590,6 @@ static struct bfq_queue *
 bfq_split_bfqq(struct bfq_io_cq *bic, struct bfq_queue *bfqq)
 {
 	bfq_log_bfqq(bfqq->bfqd, bfqq, "splitting queue");
-
-	put_io_context(bic->icq.ioc);
-
 	if (bfqq_process_refs(bfqq) == 1) {
 		bfqq->pid = current->pid;
 		bfq_clear_bfqq_some_coop_idle(bfqq);
