@@ -245,8 +245,13 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 
 HOSTCC       = gcc
 HOSTCXX      = g++
-HOSTCFLAGS   = -Wall -W -Wmissing-prototypes -Wno-sign-compare -Wstrict-prototypes -Wno-unused-parameter -Wno-missing-field-initializers -O2 -fomit-frame-pointer -fno-delete-null-pointer-checks
-HOSTCXXFLAGS = -O2 -Wall -W -fno-delete-null-pointer-checks
+ifdef CCONFIG_CC_OPTIMIZE_O3
+ HOSTCFLAGS   = -Wall -W -Wmissing-prototypes -Wno-sign-compare -Wstrict-prototypes -Wno-unused-parameter -Wno-missing-field-initializers -O3 -fomit-frame-pointer -fno-delete-null-pointer-checks
+ HOSTCXXFLAGS = -O3 -Wall -W -fno-delete-null-pointer-checks
+else
+ HOSTCFLAGS   = -Wall -W -Wmissing-prototypes -Wno-sign-compare -Wstrict-prototypes -Wno-unused-parameter -Wno-missing-field-initializers -O2 -fomit-frame-pointer -fno-delete-null-pointer-checks
+ HOSTCXXFLAGS = -O2 -Wall -W -fno-delete-null-pointer-checks
+endif
 
 # Decide whether to build built-in, modular, or both.
 # Normally, just do built-in.
@@ -376,7 +381,11 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -ftree-vectorize -floop-interchange -floop-strip-mine -floop-block \
 		   -mno-unaligned-access
 KBUILD_AFLAGS_KERNEL :=
-KBUILD_CFLAGS_KERNEL := -O2 -mtune=cortex-a9 -march=armv7-a -mfpu=neon -ftree-vectorize
+ifdef CCONFIG_CC_OPTIMIZE_O3
+ KBUILD_CFLAGS_KERNEL := -O3 -mtune=cortex-a9 -march=armv7-a -mfpu=neon -ftree-vectorize
+else
+ KBUILD_CFLAGS_KERNEL := -O2 -mtune=cortex-a9 -march=armv7-a -mfpu=neon -ftree-vectorize
+endif
 KBUILD_AFLAGS   := -D__ASSEMBLY__
 KBUILD_AFLAGS_MODULE  := -DMODULE
 KBUILD_CFLAGS_MODULE  := -DMODULE
@@ -565,11 +574,14 @@ endif # $(dot-config)
 all: vmlinux
 
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
-KBUILD_CFLAGS	+= -Os
-else
-KBUILD_CFLAGS	+= -O2
+ KBUILD_CFLAGS	+= -Os
 endif
-
+ifdef CONFIG_CC_OPTIMIZE_DEFAULT
+ KBUILD_CFLAGS	+= -O2
+endif
+ifdef CONFIG_CC_OPTIMIZE_O3
+ KBUILD_CFLAGS  += -O3
+endif
 
 ifdef CONFIG_CC_CHECK_WARNING_STRICTLY
 KBUILD_CFLAGS += -fdiagnostics-show-option -Werror \
