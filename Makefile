@@ -1,8 +1,8 @@
 VERSION = 3
 PATCHLEVEL = 0
 SUBLEVEL = 63
-EXTRAVERSION = ++
-NAME = Sneaky Weasel
+EXTRAVERSION = +
+NAME = Pirates Attack
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
