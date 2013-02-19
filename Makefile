@@ -1,8 +1,8 @@
 VERSION = 3
 PATCHLEVEL = 0
-SUBLEVEL = 65
+SUBLEVEL = 66
 EXTRAVERSION = +
-NAME = Pirates Attack
+NAME = Pirate Edition
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
