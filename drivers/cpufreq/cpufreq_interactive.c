@@ -862,7 +862,7 @@ static ssize_t store_boostpulse(struct kobject *kobj, struct attribute *attr,
 }
 
 static struct global_attr boostpulse =
-	__ATTR(boostpulse, 0200, NULL, store_boostpulse);
+	__ATTR(boostpulse, 0644, NULL, store_boostpulse);
 
 static ssize_t show_boostpulse_duration(
 	struct kobject *kobj, struct attribute *attr, char *buf)
