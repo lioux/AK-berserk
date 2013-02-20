@@ -43,7 +43,7 @@ else
   #
   # LOCAL KERNEL VERSION
   #
-  ak_ver="ak.442.42.berserk"; export LOCALVERSION="~"`echo $ak_ver`
+  ak_ver="ak.422.Stock.Wifi3.4"; export LOCALVERSION="~"`echo $ak_ver`
 
   debug=0
 
