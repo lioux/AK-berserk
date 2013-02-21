@@ -95,9 +95,9 @@ static const struct row_queue_params row_queues_def[] = {
 	{false, 1, false}	/* ROWQ_PRIO_LOW_SWRITE */
 };
 
-/* Default values for idling on read queues */
-#define ROW_IDLE_TIME_MSEC 5	/* msec */
-#define ROW_READ_FREQ_MSEC 20	/* msec */
+/* Default values for idling on read queues (in msec) */
+#define ROW_IDLE_TIME_MSEC 5
+#define ROW_READ_FREQ_MSEC 20
 
 /**
  * struct rowq_idling_data -  parameters for idling on the queue
@@ -301,14 +301,15 @@ static void row_add_request(struct request_queue *q,
 
 		rqueue->idle_data.last_insert_time = ktime_get();
 	}
-	if (urgent_queues[rqueue->prio] &&
+	if (row_queues_def[rqueue->prio].is_urgent &&
 	    row_rowq_unserved(rd, rqueue->prio)) {
 		row_log_rowq(rd, rqueue->prio,
 			"added urgent request (total on queue=%d)",
 			rqueue->nr_req);
 		rq->cmd_flags |= REQ_URGENT;
 	} else
-		row_log_rowq(rd, rqueue->prio, "added request");
+		row_log_rowq(rd, rqueue->prio,
+			"added request (total on queue=%d)", rqueue->nr_req);
 }
 
 /**
@@ -362,7 +363,6 @@ static void row_completed_req(struct request_queue *q, struct request *rq)
  * row_urgent_pending() - Return TRUE if there is an urgent
  *			  request on scheduler
  * @q:	requests queue
- *
  */
 static bool row_urgent_pending(struct request_queue *q)
 {
@@ -386,28 +386,6 @@ static bool row_urgent_pending(struct request_queue *q)
 		if (row_queues_def[i].is_urgent && row_rowq_unserved(rd, i) &&
 		    !list_empty(&rd->row_queues[i].fifo)) {
 			row_log_rowq(rd, i, "Urgent request pending");
-			return true;
-		}
-
-	return false;
-}
-
-/**
- * row_urgent_pending() - Return TRUE if there is an urgent
- *			  request on scheduler
- * @q:	requests queue
- */
-static bool row_urgent_pending(struct request_queue *q)
-{
-	struct row_data *rd = q->elevator->elevator_data;
-	int i;
-
-	for (i = 0; i < ROWQ_MAX_PRIO; i++)
-		if (urgent_queues[i] && row_rowq_unserved(rd, i) &&
-		    !list_empty(&rd->row_queues[i].fifo)) {
-			row_log_rowq(rd, i,
-				     "Urgent request pending (curr=%i)",
-				     rd->curr_queue);
 			return true;
 		}
 
@@ -674,7 +652,7 @@ static void *row_init_queue(struct request_queue *q)
 	memset(rdata, 0, sizeof(*rdata));
 	for (i = 0; i < ROWQ_MAX_PRIO; i++) {
 		INIT_LIST_HEAD(&rdata->row_queues[i].fifo);
-		rdata->row_queues[i].disp_quantum = queue_quantum[i];
+		rdata->row_queues[i].disp_quantum = row_queues_def[i].quantum;
 		rdata->row_queues[i].rdata = rdata;
 		rdata->row_queues[i].prio = i;
 		rdata->row_queues[i].idle_data.begin_idling = false;
