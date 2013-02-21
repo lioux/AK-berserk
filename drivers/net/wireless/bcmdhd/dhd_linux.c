@@ -567,9 +567,7 @@ static void dhd_set_packet_filter(int value, dhd_pub_t *dhd)
 
 static int dhd_set_suspend(int value, dhd_pub_t *dhd)
 {
-#if !defined(SUPPORT_PM2_ONLY)
 	int power_mode = PM_MAX;
-#endif
 	/* wl_pkt_filter_enable_t	enable_parm; */
 	char iovbuf[32];
 	int bcn_li_dtim = DTIM_COUNT;
@@ -1974,9 +1972,9 @@ dhd_ethtool_get_drvinfo(struct net_device *net, struct ethtool_drvinfo *info)
 {
 	dhd_info_t *dhd = *(dhd_info_t **)netdev_priv(net);
 
-	snprintf(info->driver, sizeof(info->driver), "wl");
-	snprintf(info->version, sizeof(info->version), "%lu", dhd->pub.drv_version);
-};
+	sprintf(info->driver, "wl");
+	sprintf(info->version, "%lu", dhd->pub.drv_version);
+}
 
 struct ethtool_ops dhd_ethtool_ops = {
 	.get_drvinfo = dhd_ethtool_get_drvinfo
