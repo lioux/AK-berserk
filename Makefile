@@ -374,13 +374,13 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
-		   -fno-delete-null-pointer-checks \
+		   -fno-delete-null-pointer-checks -mno-unaligned-access \
 		   -pipe -marm -mfloat-abi=softfp \
-		   -mcpu=cortex-a9 \
+		   -mcpu=cortex-a9 -march=armv7-a -mfpu=neon-vfpv4 -funsafe-math-optimizations \
 		   -fmodulo-sched -fmodulo-sched-allow-regmoves \
 		   -funswitch-loops -fpredictive-commoning -fgcse-after-reload \
 		   -ftree-vectorize -floop-interchange -floop-strip-mine -floop-block \
-		   -mno-unaligned-access
+		   -fsingle-precision-constant -fipa-cp-clone
 KBUILD_AFLAGS_KERNEL :=
 ifdef CCONFIG_CC_OPTIMIZE_O3
  KBUILD_CFLAGS_KERNEL := -O3 -mtune=cortex-a9 -march=armv7-a -mfpu=neon -ftree-vectorize
