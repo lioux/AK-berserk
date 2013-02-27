@@ -40,13 +40,13 @@
 #define DEFAULT_DOWN_FREQ_MAX_LOAD			(35)
 
 /* default sampling period (uSec) is bogus; 10x ondemand's default for x86 */
-#define DEFAULT_SAMPLING_PERIOD				(100000)
+#define DEFAULT_SAMPLING_PERIOD				(150000)
 
 /* default number of sampling periods to average before hotplug-in decision */
-#define DEFAULT_HOTPLUG_IN_SAMPLING_PERIODS		(5)
+#define DEFAULT_HOTPLUG_IN_SAMPLING_PERIODS		(7)
 
 /* default number of sampling periods to average before hotplug-out decision */
-#define DEFAULT_HOTPLUG_OUT_SAMPLING_PERIODS		(20)
+#define DEFAULT_HOTPLUG_OUT_SAMPLING_PERIODS		(25)
 
 static void do_dbs_timer(struct work_struct *work);
 static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
@@ -106,7 +106,7 @@ static struct dbs_tuners {
 	.down_threshold =		DEFAULT_DOWN_FREQ_MAX_LOAD,
 	.hotplug_in_sampling_periods =	DEFAULT_HOTPLUG_IN_SAMPLING_PERIODS,
 	.hotplug_out_sampling_periods =	DEFAULT_HOTPLUG_OUT_SAMPLING_PERIODS,
-	.hotplug_load_index =		0,
+	.hotplug_load_index =		1,
 	.ignore_nice =			0,
 	.io_is_busy =			0,
 };
