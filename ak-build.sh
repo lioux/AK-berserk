@@ -45,7 +45,7 @@ else
   #
   # LOCAL KERNEL VERSION
   #
-  ak_ver="ak.710.422.Cylon"; export LOCALVERSION="~"`echo $ak_ver`
+  ak_ver="ak.712.422.Cylon"; export LOCALVERSION="~"`echo $ak_ver`
 
   debug=0
 
