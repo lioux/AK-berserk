@@ -964,7 +964,7 @@ CONFIG_PHONET=y
 #
 # Queueing/Scheduling
 #
-CONFIG_NET_SCHED=y
+# CONFIG_NET_SCHED is not set
 # CONFIG_NET_SCH_CBQ is not set
 # CONFIG_NET_SCH_HTB is not set
 # CONFIG_NET_SCH_HFSC is not set
