@@ -1,0 +1,707 @@
+[33mc2fc34dd90d509922dcc95aa775c68853951bc8b[m Kernel Version: ak.728.422.Cylon
+[33me30bbd5cc056d9c61f35d4b750d3ad4257bedbd2[m Merge branch 'linux-3.0.y' into ak-cylon-4.2.2-experimental05
+[33me28c3f2b514b5581e15614f7cf976131092cf4b6[m Linux 3.0.68
+[33m6c80ee53f3737993f693bf2a3b4b3e4bbde9b51f[m staging: comedi: check s->async for poll(), read() and write()
+[33m544da4403b05e874e134919db7124def003ef7cf[m staging: comedi: ni_labpc: set up command4 register *after* command3
+[33m5e6af63de116db55be85da4374441f7963d11281[m staging: comedi: ni_labpc: correct differential channel sequence for AI commands
+[33md81d788db85abd39fd7753e2482f748c48de202a[m s390/kvm: Fix store status for ACRS/FPRS fix
+[33m55bce39db26a3b1d6b18fc0ae5d57948946f0c49[m dca: check against empty dca_domains list before unregister provider fix
+[33mcc0e3e13b0a90e5ff42d5b134939eacf5e7e497c[m cgroup: fix exit() vs rmdir() race
+[33m6403d47ff9392807fcfa4464527193e0cab65b2a[m cpuset: fix cpuset_print_task_mems_allowed() vs rename() race
+[33m2212f47b734e5b9461b5c3f555dc653ea7aa212f[m x86/apic: Work around boot failure on HP ProLiant DL980 G7 Server systems
+[33mf39edfbf6dbf8e29cfbafd67d93fa1e30196701c[m x86: Do not leak kernel page mapping locations
+[33m43f514598ad16af1c6dd08dd429631eaafef7849[m unbreak automounter support on 64-bit kernel with 32-bit userspace (v2)
+[33m8a9279a5af607d9f59b3921c639df139a28bcef6[m wake_up_process() should be never used to wakeup a TASK_STOPPED/TRACED task
+[33ma214998c48e204227d52a81dd459ea51a8a9ae36[m ptrace: ensure arch_ptrace/ptrace_request can never race with SIGKILL
+[33m964b12560e1d50f31bc1cc0ac662d52bdbdb6f40[m ptrace: introduce signal_wake_up_state() and ptrace_signal_wake_up()
+[33m603b86549a4d6928d1059b19df2dfc5d61070533[m vhost: fix length for cross region descriptor
+[33m4bf6d0956ad678f3ef59362cb41dae05a2259f78[m svcrpc: make svc_age_temp_xprts enqueue under sv_lock
+[33mfd80f53550720f200ca0469e9419c750f895ab50[m ext4: fix race in ext4_mb_add_n_trim()
+[33m5dec43e3d688390256df3343bb444e7ed0022f44[m media: rc: unlock on error in show_protocols()
+[33md6bf427fdac5fb26636d72f04289780a0ff2ca93[m sysctl: fix null checking in bin_dn_node_address()
+[33mcbf253c44b52b3c6b921a22f05243a1dc7a00122[m firewire: add minor number range check to fw_device_init()
+[33m4ec348232dc21cf79b62f32e0bdb099c9d817941[m idr: fix a subtle bug in idr_get_next()
+[33m975398374dac831d5d5c2825615c489aee24ea3a[m xen-blkback: do not leak mode property
+[33mad315127433dc9a8147e7f6b43f21b3d0061003a[m ocfs2: ac->ac_allow_chain_relink=0 won't disable group relink
+[33m954497ea2037e8c42fe1c7a0882030b62ac9116c[m target: Add missing mapped_lun bounds checking during make_mappedlun setup
+[33m93b6b299f7a97a8ce2f8ab7b14195f8d2d131905[m x86: Make sure we can boot in the case the BDA contains pure garbage
+[33m834f139f1613ba0ca3239a6a12be97c70698f189[m doc, kernel-parameters: Document 'console=hvc<n>'
+[33m9b1d040fee4c82b3c69283cbb8a4d2a1dc062a21[m doc, xen: Mention 'earlyprintk=xen' in the documentation.
+[33m85fed56cdbc7973f34524ee9efa885ef66e4d831[m ftrace: Call ftrace cleanup module notifier after all other notifiers
+[33mffe56d754e59cdb086b76b95fe0c3a0302ec46c8[m posix-timer: Don't call idr_find() with out-of-range ID
+[33mffbf1423cc7e8ed018d0ba8fbe3f9f3bb816fa4c[m iommu/amd: Initialize device table after dma_ops
+[33m1adbb5db21a1e08537061607abc9b0a9e7e12848[m quota: autoload the quota_v2 module for QFMT_VFS_V1 quota format
+[33mfe3286b08ee84ed730fcb6c89e31271ac1ada6ef[m Kernel Version: ak.718.422.Cylon
+[33mb886b656ed778ff1ee5fb25d640d08d2908ec27b[m tuna_ak_defconfig: Fix NET_SCHED compile errors
+[33mdb8607196f13619f5d68dac62a0747707f6502d6[m sched/Kconfig: Codel Forever
+[33ma761c0b824440e32522cc655db326c4219c2703f[m tuna_ak_defconfig: Fix Typo
+[33mf7a23086ee9ce8a496fc49d24acc110744bee444[m tuna_ak_defconfig: Force to use SCH_CODEL By default
+[33m55ef8cc7bc1e709b38518a21876e7e916bff818d[m net: Fix build failures due to ip_is_fragment()
+[33m3d958c788e4686b692beafbb4c306b5c86d0f514[m ip: introduce ip_is_fragment helper inline function
+[33m84cebd5666771813c9b56fb5fe8a748db6d99fb9[m net: introduce skb_flow_dissect()
+[33m78ee0f5ca5444719f56727612e557df6306f3eeb[m tuna_ak_defconfig: Enable NET_SCH_CODEL + NET_SCH_FQ_CODEL
+[33m720c5e88407f9acf42edc0924cea556fe6a41ddd[m fq_codel: Fair Queue Codel AQM
+[33m9894d4a50498808d05b69a7eb31a8323f076a0ed[m codel: Controlled Delay AQM
+[33m0a295c296630ead64fb0699a018c6e972cc61b30[m Kernel Version: ak.717.422.Cylon
+[33maa4c9bdbbe821811520cd44e27a63594840d4250[m board-tuna: Lower VAUX3 and vusim voltages, undervolt vusim (from ch33kybutt)
+[33m3563addf346c34aa349274d253fc4efb3aad1043[m Extend the PMIC values a bit
+[33m124f3ca4bbe64ce3fc676757e1cd8c3bd407a709[m ak-build.sh: Set new path for Linaro
+[33mcd0559093574ea34842703ceb4553e93da7cfba5[m Kernel Version: ak.716.422.Cylon
+[33m4b31d9a36d33b49191bf54b951a3e11cb1325c39[m Revert "staging: android: timed_gpio: Updated to Linux 3.8-rc7"
+[33m9af949df540c403119a15ad618d9f2c1428b3bec[m opp4xxx_data.c: Undervolt 180Mhz MPU_OPP15 830
+[33mf5d50c625115dc59195425199ffd8c3e4fd16f97[m Revert "netfilter: xt_qtaguid: remove AID_* dependency for access control"
+[33mf1d54d06beed8a32511c5550e10f309fe96619a0[m tuna_ak_defconfig: XZ for Ramdisk, LZ4 for Kernel
+[33m1d2398c24ddfda72b04722db4a99cfc0adf5f400[m Makefile: Remove -fomit-frame-pointer conflict with FRAME_POINTER
+[33m6abd6a3a196913b8f9cdc20e199cc4f5885cd37b[m Revert "panel-s6e8aa0.c: Change to offset 2, 15, 5"
+[33m3bf9c6d990c05f3c3dc0bcf3ed6cd305a965bfca[m tuna_ak_defconfig: Enable LZ4 Compression Support
+[33m33341320ddbd184e04d6bbed49735e6af0780b34[m tuna_ak_defconfig: Enable EFFICIENT_UNALIGNED_ACCESS
+[33m8e341c029c6d48c2ccfbf392fb8d3218cc40c7dc[m tuna_ak_defconfig: Rework and Optimize tuna_ak deconfig
+[33m3f02a4ac318aa890f50b866a1cf3dfdbe6bf474a[m arch/arm/Kconfig: enable unaligned capability for ARM
+[33mcedd9dfe97d0fa0197c2e944beb39776a91d5c64[m ARM: 7583/1: decompressor: Enable unaligned memory access  for v6 and above
+[33m7207b619a3d72e6e4961c94bed9e85efbff342b8[m arm: add support for LZ4-compressed kernels
+[33m281ee85da2f548dd705fcec7089c056979e66e5e[m lib: add support for LZ4-compressed kernels
+[33m71d94c3ca45a8874df8da30e09809bc21d666bbd[m decompressors: add lz4 decompressor module
+[33m3b408c615e59a6fcfb91315d35b1b83cfde206e0[m Update drivers/cpufreq/cpufreq_hotplug.c
+[33m652c5e8a021ab963b646e11a4fa5b5ec4a93787e[m New Bootsplash Cylon Ed. - Made by Me
+[33m268e6a979a526a145ca2fdf2cc70b4fe15f2cc2a[m cpufreq_conservative: Reduce minimum polling interval
+[33m0bf77eeac01996a8bd3af5cd6bf81f5d2aac6d4d[m ak-build.sh: Set new path for Linaro II
+[33m92ac8c9dbd66b41508da24e8922ba4bb782d486b[m Merge branch 'linux-3.0.y' into ak-cylon-4.2.2-experimental05
+[33m90aee6e5a2f9403dafa1114ded19a5505b42d041[m Add New Linaro to AK build - 4.7.3-2013.02.20130221
+[33m98bbf3565e3147a40c583ff97e2b5a98370c21a5[m Linux 3.0.67
+[33mcfb2ddcace95399e4dcefebb62e16cd93c9d4ae7[m USB: usb-storage: unusual_devs update for Super TOP SATA bridge
+[33mba18450b8528ed69d71b3cb8dbdecb08d9272c72[m USB: storage: properly handle the endian issues of idProduct
+[33me39d97f98e39ecb860d113ad75fa250bc52d247b[m USB: ehci-omap: Fix autoloading of module
+[33mb3747d5aec3cc8a5a734bc384c3443d93a31b5e1[m USB: option: add Huawei "ACM" devices using protocol = vendor
+[33m20fc803358fd0278dfbb5b82d947c3f9ea0164a3[m USB: option: add Yota / Megafon M100-1 4g modem
+[33m2466f8620e8fb814f2d1c72584e1e4e95ca50ead[m USB: option: add and update Alcatel modems
+[33m7a9a20ea77e7508c795dead9ab2f6c98a617762d[m dca: check against empty dca_domains list before unregister provider
+[33mae593067dbed83010fee8ad59bab7948f3d3601f[m ipv6: use a stronger hash for tcp
+[33mb18383129b00d2d6aac160f55e27c5ba1cf9d49b[m ipv4: fix a bug in ping_err().
+[33mbd986521a6e35a301e45d2831501acc172fe2a8f[m xen-netback: cancel the credit timer when taking the vif down
+[33m436d1b8ff7eb7ac9e2569ad780c33bd4287d0526[m xen-netback: correctly return errors from netbk_count_requests()
+[33maa1bada15c8ce41ea5b3b9392a85e6e2e07849ff[m bridge: set priority of STP packets
+[33m49a656f8337670ffc66f28235f371767f5d25f42[m fb: Yet another band-aid for fixing lockdep mess
+[33mabd9120040d5f427b950561277f2846b0a80be44[m fb: rework locking to fix lock ordering on takeover
+[33m90523879cdf0051a208a660a6ce475ed7ac51e99[m fbcon: don't lose the console font across generic->chip driver switch
+[33m9c3f628b6004454a3867b4c0dad9c9738405dd75[m pcmcia/vrc4171: Add missing spinlock init
+[33mef96576ef50b8bbd4c63b9cebab372cb7cf4ba67[m Purge existing TLB entries in set_pte_at and ptep_set_wrprotect
+[33m534aaed9080ba82974e8d2a71e43a362918138f8[m powerpc/kexec: Disable hard IRQ before kexec
+[33m928de5bcadf8540f58ba6b12c6b7547d33dcde89[m ARM: PXA3xx: program the CSMSADRCFG register
+[33m02424a5539959f519256b3a1a9e046f4caed6e65[m staging: vt6656: Fix URB submitted while active warning.
+[33m1646fff8a00d797cbaa0d711f29d3102cc7c022f[m staging: comedi: disallow COMEDI_DEVCONFIG on non-board minors
+[33m2fb8324e4a70aef032d156ce26b979c7de59303f[m drm/i915: disable shared panel fitter for pipe
+[33m8eac4364548b8f53476602969a2fba65d029d8b7[m NLS: improve UTF8 -> UTF16 string conversion routine
+[33m4b5784741fdfdb5fa91edc6ea8fc5eeeed0b4a6a[m drm/usb: bind driver to correct device
+[33mddab81f4d0998efd4d3e288a26379fb4957cb5f7[m sunvdc: Fix off-by-one in generic_request().
+[33m131fb7cce88c8c953429ecee478477db81727273[m ext4: add missing kfree() on error return path in add_new_gdb()
+[33mf1d8678b90aeaf7a3c5c30cea8a838f54cd5a8bc[m ext4: Free resources in some error path in ext4_fill_super
+[33md631d0d60c31bed15002ac656cbbfba3d6ce99b5[m ALSA: usb: Fix Processing Unit Descriptor parsers
+[33m8eab86c3483569160b2aef56cf9db6ce1274b4f6[m ALSA: usb-audio: fix Roland A-PRO support
+[33me487015297fca084180281fbc0ecdbf757ddbebe[m p54usb: corrected USB ID for T-Com Sinus 154 data II
+[33m8f0b9cb82a2d156297664de6e6df14afa39c5b7f[m NLM: Ensure that we resend all pending blocking locks after a reclaim
+[33m78e47dce08b0dd37a001ee540cdb94fbeba89850[m mm/fadvise.c: drain all pagevecs if POSIX_FADV_DONTNEED fails to discard all pages
+[33ma95f23a87f048318db586d087725b574f40002ce[m tmpfs: fix use-after-free of mempolicy object
+[33m36c15fe81edd6963781d3472d27b199279f5d28a[m drivers/video/backlight/adp88?0_bl.c: fix resume
+[33m099f19c0426e465c44b66cc93f923461af6e5f8d[m ocfs2: unlock super lock if lockres refresh failed
+[33m9a84bc2154b9787917cfc69cd619110bb9ab802f[m inotify: remove broken mask checks causing unmount to be EINVAL
+[33m58c9ce6fad8e00d9726447f939fe7e78e2aec891[m s390/kvm: Fix store status for ACRS/FPRS
+[33m25adbf9cfa6ea467b681a11219d29c7ff41637c7[m KVM: s390: Handle hosts not supporting s390-virtio.
+[33m8e78002093815336a22ba3e723c1d9d15000d9b5[m mmu_notifier_unregister NULL Pointer deref and multiple ->release() callouts
+[33md98f0eb2ac95485b0fce8f14f77f1482ce293948[m mm: mmu_notifier: make the mmu_notifier srcu static
+[33med5ac19078a65a66008f9bef0037b56828349b5b[m mm: mmu_notifier: have mmu_notifiers use a global SRCU so they may safely schedule
+[33m0eec39b02834d2af586ec6ebe84117273995021c[m Driver core: treat unregistered bus_types as having no devices
+[33m20807f47cffc5e85f9127c260621d12dc3b7814b[m xen: Send spinlock IPI to all waiters
+[33m212d2748ffe43d4e2756be40ddfdd7044197936d[m xen/netback: check correct frag when looking for head frag
+[33m13efbfc6083d955929052394254d1ccba840edfc[m tty: set_termios/set_termiox should not return -EINTR
+[33m4e466c1472a407c6dc1a03d3a17783e9f35e6304[m ALSA: rme32.c irq enabling after spin_lock_irq
+[33m89251132aead7e623602604146d0b30e265c9259[m ALSA: ali5451: remove irq enabling in pointer callback
+[33mbdc82b1e7a4dfc5b287d3f52e173ba8e0183be15[m hrtimer: Prevent hrtimer_enqueue_reprogram race
+[33mc56dec21a605c9cad4e37492ca292f114d2aad34[m posix-cpu-timers: Fix nanosleep task_struct leak
+[33m890914e9fc7b9c12714a58f1e1318f3de500f241[m genirq: Avoid deadlock in spurious handling
+[33md8c3d7e8f9e47cc1a828ca7433376c60c4b9af23[m timeconst.pl: Eliminate Perl warning
+[33m744dac7d299be82e4d13b217e81eb4bfee9826a8[m mm: fix pageblock bitmap allocation
+[33mdbb694e810c87e7e1760527a783437f26ac5a547[m x86-32, mm: Remove reference to resume_map_numa_kva()
+[33m4eb8d272f796e17243c9f72db5b3d87f5c12a744[m Kernel Version: ak.704.422.Pirates
+[33m63f008afc57075159a093624728a896a087c5e8e[m net: bluetooth: Remove the AID_NET_BT* gid numbers
+[33mb8568416b19c4e86860394e7284e6389455593e0[m Kernel Version: ak.703.422.Pirates
+[33m72c82d776b6b66516c6d8b61b1af88b959a9ce57[m block,elevator: use new hashtable implementation
+[33m9cdeec2c41d9f50764f0b320efed2ba68ca5818a[m hashtable: introduce a small and naive hashtable
+[33m8b04fab11f10625dbaf8739dd206176d8a7ee0e7[m Makefile: Add CCACHE to Cross compile
+[33m2d5e2873666a66600e7e59303b87c3d05d048872[m Kconfig: Cleaning + Makefile: Changes
+[33m7f7d591da884e527771d1c1b6e11eef3b4196a4e[m cfq-iosched: Fix null pointer dereference
+[33m21d69845e411bfcee426070af5416ddfba350529[m 3.0.66
+[33mf3720830189356bed9247951ae4d7a1a6347ff10[m printk: fix buffer overflow when calling log_prefix function from call_console_drivers
+[33m5093147348c11afa80fcefee0f5058511297002f[m slub: fix a possible memory leak
+[33m1e3ccc5365c14662f4899bd2a9e9dbbc4e966a1a[m Fuel Gauge: Correct the FULL flag conditions
+[33m9938b3ec889f61dccdd431f9434ccb56134009d5[m Kernel Version: ak.701.422.Pirates
+[33mb7d1f3d514cf2ae72f9de09b2b327c3c59d61140[m Restored ARP offload agent mode
+[33mcc3ac4e48440a8aff74529482c9afd7ea900194a[m dhd.h + dhd_common.c: Fix compiling errors
+[33m2941bd7e2c552b800b716329ebc173df40d168c9[m tuna_ak_defconfig: Enable NETFILTER_XT TCPMSS
+[33m3ccf7f198d3fd1ae17fb9a75dff53e83431d8eae[m bcmdhd: removed some TW artifacts
+[33m2002f2b4481c7d47631f19e0f0344e907130356b[m net: wireless: bcmdhd: Update to Version 1.28-27
+[33mc24b51050a2b1cad0a2cdca9a100760c6ed00242[m wl_linux_mon.c: Remove some debug messages
+[33m7b3cea6c6fb823b01d79e1c2b2178b55d877f836[m bcmdhd/Kconfig: Fix path /system/vendor/firmware/fw_bcmdhd.bin
+[33m69bd742152930affea95d5ac2a4ac5eba35a57ec[m wl_cfg80211.c: Fix compile errors for wf_channel2chspec
+[33mdd1a4d83e1f6eba707a6b7450a9c8557f6b48bf8[m net: wireless: bcmdhd: Update to Version 1.28-24
+[33mda81e8b20f67841d8d5749b2b12bcbd1450f2688[m net: wireless: bcmdhd: Fix PEAP with dynamic WEP
+[33m88a51fa0f1f3ae667a3c72ab63dc9e06e579895e[m net: wireless: bcmdhd: Update to Version 1.28-23
+[33m3e7194ea811680233538a1aa79ae345e4124fc9f[m net: wireless: bcmdhd: Fix division by 0 if dhd_watchdog_ms is 0
+[33ma835755649bce2821f761cdf7793b4c8e3dddb27[m net: wireless: bcmdhd: HACK - force active power mode
+[33mae27ec951a88028862d2fe8dc614ef2af23fe926[m net: wireless: bcmdhd: Fix crash on dhdsdio_probe_attach() failure
+[33m253ac61a5723c2869691cd208202b56b71bd3c24[m net: wireless: bcmdhd: Daemonize wl_event_handler
+[33mf3b7fad0d6a7cdb6f7205dee347dd00899e97364[m Revert "net: wireless: bcmdhd: Fix WD wakelock behavior"
+[33m23f64eab68f18c287bbaa94b053c0ac299749cf8[m net: wireless: bcmdhd: Increase PNO wakelock to 7 sec
+[33m48e3b5adbba20b48150b0cff7af3b3661b58be03[m cfg80211: reorder code to obsolete forward declaration
+[33m8fb48746bb478957cc87f7ce5efbf3cfa2d393c9[m cfg80211: hold reg_mutex when updating regulatory
+[33m6f6c3fb148878321ce6c12cb432ba8442a4955d9[m cfg80211: print bandwidth in chan_reg_rule_print_dbg()
+[33m4f39ce4c81367690a4c6a589bc40564f1e70c6ce[m lib80211: remove exports for functions not called by other modules
+[33m736bea4f8455899fd0757a11ae415e92d3e64afa[m cfg80211: remove unused wext handler exports
+[33m7f1116bb172b66b0a4deeb74453185aa6ca3f606[m cfg80211: split wext compatibility to separate header
+[33mb6dfb8a98d6232b72b720daa4636aa0039e25f6c[m mac80211: Provide station flags to cfg80211
+[33m47a1d628211abf56faa00d31ab644af430651512[m mac80211: Populate radiotap header with MCS info for TX frames
+[33m17b665d947771e77fbbf8fca9345befcf920e83f[m mac80211: Build TX radiotap header dynamically
+[33m2d89b8923a755f32e1d922999c920abd75daf938[m mac80211: dont orphan TX skb
+[33m305839e0aec38b70b264f2591e4615c3b02f1b3f[m mac80211: dont adjust truesize
+[33m7496d646767547d2e6b6dfb4654d9fdc5afa26ec[m mac80211: remove tx_data ethertype
+[33m4736a4d511190575e32adf581e732d5c85a61156[m mac80211: optimise monitor xmit
+[33me95dd9cf0c5cc063367a4a971f5245de17c5058a[m mac80211: Fix regression that allowed mpaths between non-peers.
+[33ma02211ba3743e1c9ade300c42990a5f7d419d4be[m mac80211: pass no-CCK flag through to HW scan
+[33m342be5d64dac2530bd1a8ddbe0ca705f64e6064e[m mac80211: Allow noack flag overwrite for injected frames
+[33m067547206a462bad545cf0d3e17196884d57585d[m mac80211: dont assign seqno to or aggregate QoS Null frames
+[33m9e6769319103729b6a7495945fa9b79d9e4f4dd8[m mac80211: remove return value from add_pending_skbs
+[33m6673eef40a46eebb00526d3763e4e6c53654321a[m mac80211: also expire filtered frames
+[33m3efd8f301f116ee691d6ebc68c9a64021187c930[m mac80211: unify TIM bit handling
+[33m2e4df2524400b405c7fd0cc7cf34bd95aa71e198[m nl80211/mac80211: allow adding TDLS peers as stations
+[33m7279db196e0a503c7b05735fc0ebe94524f048d4[m mac80211: max_tp_rate2 management of minstrel_ht
+[33mb3f5589c241b51f312ec3bfbed3706511e737275[m mac80211: fix indentation
+[33mdf8184597cfa61ecb95863802a29c1cb4d1998e2[m mac80211: Fix regression on queue stop during 2040 bss change
+[33mc50196754c2119bfb45353bf11aea0240142b38c[m mac80211: fix endian issues and comments for BAR failure handling
+[33m25564e60cd799baeb352459d5317800c1a7c18e1[m mac80211: Update device channel in case of HW channel switch supported
+[33m17041041d3d3b33ad413a0c912e8c5c11bbc9fb9[m mac80211: Mark all mesh stations as QoS capable
+[33m06b6bedfee25476e04c134ba7cc1ba546d924d8e[m mac80211: Start implementing QoS support for mesh interfaces
+[33m4d9805eb37374698a7d8108bbf25d9c70b55d666[m mac80211: further optimise buffer expiry timer
+[33mcb22e08c021db9cfa3f4aef6e66ac3e3764efb8f[m mac80211: add ssid config to bss information in AP-mode
+[33mbb981658708e40861481d28cd8086adc38741d94[m minstrel_ht: fix Open BA session request floods
+[33md1fe6a31c749c7aed18034c28a36a79563c6f600[m mac80211: stop tx before doing hw config and rate update
+[33m8c9821aa3e07b6dfee4c8b25750094a179b2b026[m mac80211: Stop forwarding mesh traffic when tx queues are full
+[33m076d95876eee1e03233ff739f6052a20e22c5bd9[m mac80211: check if mesh frame is in RMC after decrypt
+[33m47cebb6f7d53a503fccaf73e8f01cb395884addd[m mac80211: add flag to indicate HW only Tx-agg setup support
+[33m5421db54c2eecac2b10e4ad8cbbf4decd4d58e72[m mac80211: Remove unnecessary OOM logging messages
+[33m2051a18a285ea8fbd7f8b15b3f9fab9320cef7b9[m mac80211: Remove redundant mesh path expiration checks
+[33maa095740370b6ded69c07dc1b04023b031d95de5[m mac80211: Remove mesh paths when an interface is removed
+[33m53bc4361a399f066b11f91f728c90bd65e4af152[m mac80211: Fix RCU pointer dereference in mesh_path_discard_frame()
+[33m8b1a59455db8bc4da001d4f63b93c673d129e535[m mac80211: retry sending failed BAR frames later instead of tearing down aggr
+[33m5fd39d9ab38dc421b77049b5f0be2a880200fb57[m mac80211: Defer tranmission of mesh path errors
+[33m67eeb00a9d32fdb5ac25000f2378197465037fc6[m net/mac80211/debugfs: Convert to kstrou8_from_user
+[33md82b7939707504d49e6c21910ede2fbe962b5dea[m mac80211: allow action frames with unknown BSSID in GO mode
+[33mdda4e1b866ae0526cf310b429ac51baed51808bb[m mac80211: fix race condition between assoc_done and first EAP packet
+[33m5e96e856ce0f665d81fe1eeeb71b125f5ab0be99[m mac80211: refactor sta_info_insert_rcu to 3 main stages
+[33m419b41766a3f875a1ce66827dd04b711a3cd3245[m {nl,mac}80211: add missing root mode meshconf entries
+[33m4bb9b168624355275da17d367dea7756e39adc72[m mac80211: fix mesh path flushing
+[33m7abb52d1b5659c265c4b10e580d2b502fcf2de20[m mac80211: fix mpath timer NULL function
+[33m1e3bba2cf018c43ed0308d197e0c3891a70ece86[m mac80211: improve mpath debugging
+[33m3b084859f91a09097083a3161213ca25edf6b2ea[m wireless: Introduce defines for BAR TID_INFO & MULTI_TID fields
+[33m5fa98ff129f70158fd173e16208b003f480e3f9e[m net: cleanup some rcu_dereference_raw
+[33m0a3ca949d34c246cccfd502d92aeb2503112951e[m mac80211/mesh: make the preq queue lock consistent
+[33m262c944bc97d347a54ef263ca33a69cfbc0c1ef2[m mac80211: notify peer when shutting down peer link
+[33m8e74af43137d026b37986adf3ca34dba5b133069[m mac80211: fix AP/VLAN PS buffer race
+[33meb2138633163fbc13a92a98e3653b51daf2d740a[m ieee80211: add mesh action codes
+[33m05a98bb446f4575d6b73aa6bd11e882a3dbddc1f[m mac80211: update mesh peering frame codes
+[33mdb4f824e369bd8bb6b5f2fac9c7171fc9f8eb483[m ieee80211: introduce Self Protected Action codes
+[33m56ee87e6c8d19dde46887a5ecce1a4674115cd78[m mac80211: fix mesh beacon format
+[33m5e21bd88f28f1c299886b84ecb19352b1e17222a[m mac80211: Tear down BA session on BAR tx failure
+[33m6510994e2735b92db3998dd0d05baa88f31af162[m mac80211: fix suspend/resume races with unregister hw
+[33mb7067cc9a90ddaef5c776735ce3af3a9ed7c7e70[m mac80211: fix erroneous clearing of MESH_PATH_SN_VALID flag
+[33m3f7dd8573956e88ccc1c0f5e7d628b1e193fb74d[m mac80211: clear sta.drv_priv on reconfiguration
+[33md6b10330f9cd38458357f6b7895d001911b14617[m nl80211: Indicate driver-based offchannel TX on mgmt_tx_cancel_wait
+[33m1f205122add0b97b114d9317558a320e8e0056e2[m mac80211_hwsim: Fix RX status reporting for HT
+[33m77a49e82fcdb13325ceed742ee64088bae004a38[m mac80211: Don't use EAPOL frames for rate sampling
+[33m6e8d10f86a7213c90efff53e24b3a5c19c734938[m mac80211: Fill in skb->protocol information for injected frames
+[33m39dccc593944dd99ab77da682de41676e28392fc[m cfg80211: Update REG_DBG_PRINT macro and uses
+[33m0b3a9c8d4aa349dee76838fa50ab1d018233a12d[m mac80211: Don't use a buf_size=0 in ADDBA requests
+[33m693c47358a9613cefe71fd25dfe962441bd053e7[m mac80211: Stop TX BA session if buf_size is zero
+[33m9dcd8be5caed72431b9bc6e5b7172028cedc3a59[m mac80211: remove offchannel_tx API
+[33m52e599d3bb9dcb68d7a31d1625c8cc59c8ec6427[m hostap: Fix typo in hostap_hw.c
+[33mb721e096471350d2b29e01c861f6ebf5113443b2[m hostap_cs: add ID for Canon K30225
+[33mdd0d625235eeba150cd23146821636ddac7caaf0[m hostap_cs: support cards with "Version 01.02" as third product ID
+[33md2dbfb8f220c73154654ba00be79e882f41300e5[m net: wireless: bcmdhd: Fix dhd_txcomplete() dead lock
+[33me7aba94fd56d087ee73727241cbcb908dcfc86ed[m bcmdhd/Makefile: Remove -DSUPPORT_PM2_ONLY and this Enable WIFI_PM Support
+[33m94c048bc6aaf03c30ceed99e5ac8fc7a43fe6290[m HACK: net: wireless: bcmdhd: Skip freeing skb in case of FW hang
+[33m9e0472b4d048de32a3aa49dd07a69e0f3b74ad04[m net: wireless: bcmdhd: Update wireless stack pm mode
+[33m043efa501655a46185ed00666e5337b73fb74180[m net: wireless: bcmdhd: Fix host reodering and CRC error handling
+[33m75563441477e951cc5ff006f67242e3ba214eca6[m net: wireless: bcmdhd: Fix compilation without SUPPORT_PM2_ONLY
+[33md4f15081dd6b6ab131008ab66b59b0449b538afa[m net: wireless: bcmdhd: Turn ON SUPPORT_PM2_ONLY
+[33maf75b1ae9ae8ac0ee16a3ab7ee9ae593975faf1d[m net: wireless: bcmdhd: Fix WD wakelock behavior
+[33m4e0f5f4a69b21f8beeeda60f6efae4aefabe675d[m net: wireless: bcmdhd: Reduce keep-alive period to 28 sec
+[33m09860fdebe4c4a1e6591d52e9c725eed7c473336[m net: wireless: bcmdhd: Add sync for wlfc data access
+[33mdd026d0a582e83ac3a0f493622c7cc0074cbe8cd[m net: wireless: bcmdhd: Skip turning chip off if not responding
+[33m503c4153ef5bce507b9c985ee0f5bf5c7f70e031[m net: wireless: bcmdhd: Propagate FW failure to upper layer
+[33m3cd1589d9731be2053f1b3a5769a5595cb62361c[m net: wireless: bcmdhd: Increase scan unassoc active time to 80 ms
+[33m56f623ec9962d09e4afa03c015ec5eb481b3aa1a[m net: wireless: bcmdhd: cfg80211 fixes
+[33m350410fb0b583961f0a5078ee4d8b5bdad7bd56a[m net: wireless: bcmdhd: Protect dhd_wlfc_cleanup() call
+[33m895a934d10f68324bb616500675a1711b5dc1e12[m net: wireless: bcmdhd: Skip scan params allocation in timeout
+[33ma80a1e17787294068438aa1f949a19364ce25b38[m net: wireless: bcmdhd: Update to version 1.28.13-1
+[33md17091208782b48f131cdc076170be34ead456d6[m net: wireless: bcmdhd: Adjust roaming treshold to -65 dB
+[33m7ba345ad0266a1b5af0e521157807593042faae9[m net: wireless: bcmdhd: Fix wldev_ioctl set parameter
+[33mc2a77ab7bfb47a4feebab249d02ea633cc523445[m net: wireless: bcmdhd: Update wifi stack ps state if was changed
+[33m7dbee801f0ea583e373b60e4892f01d21f9f4111[m net: wireless: bcmdhd: Adjust PS mode if we are in 'suspend'
+[33m13e478709e80823a305fd1cb7e77b0012a83b3c4[m net: wireless: bcmdhd: Add print when power-save mode is OFF
+[33mc28f0a875cd592f28f574dbc51ce56aaf7dee65b[m cfg80211: allow registering to beacons
+[33maf235f25923dedc358f18e3d2aa8ffa3d43c3bb2[m nl80211: add API to probe a client
+[33md4b7dddfbd93a9019c423269d806e2febb064cec[m nl80211: allow subscribing to unexpected class3 frames
+[33ma294c484308d55f550b28a01490423d7338673cf[m nl80211: advertise device AP SME
+[33mf8cd06a04e4e07cdd45865e6299a659c7653c952[m nl80211: advertise GTK rekey support, new triggers
+[33mcbe7e48a2670d6cc1bdcd4eedaa3c0e64ca44c3e[m nl80211: support sending TDLS commands/frames
+[33me3d63da57b49eb561ceb2735c09481bca04337f5[m cfg80211/nl80211: Add PMKSA caching candidate event
+[33mfb65eb2aed56e47a74ac4eaab506e000fc7c3068[m cfg80211/nl80211: support GTK rekey offload
+[33m46cc0acea52e4681bc6aea8057acbd37ebfde204[m net: wireless: bcmdhd: Update to Version 1.28.12-1
+[33m9dc7578b7caa52e77efa7ba2a88badc279dc777c[m net: wireless: bcmdhd: Report proper mcs rate mask
+[33mf44f75a7e74db8a6902d2360c938a1a6f014d12b[m net: wireless: bcmdhd: Fix filtering call during dhcp session
+[33m73373859b72a4b435d387e850ed782cba9532b8b[m net: wireless: bcmdhd: Update to version 1.28.11-2
+[33madaa8a97a435d11b3921bbc8b9a43921683aa770[m net: wireless: bcmdhd: Update to version 1.28.9-5
+[33mae3ecf7e8c52d68f7c85d027dfde6894ce09c933[m net: wireless: bcmdhd: Remove WL_CFG80211_SYNC_GON option
+[33mb78d4db3a3572b841aceb647c4951ea5d7ea4427[m net: wireless: bcmdhd: Remove WIPHY_FLAG_SUPPORTS_FW_ROAM flag
+[33m64c408bfa106cae45a721af350cce6c4758444e3[m bcmdhd: update to 1.28.9-2
+[33m4008becb6506513b9e142dca729139693c9d0d36[m net: wireless: bcmdhd: Remove obsolete files
+[33ma6740c5779d4e1f42b233415f9510b96ad2b2405[m net: wireless: bcmdhd: Use correct time from boot for TSF
+[33m0e98b5c765799293f8fef8d2ed0527a63ae44a3b[m net: wireless: bcmdhd: Set probe_resp.timestamp value to scan results
+[33m3c80644696894591ef4e69c5848aa0a8ed1f2369[m net: wireless: bcmdhd: Prevent deadlock in wl_cfg80211_down()
+[33m6b6cd97abed58d21c7019173d559803a0bb05cba[m net: wireless: bcmdhd: Update to version 1.28-8
+[33m96e76ba76bfee41c2809a67a8453d0f59db652b7[m net: wireless: bcmdhd: Fix crash if bus->sih was freed
+[33m7d167f3474a7507fc82c7f2799f886cddaee5f7f[m net: wireless: bcmdhd: Prevent HT Avail request failure to flood the log
+[33m09612469a238e64af7d546957a174d6acfd6cfe9[m net: wireless: bcmdhd: Decrease chip recognition attempts to 3
+[33md0ae300a7eb98c0ef3acbeadc81ceb423902f5ec[m Change some build parameters for bcmdhd to revert to some old behavior
+[33m1036c27e289dd4fea701778ba494af6adb8d4b8c[m net: wireless: bcmdhd: Update to version 1.28-5
+[33m1436b87fabdf49f6bee0ac517645ad550d13ff6e[m net: wireless: bcmdhd: Add info_string param with driver/fw/chip info
+[33m4abbb118d90c3ea45db82ca0f23eafae2986e621[m net: wireless: bcmdhd: Update wiphy bands on country and band change
+[33md5626cbffc75bc47f40bacfb2f9841b60aa6e670[m net: wireless: bcmdhd: Decrease chip recognition attempts to 3
+[33mf7fc44d58a39778613a7e082672d4b40b8131447[m dhd_linux.c: Fix Power mode compile error
+[33m0dc90075f1467a453c5ffac3eccd04893b507d8c[m bcmdhd: upgrade to 1.28.4 (r339952) - Thanks to Master: renaudallard
+[33m621ddff8cf27d51a08970e34f8b1e39b8240d627[m sio-iosched.c: Tuning and Fix
+[33m8c90d01d25d82b2adf76eaafc565cdb6516c8f05[m deadline-iosched.c: Tuning and Fix
+[33m8c5d6632d0344a364967fff07289cd2bd7ed6531[m cpufreq_interactive.c: Fix boostpulse Permissions
+[33mec46521821ad8bee7025aae81fc3fb2ce3e0fdb0[m Revert opp4xxx_data.c: Undervolt 180/230
+[33m8ee3133e1d9d8f62e6df59e4626884e71251393a[m Kernel Version: ak.700.422.Pirates
+[33m33f50b614fc65263150746aee0b2e6685e40d566[m Linux 3.0.66
+[33m475ee0b7c0b2a616c6444661489d8c033d1fa2a2[m Restored ARP offload agent mode
+[33m4463b1d0d51f5d3a5a3dd18293c2f97c7e182084[m net: wireless: bcmdhd: Enable SUPPORT_PM2_ONLY mode
+[33m27b2551120fb9328abb5287b19671b3d9b44e2b1[m Revert "Added kernel config option 'BCMDHD_WIFI_PM'."
+[33m4ea39b73b821bf3f4d9df7c2c960e66be2225f9e[m Kernel Version: ak.692.422.Pirates
+[33ma6c206e219e4f222774eb1cc659385754afe179a[m New AK Pirate Edition Ruse & Neph Custom Bootsplash v2
+[33m49641713e615be9398fd1e18ee2f6fba16f24f47[m staging: android: timed_gpio: Updated to Linux 3.8-rc7
+[33m9fc3212988a6b736cf1b4472dab47f085833bd3e[m staging: android: lowmemorykiller: Updated to Linux 3.8-rc7
+[33m93e091b8c3279a785e97a24c3a1fc76dc259fe78[m staging: android: logger: Updated to Linux 3.8-rc7
+[33m3da430936534ed771c6c1fb5b5bf682f58d3be89[m Revert "mm.h: set VM_MAX_READAHEAD 1024 - VM_MIN_READAHEAD 64"
+[33m964f1979a24d78453f2066d6c3aa99d8f6114354[m Kernel Version: ak.691.422.Pirates
+[33m566f86f83d703070dbbc51caf534f6f9ad189b24[m Revert "Input: Send events one packet at a time"
+[33m50ffe8bdc2c5051e195b50d90542ce636ec48735[m Kernel Version: ak.690.422.Pirates
+[33m9e67d7142612ca13d5394c16372246b43fb75a40[m tuna_ak_defconfig: Add PGM Support - All users are Happy now
+[33mc3826fad12ff6da831230243cc5044fb97fecb32[m Revert "tuna_ak_defconfig: Enable TOUCH_WAKE"
+[33maa477429720d0780b3cc566b2c496a746077d2fd[m Kernel Version: ak.689.422.Pirates
+[33mc791ebcc27be088fa514f65cb6887cdeedf73d49[m Linux 3.0.65
+[33m458eb458fad83147b9ad1ecb45e2918b1bbe037f[m igb: Remove artificial restriction on RQDPC stat reading
+[33m3d574baa533bfd54b8933a43b556ffe62ca72b2a[m PCI/PM: Clean up PME state when removing a device
+[33m371058139ceb7cd3884d74cbf012e36542f8d34a[m x86/xen: don't assume %ds is usable in xen_iret for 32-bit PVOPS.
+[33m9b6c01b7ca4a941f6f5a26ea584fe6cad2ae5536[m x86/mm: Check if PUD is large when validating a kernel address
+[33m877802fa1f8c23e2d984e4927a04b0e160af6528[m Kernel Version: ak.688.422.Pirates
+[33ma3ac682479f23912ffd9353fcfae0bbdff3d1158[m Add New Bootsplash Simple style
+[33m906b7718517e8c05d46cd328c194ca0e4a4047c6[m tuna_ak_defconfig: Enable TOUCH_WAKE
+[33m11a8333e58482d01bb73580625195fa152ec350d[m Kernel Version: ak.687.422.Pirates
+[33m37a2efb3b7425ef63bd7a377850feb8e94833a84[m tuna_ak_defconfig: Enable FRANDOM at Boot
+[33mfe34c843d97c4fa082fe66dc3a65e7bd5603c70c[m Linux 3.0.65
+[33mf4dc0e6ec906da70d1edf6d00f49b792f47f2efd[m igb: Remove artificial restriction on RQDPC stat reading
+[33me862f5583a92ac9680bdb18a0e5dffe2a2c3d464[m PCI/PM: Clean up PME state when removing a device
+[33m3339af37f35aff045db6a830185dddfac424c937[m x86/xen: don't assume %ds is usable in xen_iret for 32-bit PVOPS.
+[33mec3918604c896df59632d47bd2ed874cbc2f262b[m x86/mm: Check if PUD is large when validating a kernel address
+[33m63fd3f490363bdb5ef3d034bf15254f0112a314d[m frandom.c: Add frandom Module support - Help and Source: https://github.com/Ryuinferno
+[33mb177485108e6db4dff4db847f3fea8df0383da79[m Kernel Version: ak.686.422.Pirates
+[33mae271109e1bd0aacd8f17223fd0ba99f1f61d443[m opp4xxx_data.c: Undervolt 180/230, Add 512Mhz GPU
+[33m6a441b2b5429fd4674f575e9cf313560502e3748[m omap2plus-cpufreq.c: GPU OC sysfs CM10 - Thanks Imoseyon
+[33md6bf5fa04bc213932394e0d38ea2385bea9325b8[m tuna_ak_defconfig: Disable TOUCH_WAKE, LIVE_OC
+[33m60574b1b0c9d73d9d131cd0f8ed1ab5665cd6376[m Linux 3.0.64
+[33m5351b9aae55265614e7556ade9429a0af22afc01[m netback: correct netbk_tx_err to handle wrap around.
+[33m439d488f1b1ea1d9eb21d38877e22b70a9a2a242[m xen/netback: free already allocated memory on failure in xen_netbk_get_requests
+[33m20a358062425fe52c2e2acd238bd26c03bad24f6[m xen/netback: don't leak pages on failure in xen_netbk_tx_check_gop.
+[33mfbdd73417633c9699eee8e9de92eca546a9a33c9[m xen/netback: shutdown the ring if it contains garbage.
+[33m44578a8e89fa66172912a9d055b7fcc1ca74cecd[m tg3: Fix crc errors on jumbo frame receive
+[33m9f3c96f974709f0e3fcaf51b9d67aeec92214c03[m tg3: Avoid null pointer dereference in tg3_interrupt in netconsole mode
+[33m35d8c70115b551d29e5adb57267dd2f9f54a2d6e[m bridge: Pull ip header into skb->data before looking into ip header.
+[33m35abc0ac0f4ddae79c0e6f9481527cf4850031f2[m tcp: fix MSG_SENDPAGE_NOTLAST logic
+[33m7ded907c48025ce2634e6f1a27225fe334475935[m tcp: fix for zero packets_in_flight was too broad
+[33madea80a16a35b0104a09f6137942bc5a66305b7c[m tcp: frto should not set snd_cwnd to 0
+[33m0762fca82ee3a1b697fe9fcd8c2db771560b2edd[m net: sctp: sctp_endpoint_free: zero out secret key data
+[33m5cd29d15948aa9d51bac9129fb46b9ffdee0302c[m net: sctp: sctp_setsockopt_auth_key: use kzfree instead of kfree
+[33m8cecdefeaa4c84df155518184fb80c95ddf8b308[m sctp: refactor sctp_outq_teardown to insure proper re-initalization
+[33m9735355acbd4908dfd476f2e23bd6050cbe49085[m atm/iphase: rename fregt_t -> ffreg_t
+[33mb4ab0a692e46e2ed87762daf695087cd85f101a9[m packet: fix leakage of tx_ring memory
+[33m8ede18081d174da7dfb78f28103094560e3b7053[m ipv6: do not create neighbor entries for local delivery
+[33m98ba079bb7c76d7e22437e9fb440dfc6aab58ae7[m pktgen: correctly handle failures when adding a device
+[33m5616454927eec67e66061f9b69c7cae8fa87159c[m net: loopback: fix a dst refcounting issue
+[33m749f9626ed51b34b59e23ecff9e7234ddc3d3269[m r8169: remove the obsolete and incorrect AMD workaround
+[33mac07e54e9e3e0735a5f802659b583916129707b5[m isdn/gigaset: fix zero size border case in debug dump
+[33mb63a9f743273052e137ecbadc92b37ddbbd716c3[m MAINTAINERS: Stephen Hemminger email change
+[33md8ec76ff55a59f85c1cab77d6b2c5f7e9b55c646[m net: prevent setting ttl=0 via IP_TTL
+[33me03f1a5870b628b8ca10d507ab7a6118769f8f67[m mac80211: synchronize scan off/on-channel and PS states
+[33m2c5fa488000c10f775e2ac32a7cf3ab6be62e3a7[m kernel/resource.c: fix stack overflow in __reserve_region_with_split()
+[33m277f228e02b8cf3174e35710f4ae1111d3e6fd3f[m virtio_console: Don't access uninitialized data.
+[33me682ef5212ec959c65aba6cfd25fb4117ab49e1a[m rtlwifi: Fix the usage of the wrong variable in usb.c
+[33m54ea5b40f067cf098cac639973c6628c6944cfb2[m Linux 3.0.64
+[33m7406f4230c4d086793cc62fa657750abf98559d6[m netback: correct netbk_tx_err to handle wrap around.
+[33m1d08d86d53d881952af35f841d8cf5ff23f726d9[m xen/netback: free already allocated memory on failure in xen_netbk_get_requests
+[33mf0457844e605984a12b8043c3e21554b9b1fc8a5[m xen/netback: don't leak pages on failure in xen_netbk_tx_check_gop.
+[33m2af567a11daa093a0141d675f8b3f1ab8ae8e70f[m xen/netback: shutdown the ring if it contains garbage.
+[33m01cc083b977577eae3e91372f868019efc39bfeb[m tg3: Fix crc errors on jumbo frame receive
+[33m98d5919834d6091f0a4144ebd3c2c17f1b883d84[m tg3: Avoid null pointer dereference in tg3_interrupt in netconsole mode
+[33m98df2584aaa730220adc29a7fbfa1c551fee5930[m bridge: Pull ip header into skb->data before looking into ip header.
+[33m9f557574821b44a87d95756bf53f1b7fb76eb4d4[m tcp: fix MSG_SENDPAGE_NOTLAST logic
+[33m31885683c218d57ff90d827a1be5c5d3cb4263ac[m tcp: fix for zero packets_in_flight was too broad
+[33mff1e4e5817d104e9aa46305db294602514e1c12b[m tcp: frto should not set snd_cwnd to 0
+[33m0535d24446251c444a03d912a0022319a2de16f8[m net: sctp: sctp_endpoint_free: zero out secret key data
+[33m7340fda068b62790d612ebbd3a331a2847895f19[m net: sctp: sctp_setsockopt_auth_key: use kzfree instead of kfree
+[33mdaba311aef717d505bc2ebb9a24f96ad15b7f394[m sctp: refactor sctp_outq_teardown to insure proper re-initalization
+[33m107be19fbf77ba82dd8f081c1fb9e20ecdd07a64[m atm/iphase: rename fregt_t -> ffreg_t
+[33m069d8ee0271bdf29ac0fc1186cbedb3815f94255[m packet: fix leakage of tx_ring memory
+[33md72b29e562214c7c5b635c3f44884a37bd115739[m ipv6: do not create neighbor entries for local delivery
+[33maa5d2659341c70682149e1c987bce6fe6620b30b[m pktgen: correctly handle failures when adding a device
+[33m94510aa4e103c892e73fd688a6bd8e68bced1fe5[m net: loopback: fix a dst refcounting issue
+[33m3a42cce923b0242d0293cae0a162601afa89d552[m r8169: remove the obsolete and incorrect AMD workaround
+[33m71d6857a18388acba0e84213778f0efba089d15f[m isdn/gigaset: fix zero size border case in debug dump
+[33m6856b63b31aed9e2d3a42f2d8c7f75dbdecd4f69[m MAINTAINERS: Stephen Hemminger email change
+[33mcadce465a66df20878bfa5062092a64ab17c6042[m net: prevent setting ttl=0 via IP_TTL
+[33m55f40ea95452350c5bab3e84a561ee83becabd20[m mac80211: synchronize scan off/on-channel and PS states
+[33m4d973b29535f5e699da399786b41d2db25bb4b2d[m kernel/resource.c: fix stack overflow in __reserve_region_with_split()
+[33m61cf42c586eff603d672b6281179c9698631bc24[m virtio_console: Don't access uninitialized data.
+[33mff3c8fd1344ae949c8acd35da44da25f10c48efd[m rtlwifi: Fix the usage of the wrong variable in usb.c
+[33m4414ae35a9e5f36e883f4fd09dc36b10f742745e[m mm.h: set VM_MAX_READAHEAD 1024 - VM_MIN_READAHEAD 64
+[33m706e8609e883cf9274394e2ed7834c4d4f29ecf7[m Kernel Version: ak.685.422.Pirates
+[33m04799df76dd53eab72fceea7ed59194d981d674e[m Makefile: Revert to single + - Pirates Attack
+[33m123aac2c92d0c5f68f4aa68508fa9fbf42696781[m init/Kconfig: Fix Typos
+[33m4c6e07255c1c84f5de9f8ad0ce762f2c979a882b[m tuna_ak_defconfig: Add OPTIMIZE_FOR_SIZE, OPTIMIZE_DEFAULT, OPTIMIZE_O3
+[33m00e4e8b9061f992391cbc866140e507c7e0a662c[m Makefile: Add Config Variable Os - O2 - O3 for choice Compilation
+[33m330c5012088054d136d657f10d51a9a19d3efa86[m init/Kconfig: Add CHECK_WARNING_STRICTLY bool
+[33mb6a9b9996184fdfa33579bd6e8d72a93876dcb04[m tuna_ak_defconfig: Disable FRONTSWAP
+[33md1ab7168ba265ef531fcc1c1a605efe677450e87[m Kernel Version: ak.680.422.Pirates
+[33m88ef0babae4410362abe12b859358c2ec4ba437a[m net: wireless: bcmdhd: Cleaning and Fix
+[33mb7e305619344c727fa914caecb5a65ce706ef056[m net: wireless: bcmdhd: Add SUPPORT_PM2_ONLY option
+[33m060237b7831d3a1545a6f66875e546851972d50d[m Revert: PM_FAST if proximity is enabled
+[33ma6065eb786498eca4289dacd4c8764e110c85db8[m tuna_ak_defconfig: Enable MODVERSIONS
+[33mc3342e7244ab53c34e2c89ee2955386b6243cd31[m netfilter: xt_qtaguid: Allow tracking loopback
+[33m3f61d3dd3893a53344aa2b617a2f421ac06335d7[m Revert "Add Fantastic SGS custom color pallete"
+[33m6f7c794e8ba622392e67900961a9bdc259c6e1d4[m Add New Bootsplash - Ak Pirates - Thanks to CR88
+[33m2df9b394cc67d0436a49290ef6f6971399583c4f[m Kernel Version: ak.679.422.Pirates
+[33ma0650d7a6869171e00f9cc8e88c1b7ddd3ca9f20[m Merge branch 'android-omap-3.0' into ak-pirates-4.2.2-experimental01
+[33m40d48ecec7249b57ee803ffa60f58d611944a25b[m Linux 3.0.63
+[33ma7e474272b16786869f2a471c6272e7220eaf6b1[m USB: XHCI: fix memory leak of URB-private data
+[33m585acf55a02e87d73562154d6d9768f319dc5c9c[m xhci: Fix isoc TD encoding.
+[33mf0df81a054c7842a5b7f2c2fcd117719968b7370[m USB: storage: optimize to match the Huawei USB storage devices and support new switch command
+[33mc5c1b54394523f95d35f778bb5975b5a56b6b37a[m USB: storage: Define a new macro for USB storage match rules
+[33m8dacf5aa8c82ae184b6507518507be472de2f965[m USB: EHCI: fix bug in scheduling periodic split transfers
+[33mdf679c9830585a821a164d60e7e53cd17a015fdb[m USB: qcserial: add Telit Gobi QDL device
+[33m6b571f655b843dd2e70d0f5604cc2385fa5c5fc7[m USB: option: add Changhong CH690
+[33m58200e584cc5c335f81acd2cc86afe3f6edfef74[m USB: option: add support for Telit LE920
+[33mc6e6d7a965cc9de7dbaeb511d3eee105ee416c90[m USB: ftdi_sio: add PID/VID entries for ELV WS 300 PC II
+[33m452c96c4ce0e8af2275808ce51bc96d0fc1cce56[m USB: ftdi_sio: add Zolix FTDI PID
+[33m8d6ef3b4cecb9249a0c7838224454ab401f1df40[m drivers/rtc/rtc-isl1208.c: call rtc_update_irq() from the alarm irq handler
+[33m9fec57fbe008903456cdc49903344d52fb2782c9[m nilfs2: fix fix very long mount time issue
+[33m0a996311de37326ad09415b72b6d107808a3b270[m x86-64: Replace left over sti/cli in ia32 audit exit code
+[33maac8c21d6aadaa54aa0f173664d45ac65d98b334[m drm/radeon: Calling object_unrefer() when creating fb failure
+[33m97a62c0acb8e719b8f18df7bd60c6fab36ea70bd[m drm/radeon: add quirk for RV100 board
+[33m38ac6ca3d49fc2aef2683078b13f62d5f360da55[m drm/radeon/evergreen+: wait for the MC to settle after MC blackout
+[33m1d1ed4a66d12017fb4a5eea21c0e9a7bc4e0cc69[m makefile: Add CHECK_WARNING_STRICTLY
+[33m7753fe833c97fc5e1593c99d48b9978d58591bda[m omap2plus-cpufreq.c: Add policy->min = 350000 at Boot
+[33ma96dbfbcb58afeec72c2a0a03d205e0e1457ea3d[m Linux 3.0.63
+[33mb9094c6a669409df59b04105d7d257026c78cbba[m USB: XHCI: fix memory leak of URB-private data
+[33m85b9c6b4d04c753deb257c849cd0b1f9ce0d5c4e[m xhci: Fix isoc TD encoding.
+[33mdac94241120407ebcd4bbc4523f2ec4edece0f92[m USB: storage: optimize to match the Huawei USB storage devices and support new switch command
+[33ma215bd7ac53dd38293377108d9db824760317e10[m USB: storage: Define a new macro for USB storage match rules
+[33mf3f2759e76bfbd10f1612cf7f3d9d6e16fee1782[m USB: EHCI: fix bug in scheduling periodic split transfers
+[33m9e268451a7fed8c0defbe08eb32e11228eecde58[m USB: qcserial: add Telit Gobi QDL device
+[33mb506463e8cfc30ec84859387e0c0f298e92fbcff[m USB: option: add Changhong CH690
+[33m216d45079874488861ee10aefd02fb6738c7c906[m USB: option: add support for Telit LE920
+[33m6b5410c3ae2b05fb92401436177f62b3aaad81d5[m USB: ftdi_sio: add PID/VID entries for ELV WS 300 PC II
+[33m62ddf7f6b7d47a0fd2758810815364da36893cd2[m USB: ftdi_sio: add Zolix FTDI PID
+[33m76913678c4d2fe2876865b7ed944178db324db1f[m drivers/rtc/rtc-isl1208.c: call rtc_update_irq() from the alarm irq handler
+[33m466affeee2693763724e1ee351788455cfd1ba41[m nilfs2: fix fix very long mount time issue
+[33mb19f432c33a8ee49f46e5fab79cf86f745661318[m x86-64: Replace left over sti/cli in ia32 audit exit code
+[33maec2043d5287d064872491da54e89dc429cc9509[m drm/radeon: Calling object_unrefer() when creating fb failure
+[33mdfd365b9521a33e63210824d31838b9c8b258d4a[m drm/radeon: add quirk for RV100 board
+[33med1d34ff0dc2d2a92764c1a6f07b4a182ef6b88a[m drm/radeon/evergreen+: wait for the MC to settle after MC blackout
+[33m62d2e1357d87ac4cfa54efad13888addf8a55c88[m Kernel Version: ak.674.42.Dummy
+[33mf8c0f3494072c7b938c322ddd4f3b3c130a23b8f[m cpufreq: Memory leak with sysfs when stats table are freed
+[33m25f67ddb332eb0003c63fca7a106b3fa87082b29[m ashmem: fix deadlock when system is low on memory When system is low on memory, allocating memory while holding the ashmem_mutex may try to directly reclaim memory. Then ashmem_shrink() is called in same thread. It will deadlock at acquiring ashmem_mutex. This change lets ashmem_shrink() return failure if ashmem_mutex is not available. Memory will be reclaimed from others.
+[33m3438dd941b61062bda446a649ce39112becad5df[m Revert "sched: Improve scalability via 'CPU buddies', which withstand random perturbations"
+[33m1ec81c6986f0adf1a02e5bb5b60167182f41fdad[m Merge branch 'linux-3.0.y' into ak-dummy-4.2-experimental11
+[33m8ffd5d44c28a94b62cb3be5e1c5bbbefe8784cd1[m tuna_ak_defconfig: Set 32K_TIMER_HZ=300
+[33me1c63f9f42393f7c1dc072db7e0d54e599e96b46[m Linux 3.0.62
+[33md997f40c116cdb098e09f0a140501ffc42b5184e[m x86/Sandy Bridge: Sandy Bridge workaround depends on CONFIG_PCI
+[33m591f90ee64224287f360205f6ec14057b88a7701[m efi, x86: Pass a proper identity mapping in efi_call_phys_prelog
+[33m7497ef2e2dac54e354a65929258fd330c29db216[m x86/msr: Add capabilities check
+[33md915fe310d9edbc349c36d0cef1b5dd0da6b067c[m smp: Fix SMP function call empty cpu mask race
+[33m95675e4004fde70caaf119a9cb7ff489f3f0a069[m Bluetooth: Fix incorrect strncpy() in hidp_setup_hid()
+[33m207d5e19d98446129ede65c05e4b732cc8c58262[m EDAC: Test correct variable in ->store function
+[33ma043100f2831bc56a1df2e536ed3079977677348[m ALSA: usb-audio: fix invalid length check for RME and other UAC 2 devices
+[33mbed37001b6919a386dab95dc42084d755233ea60[m ath9k: fix double-free bug on beacon generate failure
+[33ma2e1c3918e77ad6a13b43cb04e3cfe19f55d8cd0[m ath9k_htc: Fix memory leak
+[33mafd2d0e726252844755e85262cdd00ab31fc29ec[m Bluetooth: Fix sending HCI commands after reset
+[33m7948bfddbe1bbfe7d25b6a269d1c1d264cf52768[m ARM: DMA: Fix struct page iterator in dma_cache_maint() to work with sparsemem
+[33m833a2e184ad1464cda69d569788e1faa37191f37[m fs/cifs/cifs_dfs_ref.c: fix potential memory leakage
+[33mbb40f9f8a41f8c8c793c375f5f3613d99990b705[m can: pch_can: fix invalid error codes
+[33m831362319d56e37311b0893ad2dcc4c8f970cbde[m can: ti_hecc: fix invalid error codes
+[33m331f275adb3f494f15e610cf7c3abf324d573d81[m can: c_can: fix invalid error codes
+[33m6ac56f88ca4c50cd690de7dd9013e2572f2aecd2[m Kernel Version: ak.673.42.Dummy
+[33mdb2d16f441edd6202d7d7d66bf966daaf13f04a1[m Linux 3.0.62
+[33m279d9647e34dabad9ca82be59f60711a19b90bce[m Revert "Makefile: Add -O3 Optimizations"
+[33m419b90ca27c95d9a05923af8b2121f13c09ced7c[m Revert "mm.h: set VM_MAX_READAHEAD 512 - VM_MIN_READAHEAD 16"
+[33m2dc3856389f3287b4b8ffe7165698c1bcaa33365[m Kernel Version: ak.672.42.Dummy
+[33me8f8db915d1397a988c1df73f35c7f5c724aacf5[m New BootSplash - Cr88 - Ready to Explode
+[33m89bf5cb7909b73d0cafb85a8509123583585cb47[m mm.h: set VM_MAX_READAHEAD 512 - VM_MIN_READAHEAD 16
+[33m80bd6aedf0122f8070eca11ceb6ee6c82ddf9bfc[m Kernel Version: ak.671.42.Dummy - New Linaro Toolchain
+[33m4fc4f79f270ec64bc12e465cece2278ad2c8d4dc[m tuna_ak_defconfig: Disable SERIO
+[33m26e1570c7619ba54a641970154ab4958184127e6[m mach-omap2/voltage.h: Adjust VDDMIN = 810000
+[33m5041705235e504f9dfb680c0b497bfe40b4208c6[m Kernel Version: ak.670.42.Dummy
+[33md01168b8b956d7459d53d9ad1bfc3d37edcc24e1[m netfilter: xt_qtaguid: extend iface stat to report protocols
+[33mc6c0eea493c12c430e92cb9a3390a847480f909f[m netfilter: xt_qtaguid: remove AID_* dependency for access control
+[33m4305c4c9d4f252700e8bfbf3d86dc0de60f0ab99[m netfilter: qtaguid: Don't BUG_ON if create_if_tag_stat fails
+[33m72da49e4f86e9b65ce1be13e2412d52782c6e43b[m netfilter: xt_qtaguid: fix error exit that would keep a spinlock.
+[33m4e0c6fdfdaf09777e320738b46dacd859b2de13c[m net: wireless: bcmdhd: Update to version 5.90.195.114
+[33m8a29926f10ff14c71da0f052ded3b742b02dc79a[m tuna_ak_defconfig: Enable GOV_INTERACTIVEX
+[33m510982afa2e09ae9438528f0049ec0965645e95f[m Kernel Version: ak.668.42.Dummy
+[33mbd1949243ed0e99f53e24e2cf884bd024890fbd8[m cpufreq: conservative: update frequency when limits are relaxed
+[33me80baf9eef89472d190cf6794cb443ce9d2b1edb[m PM / cpufreq: Initialise the cpu field during conservative governor start
+[33m146abdf8411b4adebcd0bc669a0e2edd51b639a2[m tuna_ak_defconfig: Enable SCHED_AUTOGROUP + Fix ZRAM
+[33m11a35992e38d6924f723a1a10f57e4d21277179f[m SCHEDULER: Autogroup patch group by current user android UID instead of task ID
+[33m4aa3138b578786d1394182dd1cb29de58cec71ff[m config SCHED_AUTOGROUP=y
+[33m6470dc8cacc7c039a21580c2d56f57f23be3682d[m mm: implement WasActive page flag (for improving cleancache)
+[33m8107c1ad30e8fc73b40152f331b367a199799319[m staging: zcache: fix length type mismatch
+[33m0c9b0bdbfdf0e7e8040ce4ed3c001d9b0bf21139[m staging: zcache: avoid AB-BA deadlock condition
+[33m8ca53a8abe314fd750b6a56cccbac838962b964e[m staging: zcache: crypto API support
+[33mfc476b3e4084df2d1e37f58fddc4e2ae0d49a73b[m Staging: zcache: Fix calls to obsolete function
+[33m8cf6c37f5d7864f5fbfbdc287d0a60c066d925c7[m staging: zcache: fix cleancache crash
+[33md5077aeddc9fec9d17b6c223b44b12f5eb5efe57[m staging: zcache: fix typos
+[33m713735d2554335ecb341fe6409b8e2abae4f9fc0[m staging: zcache: fix possible sleep under lock
+[33ma805b94f81acefdffad5fd471c18075303db24a5[m staging: zcache: include module.h for MODULE_LICENSE
+[33m370c586c80e4835586e19568b6d1237332d92fc8[m Revert "netfilter: xt_qtaguid: remove AID_* dependency for access control"
+[33m3277ff891674590e2e9f8bd19ea2be253ea0d211[m Kernel Version: ak.667.42.Dummy
+[33med51b1395eeb1848f8514e0f2d492afe0be81504[m Merge branch 'linux-3.0.y' into ak-dummy-4.2-experimental05
+[33mf6dabece35aa1a328f168cb669fa37d0c2c08709[m cpufreq_interactive.c: Fix stuck at Max when downloading a file
+[33mee75dab5468e354d86219c09c518d4f0aad6b5a5[m cpufreq/cpufreq.c: Cleaning and Optimize
+[33mbaef2b88c8ca89b17411c5d974ea701060027791[m Kernel Version: ak.666.42.Dummy
+[33m3737a1af6686bdacac4820522d1904f816f2a705[m block: sysfs: allow non superusers to change i/o scheduler
+[33mbba6ff32abb5bfbb94bd15d98f72df5e99b23053[m tuna_ak_defconfig: Disable GOV_INTERACTIVEX + GOV_NIGHTMARE
+[33m1598f52202cbd1a986f3d6d15523a049c46f8385[m Add Fantastic SGS custom color pallete
+[33m622004d1af7addfac8e018d1f7817fc02ae89956[m tuna_ak_defconfig: Disable 1720Mhz Slot
+[33m214dfbe8f312326911434eee3ef521e3b78e1399[m Linux 3.0.61
+[33mbe6ee99fe4380b6b1a50e15c4bdb3cdd719620fc[m ioat: Fix DMA memory sync direction correct flag
+[33ma94e7cf81096fab2a8625e1ffaae0853a80e77b2[m ACPI / cpuidle: Fix NULL pointer issues when cpuidle is disabled
+[33m06cce029daed3ce1d98164b921bb3a826ad2a12a[m SGI-XP: handle non-fatal traps
+[33mb6d3beb65f210873ef9a64a9fd204796e122da7c[m x86: Use enum instead of literals for trap values [PARTIAL]
+[33md87f5a89f5e2d2ce9e3c1b21bd2debe2130cbc90[m ahci: Add identifiers for ASM106x devices
+[33mb250e45d7e464c63428170f1b3d2e1e0bd7a6468[m drm/i915: Implement WaDisableHiZPlanesWhenMSAAEnabled
+[33m231788ba2f713b751b8c46f6ac257b7811df7476[m staging: usbip: changed function return type to void
+[33mc9d332c77f72e7d9643116e53ae0c1e2bebd3156[m serial: 8250, increase PASS_LIMIT
+[33ma6aa749906b92eaec6ca0469f90f35de26044d90[m drivers/firmware/dmi_scan.c: fetch dmi version from SMBIOS if it exists
+[33m88e10f8813d2f214178adc5f8ac62e4531bd6fdc[m drivers/firmware/dmi_scan.c: check dmi version when get system uuid
+[33m0aa31f182374b77a4b704585605ee35a642826cf[m SCSI: sd: Reshuffle init_sd to avoid crash
+[33m27b2a263fa42cbad0fb33da2de30e4bbc380c43f[m USB: UHCI: fix IRQ race during initialization
+[33mef3319d2624e24085982336facc71b414c134f4a[m PCI: Allow pcie_aspm=force even when FADT indicates it is unsupported
+[33m1085a87765acabfdf55577e4c844a6d4609a6eb2[m ftrace: Be first to run code modification on modules
+[33m4a0bc1774dfad467dc5e844516712fcd3fe03899[m drm/i915: Invalidate the relocation presumed_offsets along the slow path
+[33m4a30c76b174f2e94580dc3fb7049a4131f38fc49[m New LOGO Ak Nuclear Assoult
+[33m4b0443740146c0c3fa468dc6f6a6fc4fdb31b51a[m Makefile: Add -O3 Optimizations
+[33m17651a58223046e66fbcaae81973c439787c6226[m nohz/sched: delay going tickless when CPU is loaded
+[33m16601810e6de4b8900fe356e6166360915bf75f8[m ipv4/tcp_output.c: network speed tweak
+[33mc592b89424911271e56b6c7721fe20f8e2892211[m ak-build.sh: Update Debug compilation
+[33m57481904351a067931af73072f6c517942ff41f2[m ftrace: Make recordmcount.c handle __fentry__
+[33m7b889d7a840d7f5b3a43b4fb991999da0d420e0f[m lib/checksum.c: optimize do_csum a bit
+[33m04cecf83b29995e8737d9bc1bfb1f1cd9f8408ae[m tuna_ak_debug_defconfig: Update and Enable FTRACE
+[33m21edaa052b7ef141baa8eb492da05dd9462fccc7[m Kernel Version: ak.540.42.Dummy
+[33mc7dae721b1df55c5866478b82227c009ce48a1f9[m Revert "OMAP4: PM: setup initial OPP configuration"
+[33maafa3ecbcc81cfb411c4f768289c08b93a61abd3[m opp4xxx_data.c: Remove omap446x_vdd_iva_core_dep_data New Step - Thanlks bigeyes0x0
+[33m68fceaa02a006c343687a059a129f0c127666642[m Logo: Return to AK Arz
+[33m9cdd2c62660d1436082d22fd317676392fbfd1fb[m tuna_ak_defconfig: Enable 1720Mhz Slot
+[33m0e362505288f8715714d3e13728d08bc711c352b[m ARM: Kconfig.debug: revert ARM_UNWIND
+[33m5aa6f46435e83f42154ebc53c64e68c076f43268[m Revert "ARM: always use ARM_UNWIND for thumb2 kernels"
+[33m2da455b3fe93b0e80b11b90256bb9065fc6315bc[m Linux 3.0.61
+[33m579c152ca955dbf1464fb1b0c590cde296b18d51[m tuna_ak_defconfig: Enable & Disable for Stability
+[33m08466a387ccd3dbd333923af339134a518ca5b2e[m Kernel Version: ak.537.42.Dummy
+[33mc2ddd1c2bf9fd63c26113c45cb52e54bf3c383e1[m Revert "cm9 colorcontrol merged with ezekeel's - initial attempt"
+[33m7fd3b1c4191af6a7d8fd6f731e2584d0755f023b[m Revert "colorcontrol: created sysfs interface for samoled_color"
+[33mb0f18b61586e4ba5afd95f6b9983e10568d30c3d[m Revert "colorcontrol for cm9: default is 0 instead of 60 now"
+[33mc1864cfeac37f62c84c8b1feb48dd93f96778816[m Revert "colorcontrol: pre_offset sysfs for older cm9-like ROM compatibility"
+[33m3f9e522647256100a4e4c3211b37a6865601f203[m Kernel Version: ak.536.42.Dummy
+[33m5c38c0ee9af07b5c9cee3662b6c552108a5782c3[m logo_linux_clut224.ppm: New CR88 AK Logo - The Dragon
+[33mb619c974c48ba1ca159a43bb11510335020d34f3[m opp4xxx_data.c: Fix Bug Into Voltages Calibration without Smartreflex
+[33m3203b4e80ff778640fa03ade375ae8eb472fe2f6[m mach-omap2/voltage.h: mpu: Rise VDDMAX 151 - decrease VDDMIN 810
+[33m782d5859474271633474c7963c62d4d3b13b91e6[m dpll44xx.c: Set OMAP_1_5GHz 1700000000
+[33mb4f9735eaa321d6afc527bef8728e639ede7fd72[m omap4_trim_quirks.c: Enable dpll_trim_override = true for Reduce Phone Lag
+[33m4d04802baaf5b6bab4a6fb2988ad19a5d7cedc4b[m Kernel Version: ak.535.42.Dummy
+[33mc9d3478c30be5e23bb02457760d84df54a213f0c[m logo_linux_clut224.ppm: New CR88 AK Logo
+[33ma3168a1831070fb9f3cc41a5ac728287da86d347[m mm: writeback: Tuning writeback daemon kicks in and flushes the dirty pages into disk
+[33m381926ceaff38fff9b1b2dc8e78757ca325d53df[m rcu: Reduce cache-miss initialization latencies for large systems
+[33mf51e9590471a26aa89152f4f2db37b21bc0a2028[m rcu: Make __kfree_rcu() less dependent on compiler choices
+[33m4824123e2b4c109c9bc6dbb41f744913c3eded3d[m rcu: Clarify help text for RCU_BOOST_PRIO
+[33m818953f3dd3094677eba41b9c08cb5d5d3fe4365[m rcu: Replace list_first_entry_rcu() with list_first_or_null_rcu()
+[33m064bc75a0f6a2394d831bc51cb50016bf6040520[m rcu: Stabilize use of num_online_cpus() for GP short circuit
+[33m562e1a89e571245a32427e83d3e6605db9f14308[m arm/Kconfig: Set to 300 by Default
+[33md58c840af38f32114a0cf66f56fdc8946c645e12[m Kernel Version: ak.534.42.Dummy
+[33m90f4bac639227385390852abde2febe243f89ad0[m fix compile warnings: enumeration value TRACE REG PERF REGISTER not handled in switch
+[33m226e938b414f478dabbc79ab1968cbf530f10ab3[m tuna_ak_defconfig: Enable FAST_NO_HZ + HZ=300 + Some other Things
+[33m3b760166529f0a4e3f9926a7c63efd7b2f03b019[m nf_conntrack_proto.c: Fix rcu_assign_pointer_nonull
+[33mdfbc46e15c6718ac897ad161f68177473b9bd60e[m sch_generic.c: Fix rcu_assign_pointer_nonull
+[33mcd057d9f37f6b827ca2eb3f58ed4973dd58e1898[m perf: Trivial cleanup of duplicate code
+[33mf83f59e59fd005735f8f2105002d882e99ddc85f[m perf: Remove PERF_COUNTERS config option
+[33m87df95846411fcfcc2c85c9defc16671d9ed9c55[m perf: Use static variant of perf_event_overflow in core.c
+[33ma3d781ec9eaefeccff70522de5c50b3459993503[m rcupdate.h: Fix rcu_head error
+[33m6f5b4fac9fe8ea8975c77622f21e556836eab230[m rcu: Add a gcc-style structure initializer for RCU pointers
+[33mb8e8a4d8b4f56bf7fad6a01142ce86469433f703[m + rcu: Do not use rcu_read_lock_held when callingrcu_dereference_check
+[33m8e7574fe973ed22481173f755cb19ecfd3399b26[m Added last missing commit for RCU, now with LINARO it's compiled!
+[33m6546a84788f31cb30ddf460e9edd35958a0f85e0[m Updated Documentation/RCU + fixing RCU pointers.
+[33m47a6806ecf3e22892b629498b21e569bebce69cc[m rcu: Make RCU_FAST_NO_HZ respect nohz= boot parameter
+[33m424b9f021cf22326a9e070eb4c1d52506b0fab90[m nohz: Move next idle expiry time record into idle logic area
+[33m6d3060365a2259b497ada6025fc9a244509380eb[m nohz: Move ts->idle_calls incrementation into strict idle logic
+[33m7371096e61892594c8d0ce0fa3cf454995678434[m nohz: Rename ts->idle_tick to ts->last_tick
+[33mf8655013970681c3daae60c72220340ba5b5a743[m nohz: Make nohz API agnostic against idle ticks cputime accounting
+[33m3540e8fb1199e22165fe51db5199d03c00ff83a7[m nohz: Separate idle sleeping time accounting from nohz logic
+[33m7d7ae101b08844ddfdeaa10079edae4d24263d22[m tick: Move skew_tick option into the HIGH_RES_TIMER section
+[33m2d7cccbcbb97f56ebf2eb05f5e3198ee19d9805f[m tick: Add tick skew boot option
+[33m6580358062e55a4638fbfbff3b982d1b3f9e34be[m nohz: Remove ts->Einidle checks before restarting the tick
+[33m4c197fad0584b98eaaed6fc968cace2e8f60c01e[m nohz: Remove update_ts_time_stat from tick_nohz_start_idle
+[33m209796babf53b9e1439d333cb1f507000059a412[m nohz: Remove tick_nohz_idle_enter_norcu() / tick_nohz_idle_exit_norcu()
+[33m4ee7e2f4cc09c26f65c5fd69463957a4ec895469[m nohz: Allow rcu extended quiescent state handling seperately from tick stop
+[33m3435c37ead370042234a44912747e3b5c8cccf2f[m nohz: Separate out irq exit and idle loop dyntick logic
+[33md73d3329bb446029f6d777a5c44c4f2bfbc0304f[m nohz: Make idle/iowait counter update conditional
+[33m068743cca2828746cb1e9679b308518a40558b80[m nohz: Fix update_ts_time_stat idle accounting
+[33m8cf880545539a6416f5710d0c1078ede0c61a44c[m rcu: Stop rcu_do_batch() from multiplexing the "count" variable
+[33m6898a616bca4bea6695e5181811be1a22a503749[m ARM: fix rcu stalls on SMP platforms
+[33mfa14195119ea2e9a0204e96ee27df9c953e2d1b2[m rcu: List-debug variants of rcu list routines.
+[33m0fe7b0b69e3110fe3a681181adee232e88d021fb[m rcu: Permit call_rcu() from CPU_DYING notifiers
+[33mb2bb10fa076ecd9a9fe62b64efb3ef171e688f06[m rcu: Note that rcu_access_pointer() can be used for teardown
+[33md5a04ff29469ec4c54c042d6580334af52ebcac3[m rcu: Make rcu_sleep_check() also check rcu_lock_map
+[33md55ec2f37a43d18b36a8a80f15da35b4859bc962[m rcu: Clean up straggling rcu_preempt_needs_cpu() name
+[33m83db1a2648600eb1c591ba2cadc764dd1a0f3939[m rcu: Simplify unboosting checks
+[33m2511f6caae584f83bf574bb7681ca9505b693a1a[m rcu: Inform RCU of irq_exit() activity
+[33mbb8342945590842763b06bf6c534cba4149496c5[m rcu: Prevent RCU callbacks from executing before scheduler initialized
+[33m7eab8eddd5c01b61dfeb0387a0a117786aa039fe[m rcu: Streamline code produced by __rcu_read_unlock()
+[33m6242179926576c25cb512c0a10ceb99323f1f24d[m rcu: Protect __rcu_read_unlock() against scheduler-using irq handlers
+[33md40c27cae880d8bd11081318652267ae1582a865[m rcu: Move RCU_TRACE to lib/Kconfig.debug
+[33m0fb6bd21d304365acc4eacd4dd13b6c8897f5fd3[m rcu: Add diagnostic for misaligned rcu_head structures
+[33m6d84849f20597409dd9baedc3c279219a7e27e7a[m rcu: Add lockdep-RCU checks for simple self-deadlock
+[33m2f6d9ef2ce0a6b04b6f6036e31c60d036a2b83ae[m rcu: Improve synchronize_rcu() diagnostics
+[33m1f63eef74fd141c6348ae84e22e6a3b7581face8[m rcu: Add missing __cpuinit annotation in rcutorture code
+[33m31f8d15d7d5c80b8d0b0c9bee5f09d0a5a5e9dcd[m rcu: Make rcutorture bool parameters really bool (core code)
+[33m62bb444ebfeb16f392377b553f4e4e682f7b8c5b[m sys_getppid: add missing rcu_dereference
+[33md683889b030b7141d47bc83ab93dd39df67a9952[m rcu: convert uses of rcu_assign_pointer(x, NULL) to RCU_INIT_POINTER
+[33m516c17905e5e9e0d41436321a09a825430141e37[m Merge branch 'core-rcu-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+[33m261aa74599021ec3e48e0577466a588fbbeb8cd6[m Merge branch 'core-rcu-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+[33m73469570f3a75d4ec7cc273f9f771dc7f7fcc59c[m Merge branch 'core-rcu-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+[33m2f8c33f85128f0c979de7edc17d291cc8772ceda[m Merge branch 'core-rcu-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/linux-2.6-tip
+[33m1c566073d5e6931592888140a199c640a57362af[m OMAP: TILER: Add bounds checking on format inputs
+[33m2eaf9f8a025dadf994d3e1e5b1422cd752bf20eb[m kernel/timer: Optimise apply_slack() for size and speed.
+[33m9aef8858ad98f72bee445e23c32891f051a9d194[m HACK: OMAP2+: Makefile: sequence SR earlier than idle init
+[33m6397cd2ce64fd2f62fdc1393a846a821f0e255d6[m OMAP4: PM: setup initial OPP configuration
+[33md4184347012fbe705671037a4a0e4c7021ea4329[m Linux 3.0.60
+[33m42e29fded95cbb72b4fb42fb0b36c5b355ce3dad[m staging: vt6656: Fix inconsistent structure packing
+[33m904e718cc7b18ea8db425d51e9601fb21699892e[m serial:ifx6x60:Delete SPI timer when shut down port
+[33mf21c75c02cfdc2518e8c07d5bbed2fd815bfd457[m USB: option: blacklist network interface on ONDA MT8205 4G LTE
+[33mda1213a9153967f434ececb1747fd545918c31d1[m USB: option: add TP-LINK HSUPA Modem MA180
+[33ma5b0529675bcd9d7d3304d1f61fd1e14d6760c0b[m xen: Fix stack corruption in xen_failsafe_callback for 32bit PVOPS guests.
+[33m3b2167cc50f31531ee7cae375801489d1105d547[m xhci: fix null-pointer dereference when destroying half-built segment rings
+[33m2ff95abca6fe594a7c9182d96fa4aa37997c4a86[m drbd: add missing part_round_stats to _drbd_start_io_acct
+[33me16037a0ab5939064c95635f44e0753ecc520516[m intel-iommu: Prevent devices with RMRRs from being placed into SI Domain
+[33mb436f48a31692bc41b9d049dec23cf55714d70d5[m USB: fix endpoint-disabling for failed config changes
+[33me82efee857da0e3331cb57607e0a4058dafadb4b[m powerpc: fix wii_memory_fixups() compile error on 3.0.y tree
+[33m97765f30c49d3023a6dafe7c48c7e520fca441f8[m ext4: init pagevec in ext4_da_block_invalidatepages
+[33ma6d8f58e7c32624663e6f41ecd2c94c487fffcb0[m x86/Sandy Bridge: reserve pages when integrated graphics is present
+[33m228f49c2da2a6729ecd3af45f882296f9007287e[m s390/time: fix sched_clock() overflow
+[33m5304f42eab6d502a281337ec493b108d863da964[m tcm_fc: Do not report target role when target is not defined
+[33med46841dd015efca61c4fec2f1b3edbe1c20f6d4[m tcm_fc: Do not indicate retry capability to initiators
+[33mb738689710e427fcc0f49e940027e20316d098a3[m sh: Fix FDPIC binary loader
+[33m0ed078f9d46da698c3fe7eee3d110f231beb99cc[m Kernel Version: ak.533.42.Dummy
+[33m5b5cead7692f7199e769829ba8d3e520cb8a9e6f[m opp4xxx_data.c: Undervolt to Berserk Style
+[33m17edfe1d3032c3199d40aa78219a9185ea9da2b3[m gralloc.c: Fix unused variable i
+[33m618e581cfa898dc1167f79a49e53795ed346acb5[m abe/abe_core.c: Fix sio_desc and sio_desc_address unused
+[33m95bbcb14ff77e6f5ceb4d6dca74cc9e725617246[m serial/omap-serial.c: Fix unused variable
+[33m182fbb83e008a614a616bfc85d121566d87e96e5[m hdcp/hdcp_top.c: Fix defined but not used
+[33m9167c45b1080e98d0830eaa6b7afeba79bea97b3[m video/sii9234.c: Fix defined but not used
+[33m0852d5f079f975cb9a1e80e23ba3ff2d10b2a6a3[m cpufreq_nightmare.c: Fixed Nightmare Governor Errors
+[33m86dfddf2f10a4db13fbbc707343c8f4a8154e12e[m cpufreq_sakurative: Fix hotplug defined but not used
+[33m19e4d7d17f58dcc09e1596104d5d46cce73f0923[m cpufreq_lazy.c: Add Smooth UI - Thanks Stratosk
+[33m10e0f293dc04bab6ae922101549bbe0064f8372e[m cpufreq_pegasusq.c: Fix pm_notifi defined but not used
+[33m054f0c0921ac0f2aa40d145080d45c03b80fcd20[m governors/menu.c: Fix unused functions and variables
+[33m6d66a5e9b6fb496c2b2a525c1836cea7faa06dec[m mach-omap2/usb-musb.c: Fix usb_musb_mux_init defined but not used
+[33m9f511b427ac480ce5ba1b357c9459bd1844f52c0[m board-omap4panda.c: omap_vwlan_device define but not used
+[33m58082a3a3a006879d7ea5324445ebcf7d545a3a3[m omap_hwmod_44xx_data.c: secure_timer_dev_attr define but not used
+[33mf65d5853c0242037ecf046ca914e57239d9bc90e[m cpufreq_nightmare.c: Nightmare gov. adjustments
+[33mf8a0c5358caf9c65410bead30b292db40ae0109e[m mach-omap2/Kconfig: Add config UNLOCK_LOW_FREQS
+[33m088643fa723cb7e419bfc78d9cc4bd66c88e5f56[m tuna_ak_defconfig: Enable UNLOCK_LOW_FREQS
+[33m14ecf4a9f785ce1623664681a813b4d19860a6cc[m opp4xxx_data.c: Add Option for Enable/Disable Low Freqs - UNLOCK_LOW_FREQS
+[33mfc07f82d2aa214a8a26d287d4364ca7017d199cc[m Kernel Version: ak.532.42.Dummy
+[33md2e005691d07670944514bcdb06129f1177bf2a4[m Add New Bootlogo - ak-arz-kernel-bootlogo III
+[33mb68245d77af7d3fbb444044d1a63ccae86741987[m tuna_ak_defconfig: Disable OCFREQ_1800 + OCFREQ_2000
+[33m0510f5d7bb1f3bb235743eec761c36dde937cf41[m Rework All Freqs to Stock - AK III
+[33m596bbae5bd189a7af8e5a74ec3e3f600f02a8642[m Rework All Freqs to Stock - AK II
+[33m1772471e2713137b5e1859364c343284cdb6d3a7[m Kernel Version: ak.531.42.Dummy
+[33m4135b3dabea74d5ffa45b00e0857ac14cc6581c3[m Linux 3.0.60
+[33m0d61d1cff1c5df42d6e7d51d4ad1ce4502586f0b[m Kernel Version: ak.530.42.Dummy
+[33mba03a1de3527d2abc368e734e59ff4d77c87aa8e[m Fixed Nightmare Governor that doesn't scale the frequency - Thanks Alucard24
+[33m60e03d2b8317745bc860cc7334f6bda1aa568dc8[m omap2plus-cpufreq.c: Set policy->max = 1200000 at Boot
+[33mf8f89d35c093404c94637b3cf7f8bb2bbd488ef2[m opp4xxx_data.c: Underclock to Max 1640Mhz
+[33m7eadccda8d7c1a2aa91d70d0de10e12129dcd0a5[m board-tuna.c: Fix set_two_phase_freq
+[33mc9e2874d2dfbc3f09ad468ec517cee21cb5796b5[m cpufreq_pegasusq.c: Update governor
+[33m99275be6543bf91715154f39fea7102a01d35269[m cpufreq_nightmare.c: Update governor
+[33m64852e7e778d0f6d3ffbe04006b8bd2431051094[m cpufreq_intellidemand.c: Update governor
+[33m1ca0b154a4f572fc530ef8d15c352abc33f32f05[m cpufreq_interactiveX.c: Update governor
+[33m38de1bb61760e983f52d6ced82bcd7a21dc41064[m cpufreq_sakuractive.c: Update governor
+[33md7d88b9e692328afbb18192e1fae43b124aebbcd[m tuna_ak_defconfig: Enable OCFREQ_2000
+[33m540ea909e0b10c35183e05a080980463de44d30a[m Rework All Freqs to Stock - AK
+[33m1064c162c066b1ddb80cb9b5f2dd1b0374c89d60[m omap2plus-cpufreq.c: Fix duplicate and errors Liveoc
+[33md113ee4754108e27f2fd5cdf500c8bbbaffb88a6[m mm.h: set VM_MAX_READAHEAD 256 - VM_MIN_READAHEAD 16
+[33m9bd83718a3d7191f7ca04a3784d0ae7c5d92a2a0[m block: row: Aggregate row_queue parameters to one structure
+[33m0b48be9a8bd7a7d8e491c60d6c724c7d65484831[m block: row: fix sysfs functions - idle_time conversion
+[33mf2a9db9c86336750976d39453d14f52faf1ada5b[m block: row: Insert dispatch_quantum into struct row_queue
+[33m3b9ea7cbb7e8b0338fb76213e3186ec9d0325137[m block: row: Add some debug information on ROW queues
+[33m6a2691f2d6b5e01bf3c2951be7f88fb15b05f4ff[m Revert "tuna_ak_defconfig: Set DEFAULT_GOV_WHEATLEY"
+[33m0829a6cc39cfcd76caaf562b4254c95392463b62[m Linux 3.0.59
+[33m7633459bb303190c8c016817de45534b202a82d1[m staging: comedi: Kconfig: COMEDI_NI_AT_A2150 should select COMEDI_FC
+[33m57a750294d5d53a6ec49ac69e837216b1d982d78[m staging: comedi: don't hijack hardware device private data
+[33mf387ee89aca7a06b376c27326afd114fe93e01c2[m Revert "drm/i915: no lvds quirk for Zotac ZDBOX SD ID12/ID13"
+[33m9d2fdadbde8314c8b55bb4a58af9584897298233[m KVM: PPC: 44x: fix DCR read/write
+[33m5b8692bf7ca5beed9bb75cf97b47dc1d3e5691e2[m intel-iommu: Free old page tables before creating superpage
+[33md668f92bf357683de292ce7538fc7b1186354004[m GFS2: Test bufdata with buffer locked and gfs2_log_lock held
+[33m961161c905e212ed2510fb0612549a3d1aefb495[m xhci: Handle HS bulk/ctrl endpoints that don't NAK.
+[33mb30765e89105c321ed5a5259dc6b05752cbc8137[m USB: hub: handle claim of enabled remote wakeup after reset
+[33me16e202710af9cc74b01c60ea1e338e3e954e6ed[m USB: Increase reset timeout.
+[33mfca884e203ab0faf0e505f10d302ee0a2ffb54c7[m usb: gadget: dummy: fix enumeration with g_multi
+[33m6d9a5f52d4604191d62f51b58ab7fd2320931f53[m USB: cdc-acm: Add support for "PSC Scanning, Magellan 800i"
+[33medce154f05d0c7e474e01c833d4c3522987fa125[m usb: ftdi_sio: Crucible Technologies COMET Caller ID - pid added
+[33m54923deb52fa43659a0f0c9edc7cec13201c9663[m USB: option: add Telekom Speedstick LTE II
+[33m40d3aadc78529b6a1fb37b5ed554d041d80ceafa[m USB: option: Add new MEDIATEK PID support
+[33meaf103dbb8e51967bdee9ea89059176ea4c87465[m USB: option: blacklist network interface on ZTE MF880
+[33maa6e90f665c2551aa20892e225fb2dc12be25c8a[m USB: option: add Nexpring NP10T terminal id
+[33m9e2bd12a24c248e9b31af76f18f01c88ae32cd95[m mac80211: use del_timer_sync for final sta cleanup timer deletion
+[33m0c3b520e7407b92ebdcc21b80c8f7f8539601ae3[m radeon/kms: force rn50 chip to always report connected on analog output
+[33m71a1306551e811989c0164c614845fea352d8b57[m staging: speakup: avoid out-of-range access in synth_add()
+[33m36aa8707613d57452ebfda30812e8715f019c453[m staging: speakup: avoid out-of-range access in synth_init()
+[33m30571057bbec7bd1f2850f308d131eba4c432225[m staging: r8712u: Add new device ID
+[33m2d8a66efb832e17e906415a4e563182258cc0ab2[m staging: comedi: comedi_test: fix race when cancelling command
+[33mbf302ba15f9fc5fa2d84c6eaa2e740a0e0bb596b[m staging: comedi: prevent auto-unconfig of manually configured devices
+[33me2abf662bcedc0be6f73e7575cc203a5e3c9262c[m ALSA: pxa27x: fix ac97 cold reset
+[33m639fd95292222bf03e1bb8616437b261321e1536[m ASoC: wm2000: Fix sense of speech clarity enable
+[33m93b40265d0c287271b19320574a76070d76d5a3b[m epoll: prevent missed events on EPOLL_CTL_MOD
+[33mb18401af7f51cddd5d2e03c9b800ba7dd60f18a0[m rtnetlink: fix rtnl_calcit() and rtnl_dump_ifinfo()
+[33ma0d3aa1f04a7430fc80f6f1a7aaaaf495da8d8e1[m rtnetlink: Fix problem with buffer allocation
+[33m2e3cbdeae8e4d13087657d95ed7a5be57dc9695e[m rtnetlink: Compute and store minimum ifinfo dump size
+[33m4a6cf0c4f4f8465d61adbf3aaaec2bd100e30d97[m ACPI : do not use Lid and Sleep button for S5 wakeup
+[33m5e3fe67e02c53e5a5fcf0e2b0d91dd93f757d50b[m x86, amd: Disable way access filter on Piledriver CPUs
+[33m457a972f3038b8de2eba76dc4b7f9117f1084f7e[m thp, memcg: split hugepage for memcg oom on cow
+[33mcdfcbd8d74fdfd7a0d55330a1b60411b153ae71b[m udf: don't increment lenExtents while writing to a hole
+[33mde3ecca3e3d55f2bb3118839a8fd709362d55678[m udf: fix memory leak while allocating blocks during write
+[33m39a731949954614cea44b92e80bbb4bb54832785[m aoe: do not call bdi_init after blk_alloc_queue
+[33ma4202fd727f6bf57827061104a60307e78124ea2[m ext4: lock i_mutex when truncating orphan inodes
+[33m1ba9a27ec24b133799bc1b8a77d733c4015d0abd[m ext4: do not try to write superblock on ro remount w/o journal
+[33m7c558b7eb837ca7bc014af2f5509be143c3c3670[m jbd2: fix assertion failure in jbd2_journal_flush()
+[33m8cbe63802ddac6b242e4a4293fc338fa7808272c[m ext4: fix extent tree corruption caused by hole punch
+[33mfc65b0bb8b56913b0610588d83c78d0e5e968e9d[m video: mxsfb: fix crash when unblanking the display
+[33mf125f803570b6e617ea417d08091703e81951d87[m staging: vt6656: 64bit fixes: vCommandTimerWait change calculation of timer.
+[33mafaac0d6cd73f303df1e456905de6a4364d2a81d[m staging: vt6656: 64bit fixes: key.c/h change unsigned long to u32
+[33m355bda552316d6ae9fc87e25a915e5fcf90167d3[m staging: vt6656: 64 bit fixes: fix long warning messages.
