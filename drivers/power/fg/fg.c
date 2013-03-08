@@ -679,11 +679,9 @@ void fg_process(struct cell_state *cell, short delta_q, short voltage,
 	fg_update_edv_flags(cell);
 
 	/* Check if battery is full */
-	if (cell->cc) {
+	if (cell->nac >= cell->fcc) {
 		cell->full = true;
-	}
-
-	if (cell->soc < MAX_PERCENTAGE) {
+	} else {
 		cell->full = false;
 		if (cell->nac <= (cell->fcc - cell->config->recharge))
 			cell->cc = false;
