@@ -30,14 +30,18 @@ modules.builtin
 *.lzma
 *.xz
 *.lzo
+*.lz4
 *.patch
 *.gcno
 *.log
 ashldi3.S
 piggy.xzkern
 piggy.xzkern.S
+piggy.lz4
+piggy.lz4.S
 arch/arm/boot/compressed/ashldi3.S
 arch/arm/boot/compressed/piggy.xzkern
+arch/arm/boot/compressed/piggy.lz4
 mkboot
 zip
 
