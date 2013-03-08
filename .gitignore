@@ -36,6 +36,7 @@ modules.builtin
 ashldi3.S
 piggy.xzkern
 piggy.xzkern.S
+piggy.lz4
 arch/arm/boot/compressed/ashldi3.S
 arch/arm/boot/compressed/piggy.xzkern
 mkboot
