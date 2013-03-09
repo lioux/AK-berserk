@@ -7,3 +7,4 @@ piggy.xzkern
 piggy.lz4
 vmlinux
 vmlinux.lds
+arch/arm/boot/compressed/piggy.lz4
