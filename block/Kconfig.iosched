@@ -37,6 +37,13 @@ config IOSCHED_ROW
 	  according to queue priority.
 	  Most suitable for mobile devices.
 
+config IOSCHED_ZEN
+	tristate "Zen I/O scheduler"
+	default y
+	---help---
+	  FCFS, dispatches are back-inserted, deadlines ensure fairness.
+	  Should work best with devices where there is no travel delay.
+
 config IOSCHED_CFQ
 	tristate "CFQ I/O scheduler"
 	# If BLK_CGROUP is a module, CFQ has to be built as module.
@@ -148,6 +155,9 @@ choice
 	config DEFAULT_FIOPS
 		bool "FIOPS" if IOSCHED_FIOPS=y
 
+	config DEFAULT_ZEN
+		bool "ZEN" if IOSCHED_ZEN=y
+
 	config DEFAULT_BFQ
 		bool "BFQ" if IOSCHED_BFQ=y
 
@@ -166,6 +176,7 @@ config DEFAULT_IOSCHED
 	default "sio" if DEFAULT_SIO
 	default "vr" if DEFAULT_VR
 	default "bfq" if DEFAULT_BFQ
+    default "zen" if DEFAULT_ZEN
 	default "fiops" if DEFAULT_FIOPS
 	default "noop" if DEFAULT_NOOP
 	default "fifo" if DEFAULT_FIFO
