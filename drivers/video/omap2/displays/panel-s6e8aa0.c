@@ -81,7 +81,7 @@ static int s6e8aa0_update(struct omap_dss_device *dssdev,
 static struct omap_video_timings s6e8aa0_timings = {
 	.x_res = 720,
 	.y_res = 1280,
-	.pixel_clock = 80842,
+	.pixel_clock = 79494,
 	.hfp = 158,
 	.hsw = 2,
 	.hbp = 160,
@@ -782,7 +782,7 @@ static void s6e8aa0_setup_gamma_regs(struct s6e8aa0_data *s6, u8 gamma_regs[],
 			adj = clamp_t(int, adj, adj_min, adj_max);
 		}
 #ifdef CONFIG_COLOR_CONTROL
-		gamma_regs[gamma_reg_index(c, V1)] = min(max(adj +  v1_offset[c], 0), 255);
+		gamma_regs[gamma_reg_index(c, V1)] = ((adj + v1_offset[c]) > 0 && (adj <=255)) ? (adj + v1_offset[c]) : adj;
 #else
 		gamma_regs[gamma_reg_index(c, V1)] = adj;
 #endif
