@@ -1,8 +1,8 @@
 VERSION = 3
 PATCHLEVEL = 0
-SUBLEVEL = 68
+SUBLEVEL = 69
 EXTRAVERSION = +
-NAME = Pirate Edition
+NAME = Cylon Edition
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
