@@ -1,8 +1,8 @@
 VERSION = 3
 PATCHLEVEL = 0
-SUBLEVEL = 68
-EXTRAVERSION = +
-NAME = Pirate Edition
+SUBLEVEL = 69
+EXTRAVERSION = -rc1
+NAME = Sneaky Weasel
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
