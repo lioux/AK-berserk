@@ -109,6 +109,16 @@ static unsigned long isolate_freepages_block(unsigned long blockpfn,
 	return total_isolated;
 }
 
+static void map_pages(struct list_head *list)
+{
+	struct page *page;
+
+	list_for_each_entry(page, list, lru) {
+		arch_alloc_page(page, 0);
+		kernel_map_pages(page, 1, 1);
+	}
+}
+
 /**
  * isolate_freepages_range() - isolate free pages.
  * @start_pfn: The first PFN to start isolating.
@@ -196,16 +206,6 @@ static bool suitable_migration_target(struct page *page)
 
 	/* Otherwise skip the block */
 	return false;
-}
-
-static void map_pages(struct list_head *list)
-{
-	struct page *page;
-
-	list_for_each_entry(page, list, lru) {
-		arch_alloc_page(page, 0);
-		kernel_map_pages(page, 1, 1);
-	}
 }
 
 /*
@@ -472,8 +472,10 @@ isolate_migratepages_range(struct zone *zone, struct compact_control *cc,
 		nr_isolated++;
 
 		/* Avoid isolating too much */
-		if (cc->nr_migratepages == COMPACT_CLUSTER_MAX)
+		if (cc->nr_migratepages == COMPACT_CLUSTER_MAX) {
+			++low_pfn;
 			break;
+		}
 	}
 
 	acct_isolated(zone, cc);
@@ -722,7 +724,7 @@ out:
 	return ret;
 }
 
-unsigned long compact_zone_order(struct zone *zone,
+static unsigned long compact_zone_order(struct zone *zone,
 				 int order, gfp_t gfp_mask,
 				 bool sync)
 {
@@ -882,8 +884,8 @@ int sysctl_extfrag_handler(struct ctl_table *table, int write,
 }
 
 #if defined(CONFIG_SYSFS) && defined(CONFIG_NUMA)
-ssize_t sysfs_compact_node(struct sys_device *dev,
-			struct sysdev_attribute *attr,
+ssize_t sysfs_compact_node(struct device *dev,
+			struct device_attribute *attr,
 			const char *buf, size_t count)
 {
 	int nid = dev->id;
@@ -897,15 +899,15 @@ ssize_t sysfs_compact_node(struct sys_device *dev,
 
 	return count;
 }
-static SYSDEV_ATTR(compact, S_IWUSR, NULL, sysfs_compact_node);
+static DEVICE_ATTR(compact, S_IWUSR, NULL, sysfs_compact_node);
 
 int compaction_register_node(struct node *node)
 {
-	return sysdev_create_file(&node->sysdev, &attr_compact);
+	return device_create_file(&node->dev, &dev_attr_compact);
 }
 
 void compaction_unregister_node(struct node *node)
 {
-	return sysdev_remove_file(&node->sysdev, &attr_compact);
+	return device_remove_file(&node->dev, &dev_attr_compact);
 }
 #endif /* CONFIG_SYSFS && CONFIG_NUMA */
